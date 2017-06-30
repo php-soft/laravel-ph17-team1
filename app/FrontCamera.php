@@ -9,14 +9,12 @@ class FrontCamera extends Model
     protected $table = 'front_cameras';
     protected $fillable = [
         'resolution',
-        'videocall', 
-        'other_info',
-        'create_at',
-        'update_at'
+        'videocall',
+        'other_info'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }
