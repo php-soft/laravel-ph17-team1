@@ -8,9 +8,7 @@ class Vote extends Model
 {
     protected $table = 'votes';
     protected $fillable = [
-        'star',
-        'create_at',
-        'update_at'
+        'star'
     ];
 
     public function voteProducts()

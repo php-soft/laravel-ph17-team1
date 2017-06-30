@@ -9,15 +9,13 @@ class OperaSystem extends Model
     protected $table = 'opera_systems';
     protected $fillable = [
         'opera_system',
-        'chipset'
+        'chipset',
         'cpu_speed',
-        'cpu',
-        'create_at',
-        'update_at'
+        'cpu'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

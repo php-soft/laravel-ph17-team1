@@ -11,9 +11,7 @@ class VoteProduct extends Model
         'customer_id',
         'product_id',
         'star_id',
-        'comment',
-        'create_at',
-        'update_at'
+        'comment'
     ];
 
     public function votes()
@@ -24,5 +22,10 @@ class VoteProduct extends Model
     public function products()
     {
         return $this->hasMany('App\Product');
+    }
+
+    public function users()
+    {
+        return $this->hasMany('App\User');
     }
 }

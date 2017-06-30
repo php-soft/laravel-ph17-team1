@@ -8,13 +8,11 @@ class Color extends Model
 {
     protected $table = 'colors';
     protected $fillable = [
-        'name',
-        'create_at',
-        'update_at'
+        'name'
     ];
     
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

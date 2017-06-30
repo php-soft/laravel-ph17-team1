@@ -11,13 +11,11 @@ class Screen extends Model
         'tech_screen',
         'resolution',
         'width_screen',
-        'touch_screen',
-        'create_at',
-        'update_at'
+        'touch_screen'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

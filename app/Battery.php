@@ -10,13 +10,11 @@ class Battery extends Model
     protected $fillable = [
         'battery_capacity',
         'battery_type',
-        'battery_tech',
-        'create_at',
-        'update_at'
+        'battery_tech'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

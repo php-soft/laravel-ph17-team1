@@ -9,9 +9,7 @@ class PromotionProduct extends Model
     protected $table = 'promotion_products';
     protected $fillable = [
         'product_id',
-        'promotion_id',
-        'create_at',
-        'update_at'
+        'promotion_id'
     ];
 
     public function promotions()

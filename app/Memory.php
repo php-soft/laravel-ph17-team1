@@ -11,13 +11,11 @@ class Memory extends Model
         'ram',
         'rom',
         'available_memory',
-        'external_memory_card',
-        'create_at',
-        'update_at'
+        'external_memory_card'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

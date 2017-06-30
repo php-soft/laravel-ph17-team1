@@ -16,9 +16,7 @@ class Store extends Model
         'image',
         'location',
         'description',
-        'status',
-        'create_at',
-        'update_at'
+        'status'
     ];
 
     public function storeProducts()

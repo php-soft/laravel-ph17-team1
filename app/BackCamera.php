@@ -11,13 +11,11 @@ class BackCamera extends Model
         'resolution',
         'film',
         'flash',
-        'advanced_photography',
-        'create_at',
-        'update_at'
+        'advanced_photography'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

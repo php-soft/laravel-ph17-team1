@@ -10,9 +10,7 @@ class Review extends Model
     protected $fillable = [
         'customer_id',
         'product_id',
-        'comment',
-        'create_at',
-        'update_at'
+        'comment'
     ];
 
     public function product()

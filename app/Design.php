@@ -11,13 +11,11 @@ class Design extends Model
         'design',
         'material',
         'size',
-        'weigth',
-        'create_at',
-        'update_at'
+        'weigth'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }

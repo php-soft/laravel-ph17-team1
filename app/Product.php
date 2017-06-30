@@ -30,9 +30,7 @@ class Product extends Model
         'utility_id',
         'color_id',
         'memory_id',
-        'vote_id',
-        'create_at',
-        'update_at'
+        'vote_id'
     ];
 
     public function category()
@@ -42,57 +40,52 @@ class Product extends Model
 
     public function backCamera()
     {
-        return $this->hasOne('App\Back_Camera');
+        return $this->belongsTo('App\BackCamera');
     }
 
     public function frontCamera()
     {
-        return $this->hasOne('App\Front_Camera');
+        return $this->belongsTo('App\FrontCamera');
     }
 
     public function battery()
     {
-        return $this->hasOne('App\Battery');
+        return $this->belongsTo('App\Battery');
     }
 
     public function connect()
     {
-        return $this->hasOne('App\Connect');
+        return $this->belongsTo('App\Connect');
     }
 
     public function design()
     {
-        return $this->hasOne('App\Design');
+        return $this->belongsTo('App\Design');
     }
 
     public function operaSystem()
     {
-        return $this->hasOne('App\Opera_System');
+        return $this->belongsTo('App\OperaSystem');
     }
 
     public function screen()
     {
-        return $this->hasOne('App\Screen');
+        return $this->belongsTo('App\Screen');
     }
 
     public function utility()
     {
-        return $this->hasOne('App\Utility');
+        return $this->belongsTo('App\Utility');
     }
 
     public function color()
     {
-        return $this->hasOne('App\Color');
+        return $this->belongsTo('App\Color');
     }
 
     public function memory()
     {
-        return $this->hasOne('App\Memory');
-    }
-
-    public function votes()
-    {
-        return $this->hasMany('App\Vote');
+        return $this->belongsTo('App\Memory');
     }
 
     public function review()

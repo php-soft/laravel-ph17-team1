@@ -13,13 +13,11 @@ class Utility extends Model
         'recording',
         'radio',
         'movie',
-        'music',
-        'create_at',
-        'update_at'
+        'music'
     ];
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasOne('App\Product');
     }
 }
