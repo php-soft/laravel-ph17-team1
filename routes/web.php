@@ -22,4 +22,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/demoadmin', function () {
     return view('demo');
 });
-
