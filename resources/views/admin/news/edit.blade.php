@@ -72,17 +72,13 @@
 @stop
 
 @section('js')
+    <link href="{{url('css/select2.min.css')}}" rel="stylesheet">
+    <script src="{{ url('js/jquery.min.js') }}"></script>
+    <script src="{{ url('js/jquery.js') }}"></script>
     <script src="{{ url('js/select2.min.js') }}"></script>
-    <script src="{{ url('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ url('../vendor/unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
+
     <script type="text/javascript">
-        var options = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token=',
-        };
-        $('textarea.ckeditor').ckeditor(options);
+
         $('.select2-multi').select2();
         $('.select2-multi').select2().val({!! json_encode($news->tags()->allRelatedIds()->toArray()) !!}).trigger('change');
 
