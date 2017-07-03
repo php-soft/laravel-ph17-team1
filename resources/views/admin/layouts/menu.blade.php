@@ -14,7 +14,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{url('admin/news')}}">Tin tức</a></li>
+                <li><a href="{{url('admin/news')}}">Tin tức</a></li>
+                <li><a href="#">Điện thoại</a></li>
+                <li><a href="#">Quản lý kho</a></li>
+                <li><a href="#">Order</a></li>
                 <li><a href="#">Link</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
