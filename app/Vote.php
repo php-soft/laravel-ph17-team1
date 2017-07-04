@@ -8,11 +8,11 @@ class Vote extends Model
 {
     protected $table = 'votes';
     protected $fillable = [
-    	'customer_id',
-    	'product_id',
-    	'name',
-    	'phone',
-    	'email',
+        'customer_id',
+        'product_id',
+        'name',
+        'phone',
+        'email',
         'star',
         'comment'
     ];

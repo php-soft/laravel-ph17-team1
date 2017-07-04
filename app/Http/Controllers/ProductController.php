@@ -39,7 +39,8 @@ class ProductController extends Controller
         
         $votes = Vote::where('product_id', $product_id)->paginate(4);
 
-        $reviews = Review::where('product_id', $product_id)->orderBy('created_at','desc')->paginate(5);
+        $reviews = Review::where('product_id', $product_id)->orderBy('created_at','desc')
+        ->paginate(5);
 
         return view('products.detail')->with('products', $products)->with('count_vote', $count_vote)
         ->with('avgvote', $avgvote)->with('stores', $stores)->with('promotions', $promotions)
@@ -48,7 +49,7 @@ class ProductController extends Controller
 
     public function storeVote(Request $request)
     {
-        if(Auth::check() == true) {
+        if (Auth::check() == true) {
             $user_id = Auth::user()->id;
             $user = new User;
             $users_id = User::where('id', $user_id)->first();
@@ -64,8 +65,9 @@ class ProductController extends Controller
             $vote->phone = $request->phone;
             $vote->comment = $request->comment;
             $vote->save();
-            return back()->withSuccess('Cảm ơn ' .$users_id->name .' đã đánh giá sản phẩm của chúng tôi');
-        }else {
+            return back()->withSuccess('Cảm ơn ' .$users_id->name .' đã đánh
+                giá sản phẩm của chúng tôi');
+        } else {
             $vote = new Vote;
             $vote->product_id = $request->product_id;
             $vote->name = $request->name;
@@ -73,7 +75,8 @@ class ProductController extends Controller
             $vote->phone = $request->phone;
             $vote->comment = $request->comment;
             $vote->save();
-            return back()->withSuccess('Cảm ơn ' .$vote->name .' đã đánh giá sản phẩm của chúng tôi');
+            return back()->withSuccess('Cảm ơn ' .$vote->name .' đã đánh
+                giá sản phẩm của chúng tôi');
         }
     }
 
