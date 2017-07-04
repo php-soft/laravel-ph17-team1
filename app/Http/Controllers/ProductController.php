@@ -18,7 +18,7 @@ use Auth;
 
 class ProductController extends Controller
 {
-    public function indexByID($slug)
+    public function indexByID ($slug)
     {
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
@@ -47,7 +47,7 @@ class ProductController extends Controller
         ->with('votes', $votes)->with('reviews', $reviews);
     }
 
-    public function storeVote(Request $request)
+    public function storeVote (Request $request)
     {
         if (Auth::check() == true) {
             $user_id = Auth::user()->id;
@@ -80,7 +80,7 @@ class ProductController extends Controller
         }
     }
 
-    public function storeComment(Request $request)
+    public function storeComment (Request $request)
     {
         $review = new Review;
         $review->product_id = $request->product_id;
