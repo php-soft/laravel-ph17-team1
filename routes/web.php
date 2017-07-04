@@ -33,3 +33,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('tags/edit/{id}', 'TagController@update');
     Route::get('tags/delete/{id}', 'TagController@destroy');
 });
+
+Route::get('products', 'HomeController@index');
+
+Route::get('products/{slug}', 'ProductController@indexByID');
+
+Route::post('/vote/create', 'ProductController@storeVote');
+
+Route::post('/review/create', 'ProductController@storeComment');
