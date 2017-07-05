@@ -17,10 +17,10 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->string('name', 255);
-            $table->string('email', 255);
-            $table->string('phone', 11);
-            $table->string('comment', 1000);
+            $table->string('name', 255)->nullable();
+            $table->string('email', 255)->nullable()->nullable();
+            $table->string('phone', 11)->nullable();
+            $table->string('comment', 1000)->nullable();
             $table->timestamps();
         });
     }

@@ -30,7 +30,6 @@ class Product extends Model
         'utility_id',
         'color_id',
         'memory_id',
-        'vote_id'
     ];
 
     public function category()

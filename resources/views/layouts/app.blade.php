@@ -13,13 +13,14 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/quickview.css') }}" rel="stylesheet"><!-- css quickview -->
     <link href="{{ asset('css/seemore.css') }}" rel="stylesheet"><!-- css seemore -->
     <link href="{{ asset('css/voteinput.css') }}" rel="stylesheet"><!-- css voteinput -->
     <link href="{{ asset('css/rating5star.css') }}" rel="stylesheet"><!-- css rating5star -->
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 </head>
 <body>
     
@@ -87,9 +88,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{asset('js/quickview.js')}}"></script><!-- js quickview -->
     <script src="{{asset('js/formVote-validate.js')}}"></script><!-- js formVote-validate -->
+    <script src="{{asset('js/jquery.min.js')}}"></script><!-- js formVote-validate -->
+    <script src="{{asset('js/toastr.min.js')}}"></script><!-- js formVote-validate -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        @if(Session::has('message'))
+            toastr.success("{{Session::get('message')}}")
+        @endif
+    </script>
 </body>
 </html>
