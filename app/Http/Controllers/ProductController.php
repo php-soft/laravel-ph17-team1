@@ -26,7 +26,7 @@ class ProductController extends Controller
         $products=Product::find($product_id);
 
         $product_tt=Product::where('id', '<>', $product_id)->orderBy('sale_price', 'asc')->limit(5)->pluck('id');
-        $product_sames=Product::find($product_tt);    
+        $product_sames=Product::find($product_tt);
         //dd($product_sames);
 
         $count_vote=Vote::where('product_id', $product_id)->count();
@@ -48,7 +48,8 @@ class ProductController extends Controller
         $reviews = Review::where('product_id', $product_id)->orderBy('created_at', 'desc')
         ->paginate(5);
 
-        return view('products.detail')->with('products', $products)->with('product_sames', $product_sames)->with('count_vote', $count_vote)
+        return view('products.detail')->with('products', $products)->with('product_sames', $product_sames)
+        ->with('count_vote', $count_vote)
         ->with('avgvote', $avgvote)->with('stores', $stores)->with('promotions', $promotions)
         ->with('votes', $votes)->with('reviews', $reviews);
     }
@@ -71,8 +72,8 @@ class ProductController extends Controller
             $vote->phone = $request->phone;
             $vote->comment = $request->comment;
             $vote->save();
-            Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi'); 
-            Session::flash('alert-vote', 'alert-success'); 
+            Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi');
+            Session::flash('alert-vote', 'alert-success');
             return back();
         } else {
             $vote = new Vote;
@@ -85,7 +86,7 @@ class ProductController extends Controller
             $vote->phone = $request->phone;
             $vote->comment = $request->comment;
             $vote->save();
-            Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi'); 
+            Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi');
             Session::flash('alert-vote', 'alert-success');
             return back();
         }
@@ -100,8 +101,8 @@ class ProductController extends Controller
         $review->phone = $request->phone;
         $review->comment = $request->comment;
         $review->save();
-        Session::flash('message', 'Cảm ơn ' .$review->name . ' đã để lại phản hồi'); 
-        Session::flash('alert-review', 'alert-success'); 
+        Session::flash('message', 'Cảm ơn ' .$review->name . ' đã để lại phản hồi');
+        Session::flash('alert-review', 'alert-success');
         return back();
     }
 }

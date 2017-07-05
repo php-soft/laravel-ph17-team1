@@ -218,7 +218,7 @@
                               </div>
                               <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                  <div class="detail">
+                                  <div class="detail" style="width: 345px;">
                                     <div class="product-details">
                                       <ul class="list-group" style="width: 200%;">
                                         <li class="col-md-12 list-group-item disabled">Màn hình</li>
@@ -237,14 +237,14 @@
                                         <li class="col-md-8 list-group-item">{!! $product->backCamera->film !!}</li>
                                         <li class="col-md-4 list-group-item">Đèn flash</li>
                                         <li class="col-md-8 list-group-item">{!! $product->backCamera->flash !!}</li>
-                                        <li class="col-md-4 list-group-item">Chụp ảnh nâng cao</li>
+                                        <li class="col-md-4 list-group-item" style="height: 82px;">Chụp ảnh nâng cao</li>
                                         <li class="col-md-8 list-group-item">{!! $product->backCamera->advanced_photography !!}</li>
                                         <li class="col-md-12 list-group-item disabled">Camera trướt</li>
                                         <li class="col-md-4 list-group-item">Độ phân giải</li>
                                         <li class="col-md-8 list-group-item">{!! $product->frontCamera->resolution !!}</li>
                                         <li class="col-md-4 list-group-item">Video call</li>
                                         <li class="col-md-8 list-group-item">{!! $product->frontCamera->videocall !!}</li>
-                                        <li class="col-md-4 list-group-item">Thông tin khác</li>
+                                        <li class="col-md-4 list-group-item" style="height: 62px;">Thông tin khác</li>
                                         <li class="col-md-8 list-group-item">{!! $product->frontCamera->other_info !!}</li>
                                         <li class="col-md-12 list-group-item disabled">Hệ điều hành - CPU</li>
                                         <li class="col-md-4 list-group-item">Hệ điều hành</li>
@@ -271,7 +271,7 @@
                                         <li class="col-md-8 list-group-item">{!! $product->connect->network_mobile !!}</li>
                                         <li class="col-md-4 list-group-item">SIM</li>
                                         <li class="col-md-8 list-group-item">{!! $product->connect->sim !!}</li>
-                                        <li class="col-md-4 list-group-item">Wifi</li>
+                                        <li class="col-md-4 list-group-item" style="height: 62px;">Wifi</li>
                                         <li class="col-md-8 list-group-item">{!! $product->connect->wifi !!}</li>
                                         <li class="col-md-4 list-group-item">GPS</li>
                                         <li class="col-md-8 list-group-item">{!! $product->connect->gps !!}</li>
@@ -332,220 +332,249 @@
         <div id="detail-product-news">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-8">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 product-rate">
-                            <input type="checkbox" class="read-more-state" id="post-review" />
-                            <ul class="read-more-wrap">
-                                <h3>Đánh giá chi tiết sản phẩm</h3>
-                                <p>{!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
-                                Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
-                                Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
-                                Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng. <br>
-                                <img style="height: 100px; width: 100px;" class="read-more-target" class="img-responsive" src="{!!$product->image!!}">
-                                <p class="read-more-target">{!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone</p>
-                                </p>
-                            </ul>
-                            <label for="post-review" class="read-more-trigger"></label>
-                        </div>
-                    </div>
+                    <div id="baiviet-danhgia">
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12 product-rate" style="margin-left: -40px;">
+                              <input type="checkbox" class="read-more-state" id="post-review" />
+                              <ul class="read-more-wrap">
+                                  <h3>Đánh giá chi tiết sản phẩm</h3>
+                                  <p>{!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
+                                  Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
+                                  Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
+                                  Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng. <br>
+                                  <img style="height: 100px; width: 100px;" class="read-more-target" class="img-responsive" src="{!!$product->image!!}">
+                                  <p class="read-more-target">{!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone</p>
+                                  </p>
+                              </ul>
+                              <label for="post-review" class="read-more-trigger" style="margin-left: 40px;"></label>
+                          </div>
+                      </div>
+                    </div>  
                     <hr><!-- end product detail rate -->
-                    <div class="row">
-                        <div class="col-md-12">
-                          <h3>{{$count_vote}} đánh giá {!! $product->name !!}</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <form action="/vote/create" method="post">
-                          <div class="col-md-8">
-                            <div class="row">
-                              <div class="col-md-5">
-                                <p>Chọn đánh giá của bạn</p>
-                              </div>
-                              <div class="col-md-7" style="margin-left: -200px">
-                                <div class="stars" style="margin-top: 0px; margin-left: 70px;">
-                                    <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
-                                    <label class="star star-5" for="star-5"></label>
-                                    <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
-                                    <label class="star star-4" for="star-4"></label>
-                                    <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
-                                    <label class="star star-3" for="star-3"></label>
-                                    <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
-                                    <label class="star star-2" for="star-2"></label>
-                                    <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
-                                    <label class="star star-1" for="star-1"></label>
+                    <div id="danhgia">
+                      <div class="row">
+                          <div class="col-md-12">
+                            <h3>{{$count_vote}} đánh giá {!! $product->name !!}</h3>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <form action="/vote/create" method="post">
+                            <div class="col-md-8">
+                              <div class="row">
+                                <div class="col-md-5">
+                                  <p>Chọn đánh giá của bạn</p>
+                                </div>
+                                <div class="col-md-7" style="margin-left: -200px">
+                                  <div class="stars" style="margin-top: 0px; margin-left: 70px;">
+                                      <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+                                      <label class="star star-5" for="star-5"></label>
+                                      <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+                                      <label class="star star-4" for="star-4"></label>
+                                      <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+                                      <label class="star star-3" for="star-3"></label>
+                                      <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+                                      <label class="star star-2" for="star-2"></label>
+                                      <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+                                      <label class="star star-1" for="star-1"></label>
+                                  </div>
+                                </div>  
+                              </div>  
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <textarea name="comment" style="height: 138px; width: 480px; max-height: 138px; max-width: 480px; border-radius: 5px;" placeholder="Nhập đánh giá về sản phẩm. (Tối thiểu 80 ký tự)" required minlength="3">
+                                    </textarea>
                                 </div>
                               </div>  
-                            </div>  
-                            <div class="row">
-                              <div class="col-md-12">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                  <textarea name="comment" style="height: 83px; width: 480px; max-height: 138px; max-width: 480px; border-radius: 5px;" placeholder="Nhập đánh giá về sản phẩm. (Tối thiểu 80 ký tự)" required minlength="3">
-                                  </textarea>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" required>
                               </div>
-                            </div>  
+                              <div class="form-group">
+                                <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                              </div>
+                              <div class="form-group">
+                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)" required pattern="[0]\d{3}\d{3}(d{1})?\d{3}">
+                              </div>
+                              <div class="form-group">
+                              <button type="submit" class="btn btn-large btn-block btn-primary">
+                                Gửi đánh giá
+                              </button>
+                              </div>
+                            </div>
+                          </form>  
+                      </div>
+                      <div class="row">
+                          <div id="review" class="col-md-12">
+                              @foreach ($votes as $vote)
+                                  <div class="row">
+                                      <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <p><strong>{{$vote->name}}</strong></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-xs-12 col-sm-12 col-md-12">
+                                        @for ($i=1; $i <= 5 ; $i++)
+                                          <span class="glyphicon glyphicon-star{{ ($i <= $vote->star) ? '' : '-empty'}}" style="color: orange; float: left;">
+                                          </span>
+                                        @endfor
+                                        <p>{{$vote->comment}}</p>
+                                      </div>
+                                  </div>
+                              @endforeach
                           </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" required>
+                      </div>
+                      <div class="row">
+                            <div class="col-md-12">
+                                {{$votes->links()}}
                             </div>
-                            <div class="form-group">
-                              <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                            </div>
-                            <div class="form-group">
-                              <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)" required pattern="[0]\d{3}\d{3}(d{1})?\d{3}">
-                            </div>
-                            <div class="form-group">
-                            <button type="submit" class="btn btn-large btn-block btn-primary">
-                              Gửi đánh giá
-                            </button>
-                            </div>
-                          </div>
-                        </form>  
-                    </div>
-                    <div class="row">
-                        <div id="review" class="col-md-12">
-                            @foreach ($votes as $vote)
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <p><strong>{{$vote->name}}</strong></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                      @for ($i=1; $i <= 5 ; $i++)
-                                        <span class="glyphicon glyphicon-star{{ ($i <= $vote->star) ? '' : '-empty'}}" style="color: orange; float: left;">
-                                        </span>
-                                      @endfor
-                                      <p>{{$vote->comment}}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row">
-                          <div class="col-md-12">
-                              {{$votes->links()}}
-                          </div>
-                    </div>
+                      </div>
+                    </div>  
                     <hr><!-- end product vote -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 product-comment">
-                            <div class="row">
-                                <form action="/review/create" method="post">
-                                  <div class="col-xs-12 col-sm-12 col-md-8">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <textarea name="comment" style="height: 83px; width: 480px; max-height: 180px; max-width: 480px; border-radius: 5px;" placeholder="Nhập bình luận của bạn. (Tối thiểu 10 ký tự)" required minlength="3">
-                                    </textarea>
-                                  </div>
-                                  <div class="col-xs-12 col-sm-12 col-md-4">
-                                    <div class="form-group">
-                                      <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <input type="text" name="email" class="form-control" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                                    </div>
-                                    <div class="form-group">
-                                      <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" pattern="[0]\d{3}\d{3}(d{1})?\d{3}">
-                                    </div>
-                                    <div class="form-group">
-                                      <button type="submit" class="btn btn-large btn-block btn-primary">
-                                        Gửi phản hồi
-                                      </button>
-                                    </div>
-                                  </div>
-                                </form>
+                    <div id="binhluan">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <form action="/review/create" method="post">
+                              <div class="row">
+                                      <div class="col-md-12">
+                                        {{ csrf_field() }}
+                                          <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                          <textarea name="comment" style="height: 100px; width: 750px; max-height: 180px; max-width: 750px; border-radius: 5px;" placeholder="Nhập bình luận của bạn. (Tối thiểu 10 ký tự)" required minlength="3">
+                                          </textarea>
+                                      </div>
                               </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @foreach ($reviews as $review)
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                                <p><strong>{{$review->name}}</strong></p>
-                                            </div>
+                              <div class="row">
+                                      <div class="col-md-12">
+                                        <!-- Button trigger modal -->
+                                        <div class="form-group">
+                                              <button type="button" class="btn btn-large btn-block btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="width: 50px;">
+                                                Gửi
+                                              </button>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                                <p>{{ $review->comment}}</p>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content" style="width: 400px;">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">THÔNG TIN NGƯỜI GỬI</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <div class="form-group">
+                                                  <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" required>
+                                                </div>
+                                                <div class="form-group">
+                                                  <input type="text" name="email" class="form-control" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                                </div>
+                                                <div class="form-group">
+                                                  <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" pattern="[0]\d{3}\d{3}(d{1})?\d{3}">
+                                                </div>
+                                                <div class="form-group">
+                                                  <button type="submit" class="btn btn-large btn-block btn-primary">
+                                                    GỬI BÌNH LUẬN
+                                                  </button>
+                                                </div>
+                                              </div>
                                             </div>
+                                          </div>
                                         </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                {{$reviews->links()}}
+                                      </div>
                               </div>
-                            </div>
+                          </form>
                         </div>
-                    </div>
-                    <!-- end product comment -->
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          @foreach ($reviews as $review)
+                              <div class="row">
+                                  <div class="col-xs-12 col-sm-12 col-md-12">
+                                      <p><strong>{{$review->name}}</strong></p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-xs-12 col-sm-12 col-md-12">
+                                      <p>{{ $review->comment}}</p>
+                                  </div>
+                              </div>
+                          @endforeach
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          {{$reviews->links()}}
+                        </div>
+                      </div>
+                    </div> 
                 </div>
+                <!-- end col-md-8 -->
                 <div class="col-xs-12 col-sm-12 col-md-4">
-                    <div class="col-xs-12 col-sm-12 col-md-12 product-news">
-                        <h2 style="padding-left: 20px;"><small>Tin tức mới</small></h2><hr>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                            <div class="bt">
-                                <div class="image-m pull-left">
-                                    <a href="">
-                                        <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$product->image!!}">
-                                    </a>
-                                </div>
-                            </div> <!-- /div bt -->
-                            <div class="ct">
-                                <a href="" title="Chi tiết">
-                                    <p>
-                                        {!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone
-                                    </p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                            <div class="bt">
-                                <div class="image-m pull-left">
-                                    <a href="">
-                                        <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$product->image!!}">
-                                    </a>
-                                </div>
-                            </div> <!-- /div bt -->
-                            <div class="ct">
-                                <a href="" title="Chi tiết">
-                                    <p>
-                                        {!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone
-                                    </p>
-                                </a>
-                            </div>
-                        </div>
-                        <a href="{{'/news'}}" class="pull-right compare">Đọc thêm tin tức</a>
-                    </div>    
-                    <!-- end product news -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 product-similar">
-                        <h2 style="padding-left: 20px;"><small>Sản phẩm tương tự</small></h2><hr>
-                        @foreach($product_sames as $product_same)
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                                <div class="bt">
-                                    <div class="image-m pull-left">
-                                        <a href="">
-                                            <img style="height: 150px; width: 110px;" class="img-responsive" src="{!!$product->image!!}">
-                                        </a>
-                                    </div>
-                                </div> <!-- /div bt -->
-                                <div class="ct">
-                                    <h4>{!! $product_same->name !!}</h4>
-                                    <h4>{!! $product_same->price !!} đ</h4>
-                                    <a href="{!!url('mobile/'.$product->id.'-'.$product->slug)!!}" title="Chi tiết">
-                                      <ul type="none">
-                                          <li><strong>Màn Hình</strong> :{!!$product_same->screen->tech_screen!!}</li>
-                                          <li><strong>Camera</strong> :{!!$product_same->backCamera->resolution!!} MP</li>
-                                          <li><strong>Pin</strong> :{!!$product_same->battery->battery_capacity!!} mAh</li>
-                                      </ul>
-                                    </a>
-                                </div>
-                                <a href="" class="pull-right compare">So sánh chi tiết </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <!-- end product similar -->
+                      <div class="col-xs-12 col-sm-12 col-md-12 product-news">
+                          <h2 style="padding-left: 20px;"><small>Tin tức mới</small></h2><hr>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+                              <div class="bt">
+                                  <div class="image-m pull-left">
+                                      <a href="">
+                                          <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$product->image!!}">
+                                      </a>
+                                  </div>
+                              </div> <!-- /div bt -->
+                              <div class="ct">
+                                  <a href="" title="Chi tiết">
+                                      <p>
+                                          {!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone
+                                      </p>
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+                              <div class="bt">
+                                  <div class="image-m pull-left">
+                                      <a href="">
+                                          <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$product->image!!}">
+                                      </a>
+                                  </div>
+                              </div> <!-- /div bt -->
+                              <div class="ct">
+                                  <a href="" title="Chi tiết">
+                                      <p>
+                                          {!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone
+                                      </p>
+                                  </a>
+                              </div>
+                          </div>
+                          <a href="{{'/news'}}" class="pull-right compare">Đọc thêm tin tức</a>
+                      </div>    
+                      <!-- end product news -->
+                      <div class="col-xs-12 col-sm-12 col-md-12 product-similar">
+                          <h2 style="padding-left: 20px;"><small>Sản phẩm tương tự</small></h2><hr>
+                          @foreach($product_sames as $product_same)
+                              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+                                  <div class="bt">
+                                      <div class="image-m pull-left">
+                                          <a href="">
+                                              <img style="height: 150px; width: 110px;" class="img-responsive" src="{!!$product->image!!}">
+                                          </a>
+                                      </div>
+                                  </div> <!-- /div bt -->
+                                  <div class="ct">
+                                      <h4>{!! $product_same->name !!}</h4>
+                                      <h4>{!! $product_same->price !!} đ</h4>
+                                      <a href="{!!url('mobile/'.$product->id.'-'.$product->slug)!!}" title="Chi tiết">
+                                        <ul type="none">
+                                            <li><strong>Màn Hình</strong> :{!!$product_same->screen->tech_screen!!}</li>
+                                            <li><strong>Camera</strong> :{!!$product_same->backCamera->resolution!!} MP</li>
+                                            <li><strong>Pin</strong> :{!!$product_same->battery->battery_capacity!!} mAh</li>
+                                        </ul>
+                                      </a>
+                                  </div>
+                                  <a href="" class="pull-right compare">So sánh chi tiết </a>
+                              </div>
+                          @endforeach
+                      </div>
+                      <!-- end product similar -->
                 </div>
                 <!-- end col-md-4 -->
             </div>
