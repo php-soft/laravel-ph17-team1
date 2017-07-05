@@ -12,7 +12,10 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::all();
-        return view('news.index')->with('news', $news)->with('data', $news)->with('mostView', $news)->with('review', $news);
+        return view('news.index')->with('news', $news)
+            ->with('data', $news)
+            ->with('mostView', $news)
+            ->with('review', $news);
     }
 
     public function indexByTag($id)

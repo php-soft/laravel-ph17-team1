@@ -39,4 +39,3 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('news/tag/{id}', 'NewsController@indexByTag');
     Route::post('news/comment/{id}', 'NewsCommentController@store')->middleware('auth');
     Route::post('news/reply/{id}', 'ReplyController@store')->middleware('auth');
-
