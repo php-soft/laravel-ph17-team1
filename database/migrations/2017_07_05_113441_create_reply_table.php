@@ -13,7 +13,7 @@ class CreateReplyTable extends Migration
      */
     public function up()
     {
-        Schema::create('reply', function (Blueprint $table) {
+        Schema::create('replies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
@@ -31,6 +31,6 @@ class CreateReplyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reply');
+        Schema::dropIfExists('replies');
     }
 }

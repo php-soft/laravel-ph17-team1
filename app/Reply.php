@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     //
-    protected $table = "reply";
+    protected $table = "replies";
     protected $fillable = [
         'content', 'user_id', 'news_comment_id'
     ];
