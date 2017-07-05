@@ -30,7 +30,6 @@ class Product extends Model
         'utility_id',
         'color_id',
         'memory_id',
-        'vote_id'
     ];
 
     public function category()
@@ -88,7 +87,7 @@ class Product extends Model
         return $this->belongsTo('App\Memory');
     }
 
-    public function review()
+    public function reviews()
     {
         return $this->belongsTo('App\Review');
     }
@@ -103,8 +102,8 @@ class Product extends Model
         return $this->belongsToMany('App\PromotionProduct');
     }
 
-    public function voteProducts()
+    public function votes()
     {
-        return $this->belongsToMany('App\VoteProduct');
+        return $this->belongsTo('App\Vote');
     }
 }

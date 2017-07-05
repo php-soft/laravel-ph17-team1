@@ -13,6 +13,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::get('/admin', function () {
     return view('demo');
@@ -33,3 +34,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('tags/edit/{id}', 'TagController@update');
     Route::get('tags/delete/{id}', 'TagController@destroy');
 });
+
+Route::get('products', 'HomeController@index');
+
+Route::get('products/{slug}', 'ProductController@indexByID');
+
+Route::post('/vote/create', 'ProductController@storeVote');
+
+Route::post('/review/create', 'ProductController@storeComment');
+
+Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');

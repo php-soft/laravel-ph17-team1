@@ -19,6 +19,8 @@
                 <li><a href="#">Quản lý kho</a></li>
                 <li><a href="#">Order</a></li>
                 <li><a href="#">Link</a></li>
+                <li><a href="#">Đánh giá</a></li>
+                <li><a href="#">Bình luận</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

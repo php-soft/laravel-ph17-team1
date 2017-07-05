@@ -8,13 +8,15 @@ class Review extends Model
 {
     protected $table = 'reviews';
     protected $fillable = [
-        'customer_id',
         'product_id',
+        'name',
+        'email',
+        'phone',
         'comment'
     ];
 
-    public function product()
+    public function products()
     {
-        return $this->hasOne('App\Review');
+        return $this->hasMany('App\Product');
     }
 }
