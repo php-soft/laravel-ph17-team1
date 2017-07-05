@@ -359,6 +359,7 @@
                       </div>
                       <div class="row">
                           <form action="/vote/create" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="col-md-8">
                               <div class="row">
                                 <div class="col-md-5">
@@ -513,38 +514,24 @@
                 <div class="col-xs-12 col-sm-12 col-md-4">
                       <div class="col-xs-12 col-sm-12 col-md-12 product-news">
                           <h2 style="padding-left: 20px;"><small>Tin tức mới</small></h2><hr>
+                          @foreach($news as $new)
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
                               <div class="bt">
                                   <div class="image-m pull-left">
                                       <a href="">
-                                          <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$product->image!!}">
+                                          <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$new->image!!}">
                                       </a>
                                   </div>
                               </div> <!-- /div bt -->
                               <div class="ct">
                                   <a href="" title="Chi tiết">
                                       <p>
-                                          {!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone
+                                          {!!$new->description!!}
                                       </p>
                                   </a>
                               </div>
                           </div>
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                              <div class="bt">
-                                  <div class="image-m pull-left">
-                                      <a href="">
-                                          <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$product->image!!}">
-                                      </a>
-                                  </div>
-                              </div> <!-- /div bt -->
-                              <div class="ct">
-                                  <a href="" title="Chi tiết">
-                                      <p>
-                                          {!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone
-                                      </p>
-                                  </a>
-                              </div>
-                          </div>
+                          @endforeach
                           <a href="{{'/news'}}" class="pull-right compare">Đọc thêm tin tức</a>
                       </div>    
                       <!-- end product news -->
@@ -554,15 +541,14 @@
                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
                                   <div class="bt">
                                       <div class="image-m pull-left">
-                                          <a href="">
-                                              <img style="height: 150px; width: 110px;" class="img-responsive" src="{!!$product->image!!}">
+                                          <a href="{{url('products/' .$product_same->slug)}}">
+                                              <img style="height: 150px; width: 110px;" class="img-responsive" src="{!!$product_same->image!!}">
                                           </a>
                                       </div>
                                   </div> <!-- /div bt -->
                                   <div class="ct">
                                       <h4>{!! $product_same->name !!}</h4>
                                       <h4>{!! $product_same->price !!} đ</h4>
-                                      <a href="{!!url('mobile/'.$product->id.'-'.$product->slug)!!}" title="Chi tiết">
                                         <ul type="none">
                                             <li><strong>Màn Hình</strong> :{!!$product_same->screen->tech_screen!!}</li>
                                             <li><strong>Camera</strong> :{!!$product_same->backCamera->resolution!!} MP</li>
@@ -570,7 +556,7 @@
                                         </ul>
                                       </a>
                                   </div>
-                                  <a href="" class="pull-right compare">So sánh chi tiết </a>
+                                  <a href="{{url('/products/compare/' .$product->slug .'VS' .$product_same->slug)}}" class="pull-right compare">So sánh chi tiết </a>
                               </div>
                           @endforeach
                       </div>
