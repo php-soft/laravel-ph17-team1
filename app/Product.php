@@ -108,7 +108,7 @@ class Product extends Model
     }
     public function orderDetail()
     {
-        return $this->hasMany('App\Order_Detail', 'product_id', 'id');
+        return $this->hasMany('App\OrderDetail', 'product_id', 'id');
     }
     public static function getProduct($slug)
     {
