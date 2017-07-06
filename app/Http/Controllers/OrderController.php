@@ -22,7 +22,7 @@ use Session;
 class OrderController extends Controller
 {
     public $qtysp = 0;
-    public function showOrder(Request $request)
+    public function showOrder()
     {
         $qtysp = Cart::content()->count();
         if ($qtysp == 0) {
@@ -99,14 +99,14 @@ class OrderController extends Controller
         }
             // dd($request->voucher_code);
         if (!empty($request->voucher_code)) {
-            $voucher = Voucher::where('code',$request->voucher_code)->first();
+            $voucher = Voucher::where('code', $request->voucher_code)->first();
             if (!empty($voucher)) {
                 $fromtime = date('Y/m/d', strtotime($voucher->start_date));
                 $totime = date('Y/m/d', strtotime($voucher->end_date));
                 $toDate = date('Y/m/d', time());
                 // echo $fromtime . "<br>" . $totime . "<br>". $toDate;exit ;
                 // so sánh ngày để biết voucher còn hạn không và số lượng >0
-                if (strtotime($fromtime) <= strtotime($toDate) && strtotime($toDate) <= 
+                if (strtotime($fromtime) <= strtotime($toDate) && strtotime($toDate) <=
                     strtotime($totime) && $voucher->quantity > 0) {
                     $total = Cart::subtotal(0, '', '');
                     $value = $voucher->percent * $total /100;
@@ -115,8 +115,7 @@ class OrderController extends Controller
                     } else {
                         $total = $total - $voucher->max;
                     }
-                }
-                else{
+                } else {
                     echo "<script>
                         alert('mã voucher: $request->voucher_code đã hết hạn,
                          vui lòng chọn mã giảm giá khác!');
@@ -139,7 +138,7 @@ class OrderController extends Controller
         }
         //gán biến mới tạo id tự động
         $order_lastid = Order::pluck('id')->last();
-        $order_lastid = $order_lastid+1;       
+        $order_lastid = $order_lastid+1;
         if ($order_lastid<1000000) {
             $order_lastid =  sprintf('%06d', $order_lastid);
         }
@@ -163,7 +162,6 @@ class OrderController extends Controller
         if (!empty($request->voucher_code)) {
             $order->voucher_id = Voucher::where('code', $request->voucher_code)
             ->pluck('id')->first();
-
         }
         $order->save();
         //send mail
@@ -192,8 +190,8 @@ class OrderController extends Controller
             $store1->quantity = $store_qty - $data->qty;
             $store1->save();
         }
-        $madh = $order->madh;
-        $email = $order->shipping_email;
+        // $madh = $order->madh;
+        // $email = $order->shipping_email;
         Cart::destroy();
         return redirect()->back()->withSuccess('<h3 style="color: red">Đặt hàng thành công! </h3>
             <p>Xin vui lòng check <a href="https://mail.google.com/mail">email</a>
@@ -224,6 +222,7 @@ class OrderController extends Controller
     {
         if (empty(auth()->user()->id)) {
             $error = "Bạn phải đăng nhập mới quản lý được đơn hàng";
+            return view('orders.orderByCustomerId')->with('error', $error);
         } else {
             $user = auth()->user()->id;
             $order = Order::where('customer_id', $user)->orderBy('created_at', 'desc')->paginate(10);
@@ -233,7 +232,7 @@ class OrderController extends Controller
     public function viewDetailOrder($id)
     {
         // dd($id);
-        $order_detail = OrderDetail::where('order_id',$id)->get();
+        // $order_detail = OrderDetail::where('order_id', $id)->get();
         // return view('orders.orderByCustomerId')->with('order_detail', $order_detail);
     }
     public function submitOrder($id)
