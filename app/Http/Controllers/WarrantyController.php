@@ -12,4 +12,3 @@ class WarrantyController extends Controller
         return view('warrantys.warranty');
     }
 }
-

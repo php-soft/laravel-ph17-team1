@@ -37,4 +37,3 @@ Route::get('introduce', 'IntroduceController@index');
 Route::get('warranty', 'WarrantyController@index');
 Route::get('installment', 'InstallmentController@index');
 Route::get('regulation', 'RegulationController@index');
-
