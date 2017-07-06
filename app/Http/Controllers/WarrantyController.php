@@ -8,7 +8,7 @@ use Input;
 class WarrantyController extends Controller
 {
     public function index(){
-    	return view('warrantys.warranty');
+        return view('warrantys.warranty');
     }
 }
 

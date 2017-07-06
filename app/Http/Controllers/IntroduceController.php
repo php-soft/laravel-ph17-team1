@@ -8,6 +8,6 @@ use Input;
 class IntroduceController extends Controller
 {
     public function index(){
-    	return view('introduces.introduce');
+        return view('introduces.introduce');
     }
 }

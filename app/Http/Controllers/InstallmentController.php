@@ -8,6 +8,6 @@ use Input;
 class InstallmentController extends Controller
 {
     public function index(){
-    	return view('installments.installment');
+        return view('installments.installment');
     }
 }

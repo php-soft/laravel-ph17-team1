@@ -8,6 +8,6 @@ use Input;
 class RegulationController extends Controller
 {
     public function index(){
-    	return view('regulations.regulation');
+        return view('regulations.regulation');
     }
 }
