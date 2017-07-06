@@ -49,4 +49,4 @@ Route::post('products/{slug}/create-vote', 'ProductController@storeVote');
 
 Route::post('products/{slug}/create-review', 'ProductController@storeComment');
 
-Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');
+Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare');

@@ -63,11 +63,10 @@ class ProductController extends Controller
         ->with('avgvote', $avgvote)->with('stores', $stores)->with('promotions', $promotions)
         ->with('votes', $votes)->with('reviews', $reviews);
     }
-
     public function storeVote(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required',
+            'name' => 'required',
             'email' => 'required|email|unique:votes,email',
             'phone' => 'required|regex:/[0-9]/',
             'comment' => 'required|min:3',
@@ -120,12 +119,11 @@ class ProductController extends Controller
             return back();
         }
     }
-
     public function storeComment(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required',
-            'comment' => 'required|min:3',
+                'name' => 'required',
+                'comment' => 'required|min:3',
             ], [
                 'name.required'=> 'Chưa nhập tên',
                 'comment.required'=> 'Hãy để lại vài dòng bình luận',
