@@ -11,7 +11,7 @@ use Cart;
 
 class CartController extends Controller
 {
-	public $qtysp = 0;
+    public $qtysp = 0;
     public function index()
     {
         $products = Product::all();
@@ -80,7 +80,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function getUpdateCart($id,Request $request)
+    public function getUpdateCart($id, Request $request)
     {
         echo "đang hoàn thiện";
     }

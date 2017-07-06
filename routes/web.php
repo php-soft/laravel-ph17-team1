@@ -87,10 +87,10 @@ Route::post('/don-dat-hang', 'OrderController@storeOrder')->name('don-dat-hang')
 
 Route::get('/xac-nhan-dat-hang/{id}', 'OrderController@submitOrder')->name('xac-nhan-dat-hang');
 
-Route::get('/tim-kiem-hoa-don','OrderController@showSearchOrder')->name('show-tim-kiem-don-hang');
+Route::get('/tim-kiem-hoa-don', 'OrderController@showSearchOrder')->name('show-tim-kiem-don-hang');
 
-Route::post('/tim-kiem-hoa-don','OrderController@searchOrder')->name('tim-kiem-don-hang');
+Route::post('/tim-kiem-hoa-don', 'OrderController@searchOrder')->name('tim-kiem-don-hang');
 
-Route::get('/quan-ly-don-hang','OrderController@orderByCustomerId')->name('quan-ly-don-hang');
+Route::get('/quan-ly-don-hang', 'OrderController@orderByCustomerId')->name('quan-ly-don-hang');
 
-Route::get('/chi-tiet-don-hang/{id}','OrderController@viewDetailOrder')->name('chi-tiet-don-hang');
+Route::get('/chi-tiet-don-hang/{id}', 'OrderController@viewDetailOrder')->name('chi-tiet-don-hang');
