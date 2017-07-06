@@ -29,7 +29,7 @@ class CartController extends Controller
         $product = Product::find($id);
         $color = Color::find($product->color_id);
         $memory = Memory::find($product->memory_id);
-        $insert = Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
+        Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
          'price' => $product->price, 'options' => ['color' => $color->name, 'image' => $product->image,
           'ram' => $memory->ram, 'rom' => $memory->rom]]);
         return redirect()->route('home');
@@ -80,7 +80,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function getUpdateCart($id, Request $request)
+    public function getUpdateCart()
     {
         echo "đang hoàn thiện";
     }
