@@ -229,12 +229,12 @@ class OrderController extends Controller
             return view('orders.orderByCustomerId')->with('order', $order);
         }
     }
-    public function viewDetailOrder($id)
-    {
-        // dd($id);
-        // $order_detail = OrderDetail::where('order_id', $id)->get();
-        // return view('orders.orderByCustomerId')->with('order_detail', $order_detail);
-    }
+    // public function viewDetailOrder($id)
+    // {
+    //     // dd($id);
+    //     // $order_detail = OrderDetail::where('order_id', $id)->get();
+    //     // return view('orders.orderByCustomerId')->with('order_detail', $order_detail);
+    // }
     public function submitOrder($id)
     {
         $error = "";
