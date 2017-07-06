@@ -7,7 +7,8 @@ use Input;
 
 class RegulationController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('regulations.regulation');
     }
 }
