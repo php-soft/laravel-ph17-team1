@@ -26,6 +26,7 @@
                         </div>
                     </div>
                 </a>
+                <a href="{{url('/them-gio-hang/'.$product->id)}}">Thêm giỏ hàng</a>
             </div>
         </div>
     @endforeach
