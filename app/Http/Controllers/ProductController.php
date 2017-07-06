@@ -66,10 +66,10 @@ class ProductController extends Controller
     public function storeVote(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:votes,email',
-            'phone' => 'required|regex:/[0-9]/',
-            'comment' => 'required|min:3',
+                'name' => 'required',
+                'email' => 'required|email|unique:votes,email',
+                'phone' => 'required|regex:/[0-9]/',
+                'comment' => 'required|min:3',
             ], [
                 'name.required' => 'Chưa nhập tên',
                 'email.required' => 'Chưa nhập email',
@@ -81,8 +81,7 @@ class ProductController extends Controller
                 'comment.min' => 'Bình luận tối thiểu 80 ký tự',
                 Session::flash('message', 'Có lỗi xảy ra'),
                 Session::flash('alert-class', 'alert-error'),
-            ]
-        );
+            ]);
 
         if (Auth::check() == true) {
             $user_id = Auth::user()->id;
@@ -130,8 +129,7 @@ class ProductController extends Controller
                 'comment.min'=> 'Comment tối thiểu 10 ký tự',
                 Session::flash('message', 'Có lỗi xảy ra'),
                 Session::flash('alert-class', 'alert-error'),
-            ]
-        );
+            ]);
 
         $review = new Review;
         $review->product_id = $request->product_id;
