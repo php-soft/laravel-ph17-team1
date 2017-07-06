@@ -23,34 +23,35 @@ class OrderController extends Controller
 {
     public $qtysp = 0;
     public function showOrder(Request $request)
-    { 
+    {
         $qtysp = Cart::content()->count();
-        if ($qtysp == 0){
-            return view('orders.showorder', compact('qtysp'))->withSuccess('Cat has been created.');
+        if ($qtysp == 0) {
+            return view('orders.showorder', compact('qtysp'));
         } else {
-        $order = Order::pluck(
-            'id',
-            'shipping_name',
-            'shipping_address',
-            'shipping_phone',
-            'shipping_email',
-            'voucher_code'
-        );
-        if (!empty(auth()->user()->id)){
-            $order->shipping_name = auth()->user()->name;
-            $order->shipping_phone = auth()->user()->phonenumber;
-            $order->shipping_address = auth()->user()->address;
-            $order->shipping_email = auth()->user()->email;
-        }
-        $store = Store::all()->pluck('name', 'id');
-        $products = Product::all();
-        $content = Cart::content();
-        $total = Cart::total();
-        $qty = Cart::count();
-        $qtysp = Cart::content()->count();
-        $subtotal = Cart::subtotal();
-        return view('orders.showorder', compact('qtysp'), compact('subtotal'))->with('products',$products)
-        ->with('content',$content)->with('total', $total)->with('qty', $qty)->with('order', $order)->with('store', $store);
+            $order = Order::pluck(
+                'id',
+                'shipping_name',
+                'shipping_address',
+                'shipping_phone',
+                'shipping_email',
+                'voucher_code'
+            );
+            if (!empty(auth()->user()->id)) {
+                $order->shipping_name = auth()->user()->name;
+                $order->shipping_phone = auth()->user()->phonenumber;
+                $order->shipping_address = auth()->user()->address;
+                $order->shipping_email = auth()->user()->email;
+            }
+            $store = Store::all()->pluck('name', 'id');
+            $products = Product::all();
+            $content = Cart::content();
+            $total = Cart::total();
+            $qty = Cart::count();
+            $qtysp = Cart::content()->count();
+            $subtotal = Cart::subtotal();
+            return view('orders.showorder', compact('qtysp'), compact('subtotal'))
+            ->with('products', $products)->with('content', $content)->with('total', $total)
+            ->with('qty', $qty)->with('order', $order)->with('store', $store);
         }
     }
     public function storeOrder(Request $request)
@@ -75,36 +76,41 @@ class OrderController extends Controller
         $store_id = $request->store;
         $store = Store::find($store_id);
         $store_name =$store->name;
-        foreach ($content as $data){
-            $qty_store = StoreProduct::where('store_id', $store_id)->where('product_id', $data->id)->pluck('quantity')->first();
-            if ($qty_store < $data->qty){
-                if (empty($qty_store)){
-                    echo "<script>
-                            alert('Cửa hàng $store_name, $data->name không còn sản phẩm, vui lòng chọn cửa hàng khác!');
-                            window.location = '".url('/dat-hang')."'
-                        </script>";
-                } else {
-                    echo "<script>
-                            alert('Cửa hàng $store_name, $data->name chỉ còn $qty_store sản phẩm, vui lòng chọn cửa hàng khác!');
-                            window.location = '".url('/dat-hang')."'
-                        </script>";
+        if (!empty($content)) {
+            foreach ($content as $data) {
+                $qty_store = StoreProduct::where('store_id', $store_id)->where('product_id', $data->id)
+                ->pluck('quantity')->first();
+                if ($qty_store < $data->qty) {
+                    if (empty($qty_store)) {
+                        echo "<script>
+                                alert('Cửa hàng $store_name, $data->name không còn sản phẩm,
+                                 vui lòng chọn cửa hàng khác!');
+                                window.location = '".url('/dat-hang')."'
+                            </script>";
+                    } else {
+                        echo "<script>
+                                alert('Cửa hàng $store_name, $data->name chỉ còn $qty_store sản phẩm,
+                                 vui lòng chọn cửa hàng khác!');
+                                window.location = '".url('/dat-hang')."'
+                            </script>";
+                    }
                 }
             }
         }
             // dd($request->voucher_code);
-        if (!empty($request->voucher_code)){
+        if (!empty($request->voucher_code)) {
             $voucher = Voucher::where('code',$request->voucher_code)->first();
-            if (!empty($voucher)){
+            if (!empty($voucher)) {
                 $fromtime = date('Y/m/d', strtotime($voucher->start_date));
                 $totime = date('Y/m/d', strtotime($voucher->end_date));
                 $toDate = date('Y/m/d', time());
                 // echo $fromtime . "<br>" . $totime . "<br>". $toDate;exit ;
                 // so sánh ngày để biết voucher còn hạn không và số lượng >0
-                if (strtotime($fromtime) <= strtotime($toDate) && strtotime($toDate) <= strtotime($totime) && $voucher->quantity > 0)
-                {
+                if (strtotime($fromtime) <= strtotime($toDate) && strtotime($toDate) <= 
+                    strtotime($totime) && $voucher->quantity > 0) {
                     $total = Cart::subtotal(0, '', '');
                     $value = $voucher->percent * $total /100;
-                    if($value <= $voucher->max){
+                    if ($value <= $voucher->max) {
                         $total = $total-$value;
                     } else {
                         $total = $total - $voucher->max;
@@ -112,13 +118,15 @@ class OrderController extends Controller
                 }
                 else{
                     echo "<script>
-                        alert('mã voucher: $request->voucher_code đã hết hạn, vui lòng chọn mã giảm giá khác!');
+                        alert('mã voucher: $request->voucher_code đã hết hạn,
+                         vui lòng chọn mã giảm giá khác!');
                         window.location = '".url('/dat-hang')."'
                     </script>";
                 }
             } else {
                 echo "<script>
-                    alert('mã voucher: $request->voucher_code không tồn tại, vui lòng chọn mã giảm giá khác!');
+                    alert('mã voucher: $request->voucher_code không tồn tại,
+                     vui lòng chọn mã giảm giá khác!');
                     window.location = '".url('/dat-hang')."'
                 </script>";
             }
@@ -126,16 +134,16 @@ class OrderController extends Controller
             $total = Cart::subtotal(0, '', '');
         }
         $order = new Order;
-        if (!empty(auth()->user()->id)){
+        if (!empty(auth()->user()->id)) {
             $order->customer_id = auth()->user()->id;
         }
         //gán biến mới tạo id tự động
         $order_lastid = Order::pluck('id')->last();
         $order_lastid = $order_lastid+1;       
-        if ($order_lastid<1000000){
+        if ($order_lastid<1000000) {
             $order_lastid =  sprintf('%06d', $order_lastid);
         }
-        if ($store_id<1000){
+        if ($store_id<1000) {
             $store_id =  sprintf('%03d', $store_id);
         }
         //Lấy ngày giờ hiện tại tạo mã đơn hàng
@@ -152,14 +160,15 @@ class OrderController extends Controller
         $order->shipping_address = $request->shipping_address;
         $order->shipping_email = $request->shipping_email;
         $order->store_id = $request->store;
-        if (!empty($request->voucher_code)){
-            $order->voucher_id = Voucher::where('code', $request->voucher_code)->pluck('id')->first();
+        if (!empty($request->voucher_code)) {
+            $order->voucher_id = Voucher::where('code', $request->voucher_code)
+            ->pluck('id')->first();
 
         }
         $order->save();
         //send mail
         Mail::to($request->shipping_email)->send(new OrderShipped($order));
-        if (!empty($voucher)){
+        if (!empty($voucher)) {
             $voucher->quantity =$voucher->quantity-1;
             // dd($voucher->quantity);
             $voucher->save();
@@ -169,14 +178,17 @@ class OrderController extends Controller
             $order_detail = new OrderDetail;
             $order_detail->product_id = $data->id;
             $order_detail->order_id = $order->id;
-            $order_detail->color_memory = "Màu: ". $data->options->color .", rom: ". $data->options->rom ."Gb, Ram: ". $data->options->ram . " Gb";
+            $order_detail->color_memory = "Màu: ". $data->options->color .", rom: "
+            . $data->options->rom ."Gb, Ram: ". $data->options->ram . " Gb";
             $order_detail->price = $data->price;
             $order_detail->quantity = $data->qty;
             $order_detail->total = $data->subtotal(0, '', '');
             $order_detail->created_at = date('Y-m-d');
             $order_detail->save();
-            $store_qty = StoreProduct::where('store_id', $request->store)->where('product_id', $data->id)->pluck('quantity')->first();
-            $store1= StoreProduct::where('store_id', $request->store)->where('product_id', $data->id)->first();
+            $store_qty = StoreProduct::where('store_id', $request->store)
+            ->where('product_id', $data->id)->pluck('quantity')->first();
+            $store1= StoreProduct::where('store_id', $request->store)
+            ->where('product_id', $data->id)->first();
             $store1->quantity = $store_qty - $data->qty;
             $store1->save();
         }
@@ -184,7 +196,8 @@ class OrderController extends Controller
         $email = $order->shipping_email;
         Cart::destroy();
         return redirect()->back()->withSuccess('<h3 style="color: red">Đặt hàng thành công! </h3>
-            <p>Xin vui lòng check <a href="https://mail.google.com/mail">email</a> để xác nhận hoàn tất hóa đơn</p>
+            <p>Xin vui lòng check <a href="https://mail.google.com/mail">email</a>
+             để xác nhận hoàn tất hóa đơn</p>
             <p>Xin cảm ơn</p>');
     }
     public function showSearchOrder()
@@ -198,7 +211,7 @@ class OrderController extends Controller
             $error = "Bạn phải nhập đầy đủ thông tin";
         } else {
             $order = Order::where('madh', $request->madh)->where('shipping_email', $request->email)->first();
-            if (empty($order)){
+            if (empty($order)) {
                 $error = "Không tìm thấy hóa đơn, vui lòng kiểm tra lại";
             } else {
                 $order_detail = OrderDetail::where('order_id', $order->id)->get();
@@ -209,7 +222,7 @@ class OrderController extends Controller
     }
     public function orderByCustomerId()
     {
-        if (empty(auth()->user()->id)){
+        if (empty(auth()->user()->id)) {
             $error = "Bạn phải đăng nhập mới quản lý được đơn hàng";
         } else {
             $user = auth()->user()->id;
@@ -227,7 +240,7 @@ class OrderController extends Controller
     {
         $error = "";
         $order = Order::find($id);
-        if ($order->status_id == 1){
+        if ($order->status_id == 1) {
             $order->status_id = 2;
             $order->save();
         } else {
