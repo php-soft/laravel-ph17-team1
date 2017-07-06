@@ -45,8 +45,8 @@ Route::get('products', 'HomeController@index');
 
 Route::get('products/{slug}', 'ProductController@indexByID');
 
-Route::post('/vote/create', 'ProductController@storeVote');
+Route::post('products/{slug}/create-vote', 'ProductController@storeVote');
 
-Route::post('/review/create', 'ProductController@storeComment');
+Route::post('products/{slug}/create-review', 'ProductController@storeComment');
 
 Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreBlogPostRequest;
@@ -20,7 +21,6 @@ use Session;
 
 class ProductController extends Controller
 {
-
     public function indexByID($slug)
     {
         $product_id = Product::where('slug', $slug)->pluck('id');
@@ -66,6 +66,25 @@ class ProductController extends Controller
 
     public function storeVote(Request $request)
     {
+        $this->validate($request, [
+            'name'=>'required',
+            'email' => 'required|email|unique:votes,email',
+            'phone' => 'required|regex:/[0-9]/',
+            'comment' => 'required|min:3',
+            ], [
+                'name.required' => 'Chưa nhập tên',
+                'email.required' => 'Chưa nhập email',
+                'email.email' => 'Email không hợp lệ',
+                'email.unique' => 'Email đã tồn tại',
+                'phone.required' => 'Chưa nhập số điện thoại',
+                'phone.regex' => 'Số điện thoại không hợp lệ',
+                'comment.required' => 'Hãy viết một vài lời bình luận về sản phẩm',
+                'comment.min' => 'Bình luận tối thiểu 80 ký tự',
+                Session::flash('message', 'Có lỗi xảy ra'),
+                Session::flash('alert-class', 'alert-error'),
+            ]
+        );
+
         if (Auth::check() == true) {
             $user_id = Auth::user()->id;
             $users_id = User::where('id', $user_id)->first();
@@ -83,7 +102,7 @@ class ProductController extends Controller
             $vote->comment = $request->comment;
             $vote->save();
             Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi');
-            Session::flash('alert-vote', 'alert-success');
+            Session::flash('alert-class', 'alert-error');
             return back();
         } else {
             $vote = new Vote;
@@ -97,13 +116,25 @@ class ProductController extends Controller
             $vote->comment = $request->comment;
             $vote->save();
             Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi');
-            Session::flash('alert-vote', 'alert-success');
+            Session::flash('alert-class', 'alert-success');
             return back();
         }
     }
 
     public function storeComment(Request $request)
     {
+        $this->validate($request, [
+            'name'=>'required',
+            'comment' => 'required|min:3',
+            ], [
+                'name.required'=> 'Chưa nhập tên',
+                'comment.required'=> 'Hãy để lại vài dòng bình luận',
+                'comment.min'=> 'Comment tối thiểu 10 ký tự',
+                Session::flash('message', 'Có lỗi xảy ra'),
+                Session::flash('alert-class', 'alert-error'),
+            ]
+        );
+
         $review = new Review;
         $review->product_id = $request->product_id;
         $review->name = $request->name;
@@ -112,7 +143,7 @@ class ProductController extends Controller
         $review->comment = $request->comment;
         $review->save();
         Session::flash('message', 'Cảm ơn ' .$review->name . ' đã để lại phản hồi');
-        Session::flash('alert-review', 'alert-success');
+        Session::flash('alert-class', 'alert-success');
         return back();
     }
 

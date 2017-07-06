@@ -87,6 +87,11 @@ class Product extends Model
         return $this->belongsTo('App\Memory');
     }
 
+    public function manufactory()
+    {
+        return $this->belongsTo('App\Manufactory');
+    }
+
     public function reviews()
     {
         return $this->belongsTo('App\Review');
