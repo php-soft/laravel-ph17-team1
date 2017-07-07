@@ -33,6 +33,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('tags/edit/{id}', 'TagController@edit');
     Route::post('tags/edit/{id}', 'TagController@update');
     Route::get('tags/delete/{id}', 'TagController@destroy');
+
+    Route::get('/orders', 'OrderController@index')->name('adminOrders');
+
+    Route::get('/orders/get_datatable', 'OrderController@get_datatable')->name('adminOrders');
+    
+    Route::get('/orders/edit/{order_id}', 'OrderController@edit')->name('adminEditOrder');
+    
+    Route::put('/orders/edit/{order_id}', 'OrderController@update')->name('adminUpdateOrder');
+
+    Route::put('/orders/update/{id}', 'OrderController@updateindex')->name('adminUpdateOrderIndex');
+    
+    Route::get('/orders/delete/{order_id}', 'OrderController@destroy')->name('adminDeleteOrder');
+
+    Route::get('/orders/viewdetail/{order_id}', 'OrderController@viewDetail')->name('adminViewOrderDetail');
 });
 
 Route::get('introduce', 'IntroduceController@index');
@@ -54,4 +68,34 @@ Route::post('products/{slug}/create-vote', 'ProductController@storeVote');
 
 Route::post('products/{slug}/create-review', 'ProductController@storeComment');
 
-Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare');
+Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');
+
+Route::get('/gio-hang', 'CartController@index')->name('show-cart');
+
+Route::get('/them-gio-hang/{product_id}', 'CartController@getAddToCart')->name('add-to-cart');
+
+Route::get('check-out', ['uses'=>'CartController@getCheckout', 'as'=>'checkout']);
+
+Route::put('/gio-hang/cap-nhat-sp/{product_id}', 'CartController@getUpdateCart')->name('update-cart');
+
+Route::get('/gio-hang/cap-nhat/{product_id}', 'CartController@getUpdateQtyCart')->name('update-qty-cart');
+
+Route::get('/gio-hang/xoa-cap-nhat/{product_id}', 'CartController@getDeleteQtyCart')->name('delete-qty-cart');
+
+Route::get('/gio-hang/xoa-san-pham/{product_id}', 'CartController@getDeleteProductCart')->name('delete-product-cart');
+
+Route::get('/gio-hang/xoa-gio-hang', 'CartController@getDeleteCart')->name('delete-cart');
+
+Route::get('/dat-hang', 'OrderController@showOrder')->name('dat-hang');
+
+Route::post('/don-dat-hang', 'OrderController@storeOrder')->name('don-dat-hang');
+
+Route::get('/xac-nhan-dat-hang/{id}', 'OrderController@submitOrder')->name('xac-nhan-dat-hang');
+
+Route::get('/tim-kiem-hoa-don', 'OrderController@showSearchOrder')->name('show-tim-kiem-don-hang');
+
+Route::post('/tim-kiem-hoa-don', 'OrderController@searchOrder')->name('tim-kiem-don-hang');
+
+Route::get('/quan-ly-don-hang', 'OrderController@orderByCustomerId')->name('quan-ly-don-hang');
+
+Route::get('/chi-tiet-don-hang/{id}', 'OrderController@viewDetailOrder')->name('chi-tiet-don-hang');
