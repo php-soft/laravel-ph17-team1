@@ -4,8 +4,8 @@
         <div class="container">
           <h2>QUẢN LÝ KHO</h2>
           <ul class="nav nav-tabs">
-            <li ><a data-toggle="tab" href="#home">Tồn kho </a></li>
-            <li class="active"><a data-toggle="tab" href="#menu1">Nhập xuất tồn</a></li>
+            <li  class="active"><a data-toggle="tab" href="#home">Tồn kho </a></li>
+            <li><a data-toggle="tab" href="#menu1">Nhập xuất tồn</a></li>
           </ul>
 
           <div class="tab-content" style="padding-top: 10px;">
