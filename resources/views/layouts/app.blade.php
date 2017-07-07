@@ -17,6 +17,7 @@
     <link href="{{ asset('css/voteinput.css') }}" rel="stylesheet"><!-- css voteinput -->
     <link href="{{ asset('css/rating5star.css') }}" rel="stylesheet"><!-- css rating5star -->
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/product-detail.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
