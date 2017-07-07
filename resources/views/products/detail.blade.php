@@ -7,36 +7,35 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <h3 class="panel-title">
-                        <span class="glyphicon glyphicon-home" style="font-size: 10px;"></span><a href="{!!url('/')!!}" title=""> Home</a> 
-                        <span class="glyphicon glyphicon-chevron-right" style="font-size: 10px;"></span><a href="{!!url('products')!!}" title=""> Điện thoại</a>
-                        <span class="glyphicon glyphicon-chevron-right" style="font-size: 10px;"></span> <a href="#" title="">{!! $product->name !!}</a>
+                        <a href="{!!url('/')!!}" title="">Trang chủ</a>
+                        <span class="glyphicon glyphicon-menu-right" style="font-size: 14px;"></span>
+                        <a href="{!!url('products')!!}" title=""> Điện thoại</a>
+                        <span class="glyphicon glyphicon-menu-right" style="font-size: 14px;"></span>
+                        <a href="{{url('products/category/name')}}">{!! $product->manufactory->name !!}</a>
                     </h3>
                 </div>
             </div>    
             <!-- end breadcrumb -->
-            <div class="row">
-                    <div class="rowtop">
-                        <div class="col-xs-12 col-sm-12 col-md-5 product-name">
-                            <h3>Điện thoại {!! $product->name !!} {!! $product->color->name !!} {!! $product->memory->rom !!}GB</h3>
-                        </div>
-                        <!-- end product name -->
-                        <div class="col-xs-12 col-sm-12 col-md-4 rating-result">
-                            <p style="margin-top:23px; margin-left: -90px; color: orange">
-                                @for ($i=1; $i <= 5 ; $i++)
-                                    <span class="glyphicon glyphicon-star{{ ($i <= $avgvote) ? '' : '-empty'}}"></span>
-                                @endfor
-                                <a href="#review">{{$count_vote}} đánh giá</a>
-                            </p>
-                        </div>
-                        <!-- end rating result -->
-                        <div class="col-xs-12 col-sm-12 col-md-3 like-share">
-                            <p style="margin-top:16px; margin-left: 120px; font-size: 18px">
-                                <a href=""><span class="label label-primary"> Like</span></a>
-                                <a href=""><span class="label label-primary">Share</span></a>
-                            </p>
-                        </div>
-                        <!-- end like share -->
+            <div class="row" style="margin-bottom: -20px">
+                <div class="rowtop">
+                    <div class="col-xs-12 col-sm-12 col-md-8 product-name">
+                        <h3 style="float: left; margin-right: 10px;">Điện thoại {!! $product->name !!}</h3>
+                        <p style="margin-top:25px; color: orange">
+                            @for ($i=1; $i <= 5 ; $i++)
+                                <span class="glyphicon glyphicon-star{{ ($i <= $avgvote) ? '' : '-empty'}}"></span>
+                            @endfor
+                            <a href="#review">{{$count_vote}} đánh giá</a>
+                        </p>
                     </div>
+                    <!-- end product name -->
+                    <div class="col-xs-12 col-sm-12 col-md-4 like-share">
+                        <p style="margin-top:16px; margin-left: 260px; font-size: 15px">
+                            <a href=""><span class="label label-primary"> Like</span></a>
+                            <a href=""><span class="label label-primary">Share</span></a>
+                        </p>
+                    </div>
+                    <!-- end like share -->
+                </div>
             </div>
         </div>        
         <hr><!-- end detail product title -->
@@ -48,23 +47,23 @@
                 <!-- end product image -->
                 <div class="col-xs-12 col-sm-12 col-md-4 product-promotion">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -20px;">
                             @if($product->sale_price === null)
-                                <h2 style="color: red">{!! $product->price !!} đ</h2>
+                                <h2 style="color: #d0021b; float: left; margin-right: 15px;">{!! $product->price !!} đ</h2>
                             @else 
-                                <h2 style="color: red">{!! $product->sale_price !!} đ</h2>
+                                <h2 style="color: #d0021b; float: left; margin-right: 15px;">{!! $product->sale_price !!} đ</h2>
                             @endif
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
                             @if($product->sale_price !== null)
-                                <label class="label label-warning" style="margin-left: 20px;">Đã giảm {!! number_format(round((($product->price-$product->sale_price)/$product->price)*100, 2), 2) !!} %</label>
+                                <p style="margin-top: 25px;">
+                                    <label class="label label-warning">Đã giảm {!! number_format(round((($product->price-$product->sale_price)/$product->price)*100, 2), 2) !!} %</label>
+                                </p>
                             @endif
                         </div>
                     </div>
                     <!-- end show price -->
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="panel panel-info" style="margin:0;">
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-bottom: -30px;">
+                            <div class="panel panel-info">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Khuyễn mãi - Chính sách</h3>
                                 </div>
@@ -84,7 +83,7 @@
                     </div>
                     <br><!-- end promotion -->
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-bottom: -10px;">
                             <div class="panel panel-info" style="margin:0;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Phụ kiện đi kèm</h3>
@@ -105,7 +104,7 @@
                        <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             @if($product->status ==1)
-                                <a href="" title="" class="btn btn-large btn-block btn-primary" style="font-size: 20px;">Mua ngay</a>
+                                <a href="{{url('')}}" class="btn btn-large btn-block btn-primary" style="font-size: 20px;">Mua ngay</a>
                             @else
                                 <a href="" title="" class="btn btn-large btn-block btn-primary disabled" style="font-size: 20px;">Tạm hết hàng</a>
                             @endif
@@ -113,7 +112,7 @@
                     </div>
                     <br> <!-- end btn order -->
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -10px;">
                             <div class="panel panel-info" style="margin: 0;">
                                 <div class="panel-heading" style="padding:5px;">
                                     <h3 class="panel-title">Danh sách siêu thị</h3>
@@ -137,7 +136,7 @@
                 </div>
                 <!-- end product promotion -->
                 <div class="col-xs-12 col-sm-12 col-md-4 product-digital">
-                    <div class="row">
+                    <div class="row" style="margin-top: -20px;">
                         <div class="col-xs-12 col-sm-12 col-md-12 product-digital">
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -204,15 +203,17 @@
                         <div class="modal-content" style="width: 725px;">
                           <div class="modal-header">
                             <h3 class="modal-title" id="exampleModalLongTitle">Thông số kỹ thuật chi tiết {{$product->name}}</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -25px; margin-right: 10px;">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                               <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="image-large">
-                                        <img class="img-responsive" src="{!!$product->image!!}">
+                                    <div id="wrapper" style="text-align: center">    
+                                        <div id="yourdiv" style="display: inline-block;">
+                                            <img style="height: 300px; width: 300px; text-align: center;"src="{!!$product->image!!}">
+                                        </div>
                                     </div>
                                 </div>
                               </div>
@@ -238,12 +239,16 @@
                                         <li class="col-md-4 list-group-item">Đèn flash</li>
                                         <li class="col-md-8 list-group-item">{!! $product->backCamera->flash !!}</li>
                                         <li class="col-md-4 list-group-item" style="height: 82px;">Chụp ảnh nâng cao</li>
-                                        <li class="col-md-8 list-group-item">{!! $product->backCamera->advanced_photography !!}</li>
+                                        <li class="col-md-8 list-group-item" style="height: 82px;">{!! $product->backCamera->advanced_photography !!}</li>
                                         <li class="col-md-12 list-group-item disabled">Camera trướt</li>
                                         <li class="col-md-4 list-group-item">Độ phân giải</li>
                                         <li class="col-md-8 list-group-item">{!! $product->frontCamera->resolution !!}</li>
                                         <li class="col-md-4 list-group-item">Video call</li>
-                                        <li class="col-md-8 list-group-item">{!! $product->frontCamera->videocall !!}</li>
+                                        @if($product->frontCamera->videocall == 1)
+                                            <li class="col-md-8 list-group-item">Có</li>
+                                        @else
+                                            <li class="col-md-8 list-group-item">Không</li>
+                                        @endif
                                         <li class="col-md-4 list-group-item" style="height: 62px;">Thông tin khác</li>
                                         <li class="col-md-8 list-group-item">{!! $product->frontCamera->other_info !!}</li>
                                         <li class="col-md-12 list-group-item disabled">Hệ điều hành - CPU</li>
@@ -272,7 +277,7 @@
                                         <li class="col-md-4 list-group-item">SIM</li>
                                         <li class="col-md-8 list-group-item">{!! $product->connect->sim !!}</li>
                                         <li class="col-md-4 list-group-item" style="height: 62px;">Wifi</li>
-                                        <li class="col-md-8 list-group-item">{!! $product->connect->wifi !!}</li>
+                                        <li class="col-md-8 list-group-item" style="height: 62px;">{!! $product->connect->wifi !!}</li>
                                         <li class="col-md-4 list-group-item">GPS</li>
                                         <li class="col-md-8 list-group-item">{!! $product->connect->gps !!}</li>
                                         <li class="col-md-4 list-group-item">Bluetooth</li>
@@ -330,40 +335,49 @@
         </div>
         <hr><!-- end detail product info -->
         <div id="detail-product-news">
-            <div class="row">
+            <div class="row" style="margin-top: -20px;">
                 <div class="col-xs-12 col-sm-12 col-md-8">
                     <div id="baiviet-danhgia">
                       <div class="row">
                           <div class="col-xs-12 col-sm-12 col-md-12 product-rate" style="margin-left: -40px;">
-                              <input type="checkbox" class="read-more-state" id="post-review" />
-                              <ul class="read-more-wrap">
-                                  <h3>Đánh giá chi tiết sản phẩm</h3>
-                                  <p>{!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
-                                  Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
-                                  Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng.
-                                  Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone mới sẽ có mặt lưng được làm từ nhôm nguyên khối, được sơn lên lớp sơn màu đỏ rất nổi bật và bắt mắt. Đáng tiếc là phần mặt trước của máy vẫn giữ màu trắng quen thuộc nên sẽ cho bạn đôi chút cảm thấy hụt hẫng. <br>
-                                  <img style="height: 100px; width: 100px;" class="read-more-target" class="img-responsive" src="{!!$product->image!!}">
-                                  <p class="read-more-target">{!!$product->description!!} Màu đỏ là trên chiếc iPhone 7 Plus Red 128GB là màu lần đầu tiên được Apple mang lên những chiếc iPhone của mình. Theo đó thì những chiếc iPhone</p>
-                                  </p>
-                              </ul>
-                              <label for="post-review" class="read-more-trigger" style="margin-left: 40px;"></label>
+                                <input type="checkbox" class="read-more-state" id="post-review" />
+                                <ul class="read-more-wrap">
+                                    <h3>Đánh giá chi tiết sản phẩm</h3>
+                                    <p>{!!$product->description!!} Với thiết kế không quá nhiều thay đổi, vẫn bảo tồn vẻ đẹp truyền thống từ thời iPhone 6 Plus,  iPhone 7 Plus được trang bị nhiều nâng cấp đáng giá như camera kép, đạt chuẩn chống nước chống bụi cùng cấu hình cực mạnh.</p>
+                                    <div id="wrapper" style="text-align: center">    
+                                        <div id="yourdiv" style="display: inline-block;">
+                                            <img style="height: 300px; width: 300px; text-align: center;"src="{!!$product->image!!}">
+                                        </div>
+                                    </div>
+                                    <p class="read-more-target" class="img-responsive">{!!$product->description!!} Với thiết kế không quá nhiều thay đổi, vẫn bảo tồn vẻ đẹp truyền thống từ thời iPhone 6 Plus,  iPhone 7 Plus được trang bị nhiều nâng cấp đáng giá như camera kép, đạt chuẩn chống nước chống bụi cùng cấu hình cực mạnh.</p>
+                                </ul>
+                                <label for="post-review" class="read-more-trigger" style="margin-left: 40px;"></label>
                           </div>
                       </div>
                     </div>  
                     <hr><!-- end product detail rate -->
-                    <div id="danhgia">
+                    <div id="danhgia" style="margin-top: -20px;">
                       <div class="row">
                           <div class="col-md-12">
                             <h3>{{$count_vote}} đánh giá {!! $product->name !!}</h3>
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                           </div>
                       </div>
                       <div class="row">
-                          <form action="/vote/create" method="post">
+                          <form action="{{url('products/' .$product->slug .'/create-vote')}}" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="col-md-8">
                               <div class="row">
                                 <div class="col-md-5">
-                                  <p>Chọn đánh giá của bạn</p>
+                                    <p>Chọn đánh giá của bạn</p>
                                 </div>
                                 <div class="col-md-7" style="margin-left: -200px">
                                   <div class="stars" style="margin-top: 0px; margin-left: 70px;">
@@ -383,20 +397,20 @@
                               <div class="row">
                                 <div class="col-md-12">
                                   <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <textarea name="comment" style="height: 138px; width: 480px; max-height: 138px; max-width: 480px; border-radius: 5px;" placeholder="Nhập đánh giá về sản phẩm. (Tối thiểu 80 ký tự)" required minlength="3">
+                                    <textarea name="comment" style="height: 138px; width: 480px; max-height: 138px; max-width: 480px; border-radius: 5px;" placeholder="Nhập đánh giá về sản phẩm. (Tối thiểu 80 ký tự)">
                                     </textarea>
                                 </div>
                               </div>  
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" required>
+                                <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
                               </div>
                               <div class="form-group">
-                                <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)">
                               </div>
                               <div class="form-group">
-                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)" required pattern="[0]\d{3}\d{3}(d{1})?\d{3}">
+                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)">
                               </div>
                               <div class="form-group">
                               <button type="submit" class="btn btn-large btn-block btn-primary">
@@ -417,10 +431,12 @@
                                   <div class="row">
                                       <div class="col-xs-12 col-sm-12 col-md-12">
                                         @for ($i=1; $i <= 5 ; $i++)
-                                          <span class="glyphicon glyphicon-star{{ ($i <= $vote->star) ? '' : '-empty'}}" style="color: orange; float: left;">
-                                          </span>
+                                            <p style="color: orange; float: left;">
+                                                <span class="glyphicon glyphicon-star{{ ($i <= $vote->star) ? '' : '-empty'}}">
+                                                </span>
+                                            </p>
                                         @endfor
-                                        <p>{{$vote->comment}}</p>
+                                        <p style="margin-left: 10px;">{{$vote->comment}}</p>
                                       </div>
                                   </div>
                               @endforeach
@@ -436,12 +452,21 @@
                     <div id="binhluan">
                       <div class="row">
                         <div class="col-md-12">
-                          <form action="/review/create" method="post">
+                          <form action="{{url('products/' .$product->slug .'/create-review')}}" method="post">
                               <div class="row">
                                       <div class="col-md-12">
                                         {{ csrf_field() }}
                                           <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                          <textarea name="comment" style="height: 100px; width: 750px; max-height: 180px; max-width: 750px; border-radius: 5px;" placeholder="Nhập bình luận của bạn. (Tối thiểu 10 ký tự)" required minlength="3">
+                                          @if (count($errors) > 0)
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                          <textarea name="comment" style="height: 100px; width: 750px; max-height: 180px; max-width: 750px; border-radius: 5px;" placeholder="Nhập bình luận của bạn. (Tối thiểu 10 ký tự)">
                                           </textarea>
                                       </div>
                               </div>
@@ -455,23 +480,23 @@
                                         </div>
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                            <div class="modal-content" style="width: 400px;">
-                                              <div class="modal-header">
+                                          <div class="modal-dialog" role="document" style="margin-right: 250px;">
+                                            <div class="modal-content" style="width: 350px;">
+                                              <div class="modal-header" style="height: 45px;">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">THÔNG TIN NGƯỜI GỬI</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 15px;right: 10px;">
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                               </div>
                                               <div class="modal-body">
                                                 <div class="form-group">
-                                                  <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" required>
+                                                  <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
                                                 </div>
                                                 <div class="form-group">
-                                                  <input type="text" name="email" class="form-control" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                                  <input type="text" name="email" class="form-control" placeholder="Email">
                                                 </div>
                                                 <div class="form-group">
-                                                  <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" pattern="[0]\d{3}\d{3}(d{1})?\d{3}">
+                                                  <input type="text" name="phone" class="form-control" placeholder="Số điện thoại">
                                                 </div>
                                                 <div class="form-group">
                                                   <button type="submit" class="btn btn-large btn-block btn-primary">
@@ -512,55 +537,52 @@
                 </div>
                 <!-- end col-md-8 -->
                 <div class="col-xs-12 col-sm-12 col-md-4">
-                      <div class="col-xs-12 col-sm-12 col-md-12 product-news">
-                          <h2 style="padding-left: 20px;"><small>Tin tức mới</small></h2><hr>
-                          @foreach($news as $new)
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                              <div class="bt">
-                                  <div class="image-m pull-left">
-                                      <a href="">
-                                          <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$new->image!!}">
-                                      </a>
-                                  </div>
-                              </div> <!-- /div bt -->
-                              <div class="ct">
-                                  <a href="" title="Chi tiết">
-                                      <p>
-                                          {!!$new->description!!}
-                                      </p>
-                                  </a>
-                              </div>
-                          </div>
-                          @endforeach
-                          <a href="{{'/news'}}" class="pull-right compare">Đọc thêm tin tức</a>
-                      </div>    
-                      <!-- end product news -->
-                      <div class="col-xs-12 col-sm-12 col-md-12 product-similar">
-                          <h2 style="padding-left: 20px;"><small>Sản phẩm tương tự</small></h2><hr>
-                          @foreach($product_sames as $product_same)
-                              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                                  <div class="bt">
-                                      <div class="image-m pull-left">
-                                          <a href="{{url('products/' .$product_same->slug)}}">
-                                              <img style="height: 150px; width: 110px;" class="img-responsive" src="{!!$product_same->image!!}">
-                                          </a>
-                                      </div>
-                                  </div> <!-- /div bt -->
-                                  <div class="ct">
-                                      <h4>{!! $product_same->name !!}</h4>
-                                      <h4>{!! $product_same->price !!} đ</h4>
-                                        <ul type="none">
-                                            <li><strong>Màn Hình</strong> :{!!$product_same->screen->tech_screen!!}</li>
-                                            <li><strong>Camera</strong> :{!!$product_same->backCamera->resolution!!} MP</li>
-                                            <li><strong>Pin</strong> :{!!$product_same->battery->battery_capacity!!} mAh</li>
-                                        </ul>
-                                      </a>
-                                  </div>
-                                  <a href="{{url('/products/compare/' .$product->slug .'VS' .$product_same->slug)}}" class="pull-right compare">So sánh chi tiết </a>
-                              </div>
-                          @endforeach
-                      </div>
-                      <!-- end product similar -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 product-news" style="margin-top: -10px">
+                        <h2 style="margin-bottom: -10px"><small>Tin tức mới</small></h2><hr>
+                        @foreach($news as $new)
+                            <a href="{{url('news/' .$new->slug)}}">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+                                    <div class="bt" style="margin-left: -15px">
+                                        <div class="image-m pull-left">
+                                            <img style="height: 100px; width: 100px;" class="img-responsive" src="{!!$new->image!!}">
+                                        </div>
+                                    </div> <!-- /div bt -->
+                                    <div class="ct">
+                                        <a href="" title="Chi tiết">
+                                            <p style="color: #333">{!!$new->description!!}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>    
+                        @endforeach
+                        <a href="{{url('/news')}}" class="pull-right news">Đọc thêm tin tức</a>
+                    </div>    
+                        <!-- end product news -->
+                        <div class="col-xs-12 col-sm-12 col-md-12 product-similar">
+                            <h2 style="margin-bottom: -10px;"><small>Sản phẩm tương tự</small></h2><hr>
+                            @foreach($product_sames as $product_same)
+                                <a href="{{url('products/' .$product_same->slug)}}">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" style="margin-left: -15px">
+                                        <div class="bt">
+                                            <div class="image-m pull-left">
+                                                <img style="height: 120px; width: 110px;" class="img-responsive" src="{!!$product_same->image!!}">
+                                            </div>
+                                        </div> <!-- /div bt -->
+                                        <div class="ct" style="width: 400px;">
+                                            <h4 style="color: #333">{!! $product_same->name !!}</h4>
+                                            <h4 style="color: #d0021b">{!! $product_same->price !!} đ</h4>
+                                            <ul type="none" style="color: #666  ">
+                                                <li>Màn Hình: {!!$product_same->screen->tech_screen!!}</li>
+                                                <li>Camera sau: {!!$product_same->backCamera->resolution!!}</li>
+                                                <li>Pin: {!!$product_same->battery->battery_capacity!!} mAh</li>
+                                            </ul>
+                                        </div>
+                                        <a href="{{url('/products/compare/' .$product->slug .'VS' .$product_same->slug)}}" class="pull-right compare">So sánh chi tiết </a>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                        <!-- end product similar -->
                 </div>
                 <!-- end col-md-4 -->
             </div>

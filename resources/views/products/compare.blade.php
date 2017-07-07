@@ -166,8 +166,16 @@
                     <li class="col-md-4 list-group-item">{!! $product_same->frontCamera->resolution !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Video call</li>
-                    <li class="col-md-4 list-group-item">{!! $product->frontCamera->videocall !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->frontCamera->videocall !!}</li>
+                    @if($product->frontCamera->videocall == 1)
+                        <li class="col-md-4 list-group-item">Có</li>
+                    @else
+                        <li class="col-md-4 list-group-item">Không</li>
+                    @endif
+                    @if($product_same->frontCamera->videocall == 1)
+                        <li class="col-md-4 list-group-item">Có</li>
+                    @else
+                        <li class="col-md-4 list-group-item">Không</li>
+                    @endif
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item" style="height: 62px;">Thông tin khác</li>
                     <li class="col-md-4 list-group-item" style="height: 62px;">{!! $product->frontCamera->other_info !!}</li>
@@ -291,7 +299,7 @@
                     <li class="col-md-2 list-group-item">Radio</li>
                     <li class="col-md-4 list-group-item">{!! $product->utility->radio !!}</li>
                     <li class="col-md-4 list-group-item">{!! $product_same->utility->radio !!}</li>
-                    <li class="col-md-2 list-group-item" style="height: 62px;">&nbsp;</li>
+                    <li class="col-md-2 list-group-item"    >&nbsp;</li>
                     <li class="col-md-2 list-group-item" style="height: 62px;">Xem phim</li>
                     <li class="col-md-4 list-group-item" style="height: 62px;">{!! $product->utility->movie !!}</li>
                     <li class="col-md-4 list-group-item" style="height: 62px;">{!! $product_same->utility->movie !!}</li>
@@ -299,7 +307,7 @@
                     <li class="col-md-2 list-group-item" style="height: 62px;">Nghe nhạc</li>
                     <li class="col-md-4 list-group-item" style="height: 62px;">{!! $product->utility->music !!}</li>
                     <li class="col-md-4 list-group-item" style="height: 62px;">{!! $product_same->utility->music !!}</li>
-                    <li class="col-md-2 list-group-item">&nbsp;</li>
+                    <li class="col-md-2 list-group-item" style="height: 62px;">&nbsp;</li>
                 </ul>
             </div>
           </div>

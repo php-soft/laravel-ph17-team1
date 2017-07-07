@@ -4,12 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Manufactory extends Model
 {
-    protected $table = 'categories';
+    protected $table = 'manufactories';
     protected $fillable = [
         'name',
         'slug',
+        'phone',
+        'address',
+        'email',
+        'image',
+        'description',
+        'location',
         'status'
     ];
 
