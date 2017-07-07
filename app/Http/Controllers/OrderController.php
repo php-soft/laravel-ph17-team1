@@ -117,8 +117,7 @@ class OrderController extends Controller
                                     $total = $total - $voucher->max;
                                 }
                             }
-                        } 
-                        else {
+                        } else {
                             $error = "mã voucher: $request->voucher_code không tồn tại,
                              vui nhập mã giảm giá khác!";
                         }
@@ -195,7 +194,7 @@ class OrderController extends Controller
                 <p>Xin cảm ơn</p>');
         } else {
             Alert::error($error, 'Lỗi!')->autoclose(3500);
-            return redirect()->back(); 
+            return redirect()->back();
         }
     }
     public function showSearchOrder()
