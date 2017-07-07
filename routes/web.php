@@ -50,3 +50,4 @@ Route::post('/vote/create', 'ProductController@storeVote');
 Route::post('/review/create', 'ProductController@storeComment');
 
 Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');
+Route::get('admin/stores', 'StoreController@index');
