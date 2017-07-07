@@ -30,7 +30,6 @@ class Product extends Model
         'utility_id',
         'color_id',
         'memory_id',
-        'vote_id'
     ];
 
     public function category()
@@ -88,7 +87,12 @@ class Product extends Model
         return $this->belongsTo('App\Memory');
     }
 
-    public function review()
+    public function manufactory()
+    {
+        return $this->belongsTo('App\Manufactory');
+    }
+
+    public function reviews()
     {
         return $this->belongsTo('App\Review');
     }
@@ -103,8 +107,22 @@ class Product extends Model
         return $this->belongsToMany('App\PromotionProduct');
     }
 
-    public function voteProducts()
+    public function votes()
     {
-        return $this->belongsToMany('App\VoteProduct');
+        return $this->belongsTo('App\Vote');
+    }
+    public function orderDetail()
+    {
+        return $this->hasMany('App\OrderDetail', 'product_id', 'id');
+    }
+    public static function getProduct($slug)
+    {
+        $product=Product::where('slug', $slug)->first();
+        return $product;
+    }
+    public static function getProductID($slug)
+    {
+        $product_id=Product::where('slug', $slug)->pluck('id');
+        return $product_id;
     }
 }

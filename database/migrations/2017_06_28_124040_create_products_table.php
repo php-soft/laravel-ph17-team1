@@ -16,10 +16,12 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
+            $table->integer('manufactory_id')->unsigned()->nullable();
+            $table->foreign('manufactory_id')->references('id')->on('manufactories');
             $table->string('slug', 255);
             $table->decimal('price', 10, 0);
             $table->decimal('sale_price', 10, 0)->nullable();
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable();
             $table->string('image', 255);
             $table->string('accessory', 255);
             $table->integer('tophot')->nullable();
@@ -49,8 +51,6 @@ class CreateProductsTable extends Migration
             $table->foreign('color_id')->references('id')->on('colors');
             $table->integer('memory_id')->unsigned()->nullable();
             $table->foreign('memory_id')->references('id')->on('memories');
-            $table->integer('vote_id')->unsigned()->nullable();
-            $table->foreign('vote_id')->references('id')->on('votes');
             $table->timestamps();
         });
     }

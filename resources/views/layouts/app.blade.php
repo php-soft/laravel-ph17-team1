@@ -11,9 +11,22 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/seemore.css') }}" rel="stylesheet"><!-- css seemore -->
+    <link href="{{ asset('css/voteinput.css') }}" rel="stylesheet"><!-- css voteinput -->
+    <link href="{{ asset('css/rating5star.css') }}" rel="stylesheet"><!-- css rating5star -->
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/product-detail.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
+    
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -42,10 +55,42 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                        <li><a href="{{ url('products') }}">Điện thoại</a></li>
+                        <li><a href="{{ url('news') }}">Tin tức</a></li>
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Đơn hàng
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/tim-kiem-hoa-don"><span class="glyphicon glyphicon-search"></span> Tìm kiếm đơn hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="/quan-ly-don-hang"><span class="glyphicon glyphicon-th-list"></span> Quản lý đơn hàng</a>
+                                    </li>
+                                </ul>
+                            </li> 
+                            <li>
+                                <a href="/gio-hang"><span class="glyphicon glyphicon-shopping-cart"> </span> Giỏ hàng</a>
+                            </li>
                         @else
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Đơn hàng
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/tim-kiem-hoa-don"><span class="glyphicon glyphicon-search"></span> Tìm kiếm đơn hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="/quan-ly-don-hang"><span class="glyphicon glyphicon-th-list"></span> Quản lý đơn hàng</a>
+                                    </li>
+                                </ul>
+                            </li> 
+                            <li>
+                                <a href="/gio-hang"><span class="glyphicon glyphicon-shopping-cart"> </span> Giỏ hàng</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -76,5 +121,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/formVote-validate.js')}}"></script><!-- js formVote-validate -->
+    <script src="{{asset('js/jquery.min.js')}}"></script><!-- js formVote-validate -->
+    <script src="{{asset('js/toastr.min.js')}}"></script><!-- js formVote-validate -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        @if(Session::has('message'))
+            toastr.success("{{Session::get('message')}}")
+        @endif
+    </script>
 </body>
 </html>

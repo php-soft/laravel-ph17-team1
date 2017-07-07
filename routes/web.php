@@ -13,6 +13,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::get('/admin', function () {
     return view('demo');
@@ -38,3 +39,19 @@ Route::get('introduce', 'IntroduceController@index');
 Route::get('warranty', 'WarrantyController@index');
 Route::get('installment', 'InstallmentController@index');
 Route::get('regulation', 'RegulationController@index');
+
+Route::get('news', 'NewsController@index');
+Route::get('news/{slug}', 'NewsController@detail');
+Route::get('news/tag/{id}', 'NewsController@indexByTag');
+Route::post('news/comment/{id}', 'NewsCommentController@store')->middleware('auth');
+Route::post('news/reply/{id}', 'ReplyController@store')->middleware('auth');
+
+Route::get('products', 'HomeController@index');
+
+Route::get('products/{slug}', 'ProductController@indexByID');
+
+Route::post('products/{slug}/create-vote', 'ProductController@storeVote');
+
+Route::post('products/{slug}/create-review', 'ProductController@storeComment');
+
+Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare');

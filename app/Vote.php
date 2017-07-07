@@ -8,11 +8,21 @@ class Vote extends Model
 {
     protected $table = 'votes';
     protected $fillable = [
-        'star'
+        'customer_id',
+        'product_id',
+        'name',
+        'phone',
+        'email',
+        'star',
+        'comment'
     ];
 
-    public function voteProducts()
+    public function products()
     {
-        return $this->belongsToMany('App\VoteProduct');
+        return $this->hasMany('App\Product');
+    }
+    public function users()
+    {
+        return $this->hasMany('App\User');
     }
 }

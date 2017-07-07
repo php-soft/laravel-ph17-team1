@@ -28,8 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function voteproducts()
+    public function votes()
     {
-        return $this->belongsTo('App\VoteProduct');
+        return $this->belongsTo('App\Vote');
     }
 }
