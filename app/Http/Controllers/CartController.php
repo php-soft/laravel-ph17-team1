@@ -29,10 +29,24 @@ class CartController extends Controller
         $product = Product::find($id);
         $color = Color::find($product->color_id);
         $memory = Memory::find($product->memory_id);
-        Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
-         'price' => $product->price, 'options' => ['color' => $color->name, 'image' => $product->image,
-          'ram' => $memory->ram, 'rom' => $memory->rom]]);
-        return redirect()->route('home');
+        if (!empty($product->sale_price)) {
+            if ($product->price > $product->sale_price) {
+                Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
+                 'price' => $product->sale_price, 'options' => ['color' => $color->name,
+                  'image' => $product->image, 'ram' => $memory->ram, 'rom' => $memory->rom]]);
+                return redirect()->route('home');
+            } else {
+                Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
+                 'price' => $product->price, 'options' => ['color' => $color->name, 'image' => $product->image,
+                  'ram' => $memory->ram, 'rom' => $memory->rom]]);
+                return redirect()->route('home');
+            }
+        } else {
+            Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
+             'price' => $product->price, 'options' => ['color' => $color->name, 'image' => $product->image,
+              'ram' => $memory->ram, 'rom' => $memory->rom]]);
+            return redirect()->route('home');
+        }
     }
 
     public function getCheckout()
