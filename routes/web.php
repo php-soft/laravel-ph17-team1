@@ -35,6 +35,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('tags/delete/{id}', 'TagController@destroy');
 });
 
+Route::get('introduce', 'IntroduceController@index');
+Route::get('warranty', 'WarrantyController@index');
+Route::get('installment', 'InstallmentController@index');
+Route::get('regulation', 'RegulationController@index');
+
 Route::get('news', 'NewsController@index');
 Route::get('news/{slug}', 'NewsController@detail');
 Route::get('news/tag/{id}', 'NewsController@indexByTag');
