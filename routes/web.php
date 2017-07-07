@@ -49,6 +49,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/orders/viewdetail/{order_id}', 'OrderController@viewDetail')->name('adminViewOrderDetail');
 });
 
+Route::get('introduce', 'IntroduceController@index');
+Route::get('warranty', 'WarrantyController@index');
+Route::get('installment', 'InstallmentController@index');
+Route::get('regulation', 'RegulationController@index');
+
 Route::get('news', 'NewsController@index');
 Route::get('news/{slug}', 'NewsController@detail');
 Route::get('news/tag/{id}', 'NewsController@indexByTag');
@@ -59,9 +64,9 @@ Route::get('products', 'HomeController@index');
 
 Route::get('products/{slug}', 'ProductController@indexByID');
 
-Route::post('/vote/create', 'ProductController@storeVote');
+Route::post('products/{slug}/create-vote', 'ProductController@storeVote');
 
-Route::post('/review/create', 'ProductController@storeComment');
+Route::post('products/{slug}/create-review', 'ProductController@storeComment');
 
 Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');
 
