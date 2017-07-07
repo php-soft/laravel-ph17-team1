@@ -106,4 +106,18 @@ class Product extends Model
     {
         return $this->belongsTo('App\Vote');
     }
+    public function orderDetail()
+    {
+        return $this->hasMany('App\OrderDetail', 'product_id', 'id');
+    }
+    public static function getProduct($slug)
+    {
+        $product=Product::where('slug', $slug)->first();
+        return $product;
+    }
+    public static function getProductID($slug)
+    {
+        $product_id=Product::where('slug', $slug)->pluck('id');
+        return $product_id;
+    }
 }
