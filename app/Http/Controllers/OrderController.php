@@ -75,128 +75,128 @@ class OrderController extends Controller
         $content = Cart::content();
         $store_id = $request->store;
         $store = Store::find($store_id);
-        $store_name =$store->name;
+        $store_name = $store->name;
+        $error = "";
         if (!empty($content)) {
             foreach ($content as $data) {
                 $qty_store = StoreProduct::where('store_id', $store_id)->where('product_id', $data->id)
                 ->pluck('quantity')->first();
                 if ($qty_store < $data->qty) {
                     if (empty($qty_store)) {
-                        echo "<script>
-                                alert('Cửa hàng $store_name, $data->name không còn sản phẩm,
-                                 vui lòng chọn cửa hàng khác!');
-                                window.location = '".url('/dat-hang')."'
-                            </script>";
+                        $error = "Cửa hàng $store_name, $data->name không còn sản phẩm,
+                                 vui lòng chọn cửa hàng khác!";
                     } else {
-                        echo "<script>
-                                alert('Cửa hàng $store_name, $data->name chỉ còn $qty_store sản phẩm,
-                                 vui lòng chọn cửa hàng khác!');
-                                window.location = '".url('/dat-hang')."'
-                            </script>";
-                    }
-                }
-            }
-        }
-            // dd($request->voucher_code);
-        if (!empty($request->voucher_code)) {
-            $voucher = Voucher::where('code', $request->voucher_code)->first();
-            if (!empty($voucher)) {
-                $fromtime = date('Y/m/d', strtotime($voucher->start_date));
-                $totime = date('Y/m/d', strtotime($voucher->end_date));
-                $toDate = date('Y/m/d', time());
-                // echo $fromtime . "<br>" . $totime . "<br>". $toDate;exit ;
-                // so sánh ngày để biết voucher còn hạn không và số lượng >0
-                if (strtotime($fromtime) <= strtotime($toDate) && strtotime($toDate) <=
-                    strtotime($totime) && $voucher->quantity > 0) {
-                    $total = Cart::subtotal(0, '', '');
-                    $value = $voucher->percent * $total /100;
-                    if ($value <= $voucher->max) {
-                        $total = $total-$value;
-                    } else {
-                        $total = $total - $voucher->max;
+                        $error = "Cửa hàng $store_name, $data->name chỉ còn $qty_store sản phẩm,
+                                 vui lòng chọn cửa hàng khác!";
                     }
                 } else {
-                    echo "<script>
-                        alert('mã voucher: $request->voucher_code đã hết hạn,
-                         vui lòng chọn mã giảm giá khác!');
-                        window.location = '".url('/dat-hang')."'
-                    </script>";
+                    if (!empty($request->voucher_code)) {
+                        $voucher = Voucher::where('code', $request->voucher_code)->first();
+                        if (!empty($voucher)) {
+                            $fromtime = date('Y/m/d', strtotime($voucher->start_date));
+                            $totime = date('Y/m/d', strtotime($voucher->end_date));
+                            $toDate = date('Y/m/d', time());
+                            // echo $fromtime . "<br>" . $totime . "<br>". $toDate;exit ;
+                            // so sánh ngày để biết voucher còn hạn không và số lượng >0
+                            if (strtotime($fromtime) >= strtotime($toDate)) {
+                                $error = "mã voucher: $request->voucher_code chưa tới ngày cho phép,
+                                 vui nhập mã giảm giá khác!";
+                            } elseif (strtotime($toDate) >= strtotime($totime)) {
+                                $error = "mã voucher: $request->voucher_code quá thời gian cho phép,
+                                 vui nhập mã giảm giá khác!";
+                            } elseif ($voucher->quantity == 0) {
+                                $error = "mã voucher: $request->voucher_code đã hết số lượng,
+                                 vui nhập mã giảm giá khác!";
+                            } else {
+                                $total = Cart::subtotal(0, '', '');
+                                $value = $voucher->percent * $total /100;
+                                // echo $value . "<br>".$total ."<br>".$voucher->max;exit;
+                                if ($value <= $voucher->max) {
+                                    $total = $total-$value;
+                                } else {
+                                    $total = $total - $voucher->max;
+                                }
+                            }
+                        } 
+                        else {
+                            $error = "mã voucher: $request->voucher_code không tồn tại,
+                             vui nhập mã giảm giá khác!";
+                        }
+                    } else {
+                        $total = Cart::subtotal(0, '', '');
+                    }
                 }
-            } else {
-                echo "<script>
-                    alert('mã voucher: $request->voucher_code không tồn tại,
-                     vui lòng chọn mã giảm giá khác!');
-                    window.location = '".url('/dat-hang')."'
-                </script>";
             }
+        }
+        if (empty($error)) {
+            $order = new Order;
+            if (!empty(auth()->user()->id)) {
+                $order->customer_id = auth()->user()->id;
+            }
+            //gán biến mới tạo id tự động
+            $order_lastid = Order::pluck('id')->last();
+            $order_lastid = $order_lastid+1;
+            if ($order_lastid<1000000) {
+                $order_lastid =  sprintf('%06d', $order_lastid);
+            }
+            if ($store_id<1000) {
+                $store_id =  sprintf('%03d', $store_id);
+            }
+            //Lấy ngày giờ hiện tại tạo mã đơn hàng
+            $now = new \DateTime('now');
+            $date = $now->format('d');
+            $month = $now->format('m');
+            $year = substr($now->format('Y'), 2);
+            $order->status_id = 1;
+            $order->total = $total;
+            $order->created_at = date('Y-m-d');
+            $order->madh = $date. $month. $year. $store_id. $order_lastid;
+            $order->shipping_name = $request->shipping_name;
+            $order->shipping_phone = $request->shipping_phone;
+            $order->shipping_address = $request->shipping_address;
+            $order->shipping_email = $request->shipping_email;
+            $order->store_id = $request->store;
+            if (!empty($request->voucher_code)) {
+                $order->voucher_id = Voucher::where('code', $request->voucher_code)
+                ->pluck('id')->first();
+            }
+            $order->save();
+            //send mail
+            Mail::to($request->shipping_email)->send(new OrderShipped($order));
+            if (!empty($voucher)) {
+                $voucher->quantity =$voucher->quantity-1;
+                // dd($voucher->quantity);
+                $voucher->save();
+            }
+            //Create new order Detail
+            foreach ($content as $data) {
+                $order_detail = new OrderDetail;
+                $order_detail->product_id = $data->id;
+                $order_detail->order_id = $order->id;
+                $order_detail->color_memory = "Màu: ". $data->options->color .", rom: "
+                . $data->options->rom ."Gb, Ram: ". $data->options->ram . " Gb";
+                $order_detail->price = $data->price;
+                $order_detail->quantity = $data->qty;
+                $order_detail->total = $data->subtotal(0, '', '');
+                $order_detail->created_at = date('Y-m-d');
+                $order_detail->save();
+                $store_qty = StoreProduct::where('store_id', $request->store)
+                ->where('product_id', $data->id)->pluck('quantity')->first();
+                $store1= StoreProduct::where('store_id', $request->store)
+                ->where('product_id', $data->id)->first();
+                $store1->quantity = $store_qty - $data->qty;
+                $store1->save();
+            }
+            Cart::destroy();
+            return redirect()->back()->withSuccess('<h3 style="color: red">Đặt hàng thành công! </h3>
+                <p>Mã đơn hàng của bạn là: <span style="color:red">'.$order->madh.'</span></p>
+                <p>Xin vui lòng check <a href="https://mail.google.com/mail">'.$order->shipping_email.'</a>
+                 để xác nhận hoàn tất hóa đơn</p>
+                <p>Xin cảm ơn</p>');
         } else {
-            $total = Cart::subtotal(0, '', '');
+            Alert::error($error, 'Lỗi!')->autoclose(3500);
+            return redirect()->back(); 
         }
-        $order = new Order;
-        if (!empty(auth()->user()->id)) {
-            $order->customer_id = auth()->user()->id;
-        }
-        //gán biến mới tạo id tự động
-        $order_lastid = Order::pluck('id')->last();
-        $order_lastid = $order_lastid+1;
-        if ($order_lastid<1000000) {
-            $order_lastid =  sprintf('%06d', $order_lastid);
-        }
-        if ($store_id<1000) {
-            $store_id =  sprintf('%03d', $store_id);
-        }
-        //Lấy ngày giờ hiện tại tạo mã đơn hàng
-        $now = new \DateTime('now');
-        $date = $now->format('d');
-        $month = $now->format('m');
-        $year = substr($now->format('Y'), 2);
-        $order->total = $total;
-        $order->status_id = 1;
-        $order->created_at = date('Y-m-d');
-        $order->madh = $date. $month. $year. $store_id. $order_lastid;
-        $order->shipping_name = $request->shipping_name;
-        $order->shipping_phone = $request->shipping_phone;
-        $order->shipping_address = $request->shipping_address;
-        $order->shipping_email = $request->shipping_email;
-        $order->store_id = $request->store;
-        if (!empty($request->voucher_code)) {
-            $order->voucher_id = Voucher::where('code', $request->voucher_code)
-            ->pluck('id')->first();
-        }
-        $order->save();
-        //send mail
-        Mail::to($request->shipping_email)->send(new OrderShipped($order));
-        if (!empty($voucher)) {
-            $voucher->quantity =$voucher->quantity-1;
-            // dd($voucher->quantity);
-            $voucher->save();
-        }
-        //Create new order Detail
-        foreach ($content as $data) {
-            $order_detail = new OrderDetail;
-            $order_detail->product_id = $data->id;
-            $order_detail->order_id = $order->id;
-            $order_detail->color_memory = "Màu: ". $data->options->color .", rom: "
-            . $data->options->rom ."Gb, Ram: ". $data->options->ram . " Gb";
-            $order_detail->price = $data->price;
-            $order_detail->quantity = $data->qty;
-            $order_detail->total = $data->subtotal(0, '', '');
-            $order_detail->created_at = date('Y-m-d');
-            $order_detail->save();
-            $store_qty = StoreProduct::where('store_id', $request->store)
-            ->where('product_id', $data->id)->pluck('quantity')->first();
-            $store1= StoreProduct::where('store_id', $request->store)
-            ->where('product_id', $data->id)->first();
-            $store1->quantity = $store_qty - $data->qty;
-            $store1->save();
-        }
-        // $madh = $order->madh;
-        // $email = $order->shipping_email;
-        Cart::destroy();
-        return redirect()->back()->withSuccess('<h3 style="color: red">Đặt hàng thành công! </h3>
-            <p>Xin vui lòng check <a href="https://mail.google.com/mail">email</a>
-             để xác nhận hoàn tất hóa đơn</p>
-            <p>Xin cảm ơn</p>');
     }
     public function showSearchOrder()
     {

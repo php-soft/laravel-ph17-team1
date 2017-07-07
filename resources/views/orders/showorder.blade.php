@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
 <div class="container">
     <div class="row">
 
@@ -12,8 +11,6 @@
             <h3 class="text-center">Không có sản phẩm nào trong giỏ hàng, vui lòng chọn mua sản phẩm trước khi đặt hàng.</h3>
             <a href="/" class="text-center"><span class="glyphicon glyphicon-chevron-left"></span>Tiếp tục mua hàng</a>
         @else
-            
-        
             <h1>thông tin giỏ hàng</h1>
             <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
@@ -157,5 +154,7 @@
         {!! Form::close()!!}
         @endif
     </div>
+                <script src="dist/sweetalert.min.js"></script>
+            @include('sweet::alert')
 </div>
 @endsection

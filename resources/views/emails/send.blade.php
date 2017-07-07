@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Email from Shop phone team 1</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -284,70 +284,76 @@
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
-              	<tr>
-                	<td class="wrapper">
+                  <tr>
+                    <td class="wrapper">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-	                    <tr>
-	                      	<td>
-	                        	<p>Chào {{$order->shipping_name}} !</p>
-	                        	<p>Cảm ơn bạn đã mua hàng tại Shop phone team 1.</p>
-	                        	<p>Vui lòng kiểm tra thông tin đơn hàng của bạn:</p>
-	                        	<p>Mã đơn hàng: {{$order->madh}}</p>
-	                        	<p>Họ và tên người nhận: {{$order->shipping_name}}</p>
-	                        	<p>Số điện thoại: {{$order->shipping_phone}}</p>
-	                        	<p>Địa chỉ đăng ký nhận hàng: {{$order->shipping_address}}</p>
-	                        	<p>Tổng giá trị đơn hàng: {{$subtotal}}</p>
-	                        	<table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-	                        		<thead>
-                                		<tr>
-                                			<td>STT</td>
-                                			<td>Tên sản phẩm</td>
-                                			<td>Màu</td>
-                                			<td>Ram</td>
-                                			<td>Rom</td>
-                                			<td>Số lượng</td>
-                                			<td>Giá tiền</td>
-                                		</tr>
-                                	</thead>
-                                  	<tbody>
-                                  		<?php $stt = 1 ?>
-                                  		@foreach($content as $data)
-                                    		<tr>
-                                    			<td>{{$stt++}}</td>
-                                    			<td>{{$data->name}}</td>
-                                    			<td>{{$data->options->color}}</td>
-                                    			<td>{{$data->options->ram}}</td>
-                                    			<td>{{$data->options->rom}}</td>
-                                    			<td>{{$data->qty}}</td>
-                                    			<td>{{$data->subtotal}}</td>
-                                			</tr>
-                                		@endforeach
-                        			</tbody>
-	                        	</table>
-	                        	<table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-	                          	<tbody>
-			                            <tr>
-				                            <td align="left">
-				                                <table border="0" cellpadding="0" cellspacing="0">
-					                                <tbody>
-					                                	<tr>
-			                                      			<td> <a href="{{$order->activation_link}}" target="_blank">Xác nhận</a> </td>
-			                                    		</tr>
-				                                  	</tbody>
-				                                </table>
-				                            </td>
-	                            		</tr>
-	                          		</tbody>
-	                        	</table>
-	                        
-	                      		</td>
-	                    	</tr>
-                			</table>
-	                	</td>
-	              	</tr>
+                        <tr>
+                              <td>
+                                <p>Chào {{$order->shipping_name}} !</p>
+                                <p>Cảm ơn bạn đã mua hàng tại Shop phone team 1.</p>
+                                <p>Vui lòng kiểm tra thông tin đơn hàng của bạn:</p>
+                                <p>Mã đơn hàng: {{$order->madh}}</p>
+                                <p>Họ và tên người nhận: {{$order->shipping_name}}</p>
+                                <p>Số điện thoại: {{$order->shipping_phone}}</p>
+                                <p>Địa chỉ đăng ký nhận hàng: {{$order->shipping_address}}</p>
+                            @if ($subtotal == $order->total)
+                            <p>Tổng giá trị đơn hàng: {{number_format($subtotal)}} VNĐ</p>
+                            @else
+                              <p>Tổng giá trị đơn hàng: {{number_format($subtotal)}} VNĐ</p>
+                              <p>Được giảm: {{number_format($subtotal - $order->total)}} VNĐ</p>
+                              <p>Phải thanh toán: {{number_format($order->total)}} VNĐ</p>
+                            @endif
+                                <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>STT</td>
+                                            <td>Tên sản phẩm</td>
+                                            <td>Màu</td>
+                                            <td>Ram</td>
+                                            <td>Rom</td>
+                                            <td>Số lượng</td>
+                                            <td>Giá tiền</td>
+                                        </tr>
+                                    </thead>
+                                      <tbody>
+                                          <?php $stt = 1 ?>
+                                          @foreach($content as $data)
+                                            <tr>
+                                                <td>{{$stt++}}</td>
+                                                <td>{{$data->name}}</td>
+                                                <td>{{$data->options->color}}</td>
+                                                <td>{{$data->options->ram}}</td>
+                                                <td>{{$data->options->rom}}</td>
+                                                <td>{{$data->qty}}</td>
+                                                <td>{{$data->subtotal}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                  <tbody>
+                                        <tr>
+                                            <td align="left">
+                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                              <td> <a href="{{$order->activation_link}}" target="_blank">Xác nhận</a> </td>
+                                                        </tr>
+                                                      </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                      </tbody>
+                                </table>
+                            
+                                  </td>
+                            </tr>
+                            </table>
+                        </td>
+                      </tr>
 
-	            <!-- END MAIN CONTENT AREA -->
-	            </table>
+                <!-- END MAIN CONTENT AREA -->
+                </table>
 
             <!-- START FOOTER -->
             <div class="footer">
