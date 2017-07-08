@@ -315,7 +315,6 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $plastics = Design::all();
         $nhua = 'nhựa';
         $results = Design::where('material', 'like', '%' . $nhua . '%')->pluck('id');
         if (empty($results)) {
