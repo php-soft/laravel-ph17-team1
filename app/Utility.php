@@ -24,7 +24,10 @@ class Utility extends Model
 
     public static function search($nguyenkhoi, $kimloai, $kinh)
     {
-        $result = Utility::where('advanced_security', 'like', '%' .$nguyenkhoi. '%')->where('material', 'like', '%' .$kimloai. '%')->where('material', 'notlike', '%' .$kinh. '%')->get();
+        $result = Utility::where('advanced_security', 'like', '%' .$nguyenkhoi. '%')
+        ->where('material', 'like', '%' .$kimloai. '%')
+        ->where('material', 'notlike', '%' .$kinh. '%')
+        ->get();
         return $result;
     }
 }

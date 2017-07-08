@@ -42,7 +42,8 @@ class ProductController extends Controller
         //     })->get();
         // dd($manu_2s);
         
-        return View('products.index')->with('products', $products)->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s);
+        return View('products.index')->with('products', $products)->with('manu_alls', $manu_alls)
+        ->with('manu_2s', $manu_2s);
     }
     public function indexByID($slug)
     {
@@ -149,7 +150,8 @@ class ProductController extends Controller
         ->with('products', $products);
     }
 
-    public function indexBySmartPhone(){
+    public function indexBySmartPhone()
+    {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'smartphone')->pluck('id');
@@ -161,7 +163,8 @@ class ProductController extends Controller
         ->with('products', $products);
     }
 
-    public function indexByClassicPhone(){
+    public function indexByClassicPhone()
+    {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'classicphone')->pluck('id');
@@ -173,7 +176,8 @@ class ProductController extends Controller
         ->with('products', $products);
     }
 
-    public function indexByAndroid(){
+    public function indexByAndroid()
+    {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'android')->pluck('id');
@@ -185,7 +189,8 @@ class ProductController extends Controller
         ->with('products', $products);
     }
 
-    public function indexByIOS(){
+    public function indexByIOS()
+    {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'ios')->pluck('id');
@@ -201,7 +206,8 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::where('resolution1', '<', 3)->orWhere('resolution2', '<', 3)->pluck('id');
+        $back_camera_id = BackCamera::where('resolution1', '<', 3)->orWhere('resolution2', '<', 3)
+        ->pluck('id');
         $products = Product::find($back_camera_id);
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
@@ -211,7 +217,8 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::whereBetween('resolution1', [3, 5])->orWhereBetween('resolution2', [3, 5])->pluck('id');
+        $back_camera_id = BackCamera::whereBetween('resolution1', [3, 5])
+        ->orWhereBetween('resolution2', [3, 5])->pluck('id');
         $products = Product::find($back_camera_id);
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
@@ -221,7 +228,8 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::whereBetween('resolution1', [5, 8])->orWhereBetween('resolution2', [5, 8])->pluck('id');
+        $back_camera_id = BackCamera::whereBetween('resolution1', [5, 8])
+        ->orWhereBetween('resolution2', [5, 8])->pluck('id');
         $products = Product::find($back_camera_id);
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
@@ -256,10 +264,12 @@ class ProductController extends Controller
         $nguyenkhoi = 'nguyên khối';
         $kimloai = 'kim';
         $kinh = 'kính';
-        $results = Design::where('design', 'like', '%' . $nguyenkhoi . '%')->where('material', 'like', '%' . $kimloai . '%')->where('material', 'not like', '%' . $kinh . '%')->pluck('id');
-        if(empty($results)){
+        $results = Design::where('design', 'like', '%' . $nguyenkhoi . '%')
+        ->where('material', 'like', '%' . $kimloai . '%')
+        ->where('material', 'not like', '%' . $kinh . '%')->pluck('id');
+        if(empty($results)) {
             $products = Product::where('design_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('design_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -272,10 +282,11 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $nhua = 'nhựa';
         $kimloai = 'kim';
-        $results = Design::where('material', 'like', '%' . $nhua . '%')->where('material', 'like', '%' . $kimloai . '%')->pluck('id');
-        if(empty($results)){
+        $results = Design::where('material', 'like', '%' . $nhua . '%')
+        ->where('material', 'like', '%' . $kimloai . '%')->pluck('id');
+        if(empty($results)) {
             $products = Product::where('design_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('design_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -288,10 +299,11 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $kinh = 'kính';
         $kimloai = 'kim';
-        $results = Design::where('material', 'like', '%' . $kinh . '%')->where('material', 'like', '%' . $kimloai . '%')->pluck('id');
-        if(empty($results)){
+        $results = Design::where('material', 'like', '%' . $kinh . '%')
+        ->where('material', 'like', '%' . $kimloai . '%')->pluck('id');
+        if(empty($results)) {
             $products = Product::where('design_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('design_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -305,9 +317,9 @@ class ProductController extends Controller
         $plastics = Design::all();
         $nhua = 'nhựa';
         $results = Design::where('material', 'like', '%' . $nhua . '%')->pluck('id');
-        if(empty($results)){
+        if(empty($results)) {
             $products = Product::where('design_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('design_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -320,9 +332,9 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $vantay = 'vân tay';
         $results = Utility::where('advanced_security', 'like', '%' . $vantay . '%')->pluck('id');
-        if(empty($results)){
+        if(empty($results)) {
             $products = Product::where('utility_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('utility_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -335,10 +347,11 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $chongbui = 'bụi';
         $chongnuoc = 'nước';
-        $results = Utility::where('special_function', 'like', '%' . $chongbui . '%')->where('special_function', 'like', '%' . $chongnuoc . '%')->pluck('id');
-        if(empty($results)){
+        $results = Utility::where('special_function', 'like', '%' . $chongbui . '%')
+        ->where('special_function', 'like', '%' . $chongnuoc . '%')->pluck('id');
+        if(empty($results)) {
             $products = Product::where('utility_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('utility_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -351,9 +364,9 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $sim = '2 sim';
         $results = Connect::where('sim', 'like', '%' . $sim . '%')->pluck('id');
-        if(empty($results)){
+        if(empty($results)) {
             $products = Product::where('connect_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('connect_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -366,9 +379,9 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $touch = '3D Touch';
         $results = Utility::where('special_function', 'like', '%' . $touch . '%')->pluck('id');
-        if(empty($results)){
+        if(empty($results)) {
             $products = Product::where('utility_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('utility_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -380,9 +393,9 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $results = Battery::where('battery_capacity', '>', 3000)->pluck('id');
-        if(empty($results)){
+        if(empty($results)) {
             $products = Product::where('battery_id', 0)->get();
-        }else{
+        }else {
             $products = Product::where('battery_id', $results)->get();
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
