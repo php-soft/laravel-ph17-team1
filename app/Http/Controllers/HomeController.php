@@ -21,15 +21,15 @@ class HomeController extends Controller
         $product_id = Product::all()->pluck('id');
         $promotion_id=PromotionProduct::where('product_id', $product_id)->pluck('promotion_id');
         $promotions=Promotion::find($promotion_id);
-        foreach($product_id as $product_ids) {
-                $count_vote=Vote::where('product_id', $product_ids)->count();
-                $vote=Vote::where('product_id', $product_ids)->sum('star');
-                if ($count_vote==0) {
-                    $avgvote=0;
-                } else {
-                    $avgvote=(float)round($vote/$count_vote);
-                }
+        foreach ($product_id as $product_ids) {
+            $count_vote=Vote::where('product_id', $product_ids)->count();
+            $vote=Vote::where('product_id', $product_ids)->sum('star');
+            if ($count_vote==0) {
+                $avgvote=0;
+            } else {
+                $avgvote=(float)round($vote/$count_vote);
             }
+        }
         
         return view('home')->with('products', $products)->with('promotions', $promotions)->with('avgvote', $avgvote);
     }
