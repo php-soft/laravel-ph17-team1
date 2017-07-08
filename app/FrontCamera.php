@@ -8,7 +8,8 @@ class FrontCamera extends Model
 {
     protected $table = 'front_cameras';
     protected $fillable = [
-        'resolution',
+        'resolution1',
+        'resolution2',
         'videocall',
         'other_info'
     ];

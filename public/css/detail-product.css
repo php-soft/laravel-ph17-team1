@@ -1,0 +1,204 @@
+/* detail-product-title */
+#detail-product-title{
+    margin-bottom: -20px;
+}
+#detail-product-title .panel-title span{
+    font-size: 14px;
+}
+#detail-product-title a{
+    text-decoration: none;
+    color: blue;
+}
+.product-name h3{
+    float: left;
+    margin-right: 10px;
+}
+
+.product-name p{
+    margin-top:25px;
+    color: orange;
+}
+
+.like-share p{
+    margin-top:16px;
+    margin-left: 260px;
+    font-size: 15px;
+}
+/* end detail-product-title */
+
+/* detail-product-info */
+/* product-img */
+/* end product-img */
+
+/* product-promotion */
+.product-promotion h2{
+    color: #d0021b;
+    float: left; 
+    margin-right: 15px;
+    margin-top: -5px;
+}
+.product-promotion p{
+    margin-top: 25px;
+}
+.product-promotion label{
+    position: absolute;
+    top: 4px;
+    left: 210px;
+}
+.panel-heading{
+    padding: 5px;
+}
+.product-promotion .accessory-info{
+    margin-bottom: -10px;
+}
+.product-promotion .promotion-info{
+    margin-bottom: -30px;
+}
+.product-promotion li{
+    list-style: none;
+}
+.product-promotion .btn-buy{
+    margin-top: -20px;
+}
+.product-promotion .btn-buy a{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.product-promotion .store-info{
+    margin-top: -10px;
+}
+/* end product-promotion */
+
+/* product-digital */
+.product-digital{
+     margin-top: -10px;
+}
+.product-digital tr td:first-child{
+    width: 120px;
+}
+.btn-view{
+    font-size: 12px;
+}
+.fade .modal-content{
+    width: 725px;
+}
+.modal-header .close{
+    margin-top: -25px;
+    margin-right: 10px;
+}
+.modal-body #wrapper{
+    text-align: center;
+}
+.modal-body #yourdiv{
+    display: inline-block;
+}
+.modal-body #yourdiv img{
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    margin-left: -250px;
+}
+.modal-detail .detail{
+    width: 345px;
+}
+.modal-detail .detail ul{
+    width: 200%;
+}
+.list-group .chupanh{
+    height: 82px;
+}
+.info-khac{
+    height: 62px;
+}
+/* end product-digital */
+/* end detail-product-info */
+/* detail-product-news */
+#detail-product-news{
+    margin-top: -20px;
+}
+.product-rate{
+    margin-left: -40px;
+}
+.product-rate #wrapper{
+    text-align: center;
+}
+#wrapper #yourdiv{
+    display: inline-block;
+}
+#wrapper #yourdiv img{
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    margin-left: -270px;
+}
+.product-rate label{
+    margin-left: 40px;
+    margin-left: 345px;
+}
+#ketqua-danhgia{
+    margin-top: -20px;
+}
+#binhluan textarea{
+    height: 100px;
+    width: 750px;
+    max-height: 180px;
+    max-width: 750px;
+    border-radius: 5px;
+}
+.btn-send-comment>button{
+    width: 50px;
+}
+.form-comment .modal-dialog{
+    margin-right: 250px;
+}
+.form-comment .modal-content{
+    width: 350px;
+}
+.form-comment .modal-content .modal-header{
+    height: 45px;
+}
+.form-comment .modal-content .modal-header .close{
+    position: absolute;
+    top: 35px;
+    right: 10px;
+}
+.tintuc-lienquan{
+    margin-top: -10px;
+}
+.tintuc-lienquan img{
+    height: 120px;
+    width: 100px;
+}
+.tintuc-lienquan a:hover{
+    text-decoration: none;
+}
+.tintuc-lienquan a:active{
+    text-decoration: none;
+}
+.news-lienquan h2{
+    margin-bottom: -10px;
+}
+.news-lienquan .bt{
+    margin-left: -15px;
+}
+.news-lienquan .ct p{
+    color: #333;
+}
+.product-similar h2{
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+.product-similar .no-padding{
+    margin-left: -15px;
+}
+.product-similar .ct .same-name{
+    color: #333;
+}
+.product-similar .ct .same-price{
+    color: #d0021b;
+}
+.product-similar .ct ul{
+    color: #667
+}
+/* end detail-product-news */

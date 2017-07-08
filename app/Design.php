@@ -18,4 +18,11 @@ class Design extends Model
     {
         return $this->hasOne('App\Product');
     }
+
+    public static function search($nguyenkhoi, $kimloai, $kinh)
+    {
+
+        $result = Design::where('design', 'like', '%' . $nguyenkhoi . '%')->where('material', 'like', '%' . $kimloai . '%')->where('material', 'not like', '%' . $kinh . '%')->pluck('id');
+        return $result;
+    }
 }
