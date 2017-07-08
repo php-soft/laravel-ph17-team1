@@ -85,6 +85,6 @@ Route::get('products/dtdd/chatlieu/kimloaivakinhcuongluc', 'ProductController@in
 Route::get('products/dtdd/chatlieu/nhua', 'ProductController@indexByDesignPlastic')->name('nhua');
 Route::get('products/dtdd/baomat/vantay', 'ProductController@indexBySecurityFinger')->name('vantay');
 Route::get('products/dtdd/baomat/chongnuocbui', 'ProductController@indexByWaterDustProof')->name('chongbuinuoc');
-Route::get('products/dtdd/baomat/2sim', 'ProductController@DoubleSim')->name('2sim');
+Route::get('products/dtdd/baomat/2sim', 'ProductController@indexByDoubleSim')->name('2sim');
 Route::get('products/dtdd/baomat/3dtouch', 'ProductController@indexBy3DTouch')->name('3dtouch');
 Route::get('products/dtdd/baomat/pinkhung', 'ProductController@indexByBatteryMax')->name('pinkhung');

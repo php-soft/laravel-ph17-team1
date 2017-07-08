@@ -359,7 +359,7 @@ class ProductController extends Controller
         ->with('products', $products);
     }
 
-    public function DoubleSim()
+    public function indexByDoubleSim()
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
