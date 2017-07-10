@@ -263,7 +263,8 @@ class OrderController extends Controller
             }
             echo "</td>
             <td>    
-            <button type='button' class='btn btn-info btn-sm adm-btn-view' data-toggle='modal' data-target='#myModal' value='".$data->id."'>
+            <button type='button' class='btn btn-info btn-sm adm-btn-view'
+             data-toggle='modal' data-target='#myModal' value='".$data->id."'>
             <span class='glyphicon glyphicon-folder-open'>
             </span></span> Chi tiết</button>
             </td>                                   
