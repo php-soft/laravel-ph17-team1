@@ -12,15 +12,17 @@ use App\StoreProduct;
 use Input;
 use Alert;
 use DB;
+
 class OrderController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $orders = Order::where('status_id', 1)->get();
         $status = Status::all();
         return view('admin.orders.index')->with('orders', $orders)->with('status', $status);
     }
 
-    public function get_datatable()
+    public function getDatatable()
     {
         $query = DB::table('orders')
             ->select(['id', 'shipping_name', 'shipping_phone', 'shipping_email', 'shipping_address', 'status_id'])
@@ -40,7 +42,6 @@ class OrderController extends Controller
             $statuses = Status::pluck('name', 'id');
             return view('admin.orders.edit')->with('order', $order)->with('statuses', $statuses);
         }
-
     }
 
     public function update($order_id, Request $request)
@@ -48,7 +49,7 @@ class OrderController extends Controller
         $order = Order::find($order_id);
         // echo $order->status_id . "s" .$request->status_id;exit;
         if ($request->status_id > $order->status_id) {
-            if ($order->status->name =="Giao thành công"){
+            if ($order->status->name =="Giao thành công") {
                 Alert::info('Hóa đơn đã giao, không được thay đổi!', 'Thông tin')->autoclose(3000);
                 return redirect('admin/orders/edit/'.$order_id);
             } elseif ($request->status_id == "5") {
@@ -59,7 +60,7 @@ class OrderController extends Controller
                 return redirect('admin/orders/edit/'.$order_id);
             } elseif ($request->status_id == 6 && $order->status_id != 5) {
                 $order_detail = OrderDetail::where('order_id', $order_id)->get();
-                foreach($order_detail as $data) {
+                foreach ($order_detail as $data) {
                     $store_product = StoreProduct::where('product_id', $data->product_id)
                     ->where('store_id', $order->store_id)->first();
                     $store_product->quantity = $store_product->quantity + $data->quantity;
@@ -81,15 +82,15 @@ class OrderController extends Controller
         }
     }
 
-    public function updateindex(Request $request)
-    {
-        //dd($request->shipping_name);
-        echo "oke";
-        exit;
-        return view('admin.orders.index');
-    }
+    // public function updateindex(Request $request)
+    // {
+    //     //dd($request->shipping_name);
+    //     echo "oke";
+    //     exit;
+    //     return view('admin.orders.index');
+    // }
 
-    public function deleteRecord($id,Request $request)
+    public function deleteRecord($id, Request $request)
     {
         // print_r('I am here');die();
         if ($request->ajax()) {
@@ -98,7 +99,7 @@ class OrderController extends Controller
                 $order->status->name == "Đã xác nhận") {
                 if ($order->status_id != 6) {
                     $order_detail = OrderDetail::where('order_id', $id)->get();
-                    foreach($order_detail as $data) {
+                    foreach ($order_detail as $data) {
                         $store_product = StoreProduct::where('product_id', $data->product_id)
                         ->where('store_id', $order->store_id)->first();
                         $store_product->quantity = $store_product->quantity + $data->quantity;
@@ -109,7 +110,7 @@ class OrderController extends Controller
                 return response()->json();
             } else {
                 return response()->json(['Bảng ghi đã được xử lý, không thể xóa!']);
-            }         
+            }
         }
     }
 
@@ -121,7 +122,7 @@ class OrderController extends Controller
             $order->save();
             if ($order->status_id != 6) {
                 $order_detail = OrderDetail::where('order_id', $id)->get();
-                foreach($order_detail as $data) {
+                foreach ($order_detail as $data) {
                     $store_product = StoreProduct::where('product_id', $data->product_id)
                     ->where('store_id', $order->store_id)->first();
                     $store_product->quantity = $store_product->quantity - $data->quantity;
@@ -154,7 +155,7 @@ class OrderController extends Controller
         </tr>
         </thead>
         <tbody>";
-        foreach ($order_detail as $data) {   
+        foreach ($order_detail as $data) {
             echo "<tr>
             <td>". $data->product->name. "</td>
             <td>". $data->color_memory. "</td>
@@ -162,59 +163,60 @@ class OrderController extends Controller
             <td>". $data->quantity. "</td>
             <td>". number_format($data->total). "</td>
             <td>". date('d/m/Y', strtotime($data->created_at)). "</td>
-            </tr>";                                                 
+            </tr>";
         }
         echo "</tbody>
         </table>";
     }
 
-    public function getDetailOfOrder($id)
-    {
-        $order = Order::find($id);
-        $status_id = $order->status_id;
-        $status = Status::all();
-        // echo "<div class='modal-body'><form class= 'form-horizontal' action='/admin/orders/edit/$order->id' method='put'>
-        // <div class='form-group col-sm-12'>
-        // <label class='control-label col-sm-4'>Tên khách hàng: </label>
-        // <div class='col-sm-8'>
-        // <input type='text' class='form-control' style='width:100%' name='shipping_name' value='".
-        // $order->shipping_name."' disabled='disabled'>
-        // </div>
-        // </div>
-        // <div class='form-group col-sm-12'>
-        // <label class='control-label col-sm-4'>Số điện thoại: </label>
-        // <div class='col-sm-8'>
-        // <input type='number' class='form-control' style='width:100%' name='shipping_phone' value='".
-        // $order->shipping_phone."' disabled='disabled'>
-        // </div>
-        // </div>
-        // <div class='form-group col-sm-12'>
-        // <label class='control-label col-sm-4'>Địa chỉ: </label>
-        // <div class='col-sm-8'>
-        // <input type='text' class='form-control' style='width:100%' name='shipping_address' value='".
-        // $order->shipping_address."' disabled='disabled'>
-        // </div>
-        // </div>
-        // <div class='form-group col-sm-12'>
-        // <label class='control-label col-sm-4'>Email: </label>
-        // <div class='col-sm-8'>
-        // <input type='email' class='form-control' style='width:100%' name='shipping_email' value='".
-        // $order->shipping_email."' disabled='disabled'>
-        // </div>
-        // </div>
-        // <div>
-        //     <select name='".$status_id."' id='".$status_id."'>";
-        //     foreach($status as $data) {
-        //         echo "<option value='".$data->id."'>".$data->name."</option>";
-        //     }
-        // echo "</select>
-        // </div>
-        // <input type='submit' value='Lưu'>
-        // </form>
-        // </div>";
-    }
+    // public function getDetailOfOrder($id)
+    // {
+    //     $order = Order::find($id);
+    //     $status_id = $order->status_id;
+    //     $status = Status::all();
+    //     // echo "<div class='modal-body'><form class= 'form-horizontal'
+    //     // action='/admin/orders/edit/$order->id' method='put'>
+    //     // <div class='form-group col-sm-12'>
+    //     // <label class='control-label col-sm-4'>Tên khách hàng: </label>
+    //     // <div class='col-sm-8'>
+    //     // <input type='text' class='form-control' style='width:100%' name='shipping_name' value='".
+    //     // $order->shipping_name."' disabled='disabled'>
+    //     // </div>
+    //     // </div>
+    //     // <div class='form-group col-sm-12'>
+    //     // <label class='control-label col-sm-4'>Số điện thoại: </label>
+    //     // <div class='col-sm-8'>
+    //     // <input type='number' class='form-control' style='width:100%' name='shipping_phone' value='".
+    //     // $order->shipping_phone."' disabled='disabled'>
+    //     // </div>
+    //     // </div>
+    //     // <div class='form-group col-sm-12'>
+    //     // <label class='control-label col-sm-4'>Địa chỉ: </label>
+    //     // <div class='col-sm-8'>
+    //     // <input type='text' class='form-control' style='width:100%' name='shipping_address' value='".
+    //     // $order->shipping_address."' disabled='disabled'>
+    //     // </div>
+    //     // </div>
+    //     // <div class='form-group col-sm-12'>
+    //     // <label class='control-label col-sm-4'>Email: </label>
+    //     // <div class='col-sm-8'>
+    //     // <input type='email' class='form-control' style='width:100%' name='shipping_email' value='".
+    //     // $order->shipping_email."' disabled='disabled'>
+    //     // </div>
+    //     // </div>
+    //     // <div>
+    //     //     <select name='".$status_id."' id='".$status_id."'>";
+    //     //     foreach($status as $data) {
+    //     //         echo "<option value='".$data->id."'>".$data->name."</option>";
+    //     //     }
+    //     // echo "</select>
+    //     // </div>
+    //     // <input type='submit' value='Lưu'>
+    //     // </form>
+    //     // </div>";
+    // }
 
-    public function getGroupOrder($id_status, Request $request)
+    public function getGroupOrder($id_status)
     {
         $order = Order::where('status_id', $id_status)->get();
         $i = 1;
@@ -249,16 +251,20 @@ class OrderController extends Controller
             <td class='text-center'> ". $data->status->name. "</td>
             <td class='text-center'> ". date('d/m/Y', strtotime($data->created_at)). "</td>
             <td class='text-center'>
-            <a href='/admin/orders/edit/".$data->id."' class='btn btn-info'><span class='glyphicon glyphicon-edit'></span>
+            <a href='/admin/orders/edit/".$data->id."' class='btn btn-info'>
+            <span class='glyphicon glyphicon-edit'></span>
             </a>";
             if (empty($data->deleted_at)) {
-                echo "<button class='btn btn-danger btn-del' value='". $data->id."'><span class='glyphicon glyphicon-trash'></span></button>";
+                echo "<button class='btn btn-danger btn-del' value='". $data->id."'>
+                <span class='glyphicon glyphicon-trash'></span></button>";
             } else {
-                echo "<button class='btn btn-success btn-restore' value='". $data->id."'><span class='glyphicon glyphicon-refresh'></span></button>";
+                echo "<button class='btn btn-success btn-restore' value='". $data->id."'>
+                <span class='glyphicon glyphicon-refresh'></span></button>";
             }
             echo "</td>
             <td>    
-            <button type='button' class='btn btn-info btn-sm adm-btn-view' data-toggle='modal' data-target='#myModal' value='".$data->id."'> <span class='glyphicon glyphicon-folder-open'>
+            <button type='button' class='btn btn-info btn-sm adm-btn-view' data-toggle='modal' data-target='#myModal' value='".$data->id."'>
+            <span class='glyphicon glyphicon-folder-open'>
             </span></span> Chi tiết</button>
             </td>                                   
             </tr>";

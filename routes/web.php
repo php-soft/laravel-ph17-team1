@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/orders', 'OrderController@index')->name('adminOrders');
 
-    Route::get('/orders/get_datatable', 'OrderController@get_datatable')->name('getdatatable');
+    Route::get('/orders/get_datatable', 'OrderController@getDatatable')->name('getdatatable');
     
     Route::get('/orders/edit/{order_id}', 'OrderController@edit')->name('adminEditOrder');
     

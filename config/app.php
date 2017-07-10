@@ -179,7 +179,7 @@ return [
         'Collective\Html\HtmlServiceProvider',
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
-
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
 
