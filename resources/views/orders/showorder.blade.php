@@ -2,7 +2,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-
         @if (Session::has('success'))
         <div class="alert alert-success">
             {!!Session::get('success')!!}
@@ -154,7 +153,7 @@
         {!! Form::close()!!}
         @endif
     </div>
-                <script src="dist/sweetalert.min.js"></script>
-            @include('sweet::alert')
+    <script src="dist/sweetalert.min.js"></script>
+    @include('sweet::alert')
 </div>
 @endsection

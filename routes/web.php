@@ -36,17 +36,23 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/orders', 'OrderController@index')->name('adminOrders');
 
-    Route::get('/orders/get_datatable', 'OrderController@get_datatable')->name('adminOrders');
+    Route::get('/orders/get_datatable', 'OrderController@get_datatable')->name('getdatatable');
     
     Route::get('/orders/edit/{order_id}', 'OrderController@edit')->name('adminEditOrder');
     
     Route::put('/orders/edit/{order_id}', 'OrderController@update')->name('adminUpdateOrder');
 
     Route::put('/orders/update/{id}', 'OrderController@updateindex')->name('adminUpdateOrderIndex');
-    
-    Route::get('/orders/delete/{order_id}', 'OrderController@destroy')->name('adminDeleteOrder');
 
-    Route::get('/orders/viewdetail/{order_id}', 'OrderController@viewDetail')->name('adminViewOrderDetail');
+    Route::get('/orders/deleteRecord/{id}', 'OrderController@deleteRecord')->name('deleteRecord');
+
+    Route::get('/orders/restoreRecord/{id}', 'OrderController@restoreRecord')->name('restoreRecord');
+
+    Route::get('/orders/detail/{id}', 'OrderController@getOrderDetail')->name('adminGetOrderDetail');
+
+    Route::get('/orders/edit/order/{id}', 'OrderController@getDetailOfOrder')->name('adminGetDetailOfOrder');
+
+    Route::get('/orders/group/{id}', 'OrderController@getGroupOrder')->name('getGroupOrder');
 });
 
 Route::get('introduce', 'IntroduceController@index');
@@ -88,6 +94,8 @@ Route::get('/gio-hang/xoa-gio-hang', 'CartController@getDeleteCart')->name('dele
 
 Route::get('/dat-hang', 'OrderController@showOrder')->name('dat-hang');
 
+Route::get('/dat-hang/group-store', 'OrderController@groupStore')->name('groupstore');
+
 Route::post('/don-dat-hang', 'OrderController@storeOrder')->name('don-dat-hang');
 
 Route::get('/xac-nhan-dat-hang/{id}', 'OrderController@submitOrder')->name('xac-nhan-dat-hang');
@@ -97,5 +105,7 @@ Route::get('/tim-kiem-hoa-don', 'OrderController@showSearchOrder')->name('show-t
 Route::post('/tim-kiem-hoa-don', 'OrderController@searchOrder')->name('tim-kiem-don-hang');
 
 Route::get('/quan-ly-don-hang', 'OrderController@orderByCustomerId')->name('quan-ly-don-hang');
+
+Route::get('/quan-ly-don-hang/chi-tiet/{id}', 'OrderController@getDetail')->name('getDetail');
 
 Route::get('/chi-tiet-don-hang/{id}', 'OrderController@viewDetailOrder')->name('chi-tiet-don-hang');
