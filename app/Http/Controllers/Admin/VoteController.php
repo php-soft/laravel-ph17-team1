@@ -12,15 +12,15 @@ class VoteController extends Controller
 {
     public function index()
     {
-    	$votes = Vote::all();
+        $votes = Vote::all();
         $product_id = Vote::all()->pluck('product_id');
         $products = Product::find($product_id);
-    	return View('admin.votes.index', ['votes' => $votes, 'products' => $products]);
+        return View('admin.votes.index', ['votes' => $votes, 'products' => $products]);
     }
 
     public function destroy($id)
     {
-    	$vote = Vote::find($id)->delete();
-		return redirect('admin/votes');
+        $vote = Vote::find($id)->delete();
+        return redirect('admin/votes');
     }
 }
