@@ -20,7 +20,7 @@ class VoteController extends Controller
 
     public function destroy($id)
     {
-        $vote = Vote::find($id)->delete();
+        Vote::find($id)->delete();
         return redirect('admin/votes');
     }
 }
