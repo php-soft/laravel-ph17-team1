@@ -82,7 +82,7 @@ Route::get('/them-gio-hang/{product_id}', 'CartController@getAddToCart')->name('
 
 Route::get('check-out', ['uses'=>'CartController@getCheckout', 'as'=>'checkout']);
 
-Route::get('/gio-hang/cap-nhat/{product_id}', 'CartController@CartUpdate')->name('update-cart-test');
+Route::get('/gio-hang/cap-nhat', 'CartController@cartUpdate')->name('update-cart-test');
 
 
 Route::get('/gio-hang/xoa-san-pham/{product_id}', 'CartController@getDeleteProductCart')->name('delete-product-cart');

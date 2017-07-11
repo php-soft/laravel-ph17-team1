@@ -13,7 +13,7 @@ $(document).ready(function(){
     $.ajax({
         type: 'get',
         dataType: 'html',
-        url: '/gio-hang/cap-nhat/'+proId,
+        url: '/gio-hang/cap-nhat',
         data: "qty=" + newqty + "& rowId=" + rowId + "& proId=" + proId,
         success: function (response) {
             console.log(response);

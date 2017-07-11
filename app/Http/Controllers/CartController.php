@@ -94,12 +94,11 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function CartUpdate(Request $request, $id)
+    public function cartUpdate(Request $request)
     {
         $qty = $request->qty;
-        $proId = $request->proId;
         $rowId = $request->rowId;
-        Cart::update($rowId,$qty); // for update
+        Cart::update($rowId, $qty); // for update
         $content = Cart::content(); // display all new data of cart
         $total = Cart::total();
         $qty = Cart::count();
