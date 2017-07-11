@@ -82,11 +82,8 @@ Route::get('/them-gio-hang/{product_id}', 'CartController@getAddToCart')->name('
 
 Route::get('check-out', ['uses'=>'CartController@getCheckout', 'as'=>'checkout']);
 
-Route::put('/gio-hang/cap-nhat-sp/{product_id}', 'CartController@getUpdateCart')->name('update-cart');
+Route::get('/gio-hang/cap-nhat/{product_id}', 'CartController@CartUpdate')->name('update-cart-test');
 
-Route::get('/gio-hang/cap-nhat/{product_id}', 'CartController@getUpdateQtyCart')->name('update-qty-cart');
-
-Route::get('/gio-hang/xoa-cap-nhat/{product_id}', 'CartController@getDeleteQtyCart')->name('delete-qty-cart');
 
 Route::get('/gio-hang/xoa-san-pham/{product_id}', 'CartController@getDeleteProductCart')->name('delete-product-cart');
 
