@@ -18,9 +18,9 @@ class ReviewController extends Controller
         return View('admin.reviews.index', ['reviews' => $reviews, 'products' => $products]);
     }
 
-     public function destroy($id)
+    public function destroy($id)
     {
-          Review::find($id)->delete();
+        Review::find($id)->delete();
         return redirect('admin/reviews');
     }
 }
