@@ -1,16 +1,14 @@
 @extends('news.layouts.master')
 @section('title')
-    Tin tức | {{ $tag->name }}
+    Tin tức | {{ $listNew->name }}
 @stop
 @section('content')
-    <h2>
-        <span class="btn btn-link" style="color: #fff; background-color: #5cb85c; margin-bottom: 5px;">
-            Tag: {{ $tag->name }}
-        </span>
-    </h2>
+    <h3>
+        <span class="btn btn-link" style="color: #fff; background-color: #5cb85c; margin-bottom: 5px;">Danh mục: {{ $listNew->name }}</span>
+    </h3>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-            @foreach ($tag->news as $n)
+            @foreach ($listNew->news as $n)
                 <div class="small-news">
                     <div class="small-news-image">
                         <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">

@@ -20,6 +20,7 @@ class CreateNewsCommentsTable extends Migration
             $table->integer('news_id')->unsigned()->nullable();
             $table->foreign('news_id')->references('id')->on('news');
             $table->text('content');
+            $table->integer('like');
             $table->timestamps();
         });
     }

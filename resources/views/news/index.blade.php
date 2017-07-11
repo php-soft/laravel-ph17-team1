@@ -57,17 +57,19 @@
                 </div>
             </div>
             @foreach ($data as $news)
-                <div class="small-news">
-                    <div class="small-news-image">
-                        <img src="{{url('uploads/news/'.$news->image)}}" alt="{{$news->image}}" height="auto" width="100%">
-                    </div>
-                    <div class="small-news-content">
-                        <span class="small-news-title"><a href="{{url('news/'.$news->slug)}}">{{$news->title}}</a></span>
-                        
-                        <div class="small-news-desciption"><span>{{$news->description}}</span></div>
+                <div class="row">
+                    <div class="small-news">
+                        <div class="small-news-image">
+                            <img src="{{url('uploads/news/'.$news->image)}}" alt="{{$news->image}}" height="auto" width="100%">
+                        </div>
+                        <div class="small-news-content">
+                            <span class="small-news-title"><a href="{{url('news/'.$news->slug)}}">{{$news->title}}</a></span>
+                            
+                            <div class="small-news-desciption"><span>{{$news->description}}</span></div>
+                        </div>
                     </div>
                 </div>
-            <div class="clearfix"></div>
+                <div class="clearfix"></div>
             @endforeach
 
         </div>
@@ -80,7 +82,7 @@
                     $i=0;
                 @endphp
                 @foreach($mostView as $n)
-                    <div class="product">
+                    <div class="product-news">
                         <div class="product-image">
                             <img src="{{url('uploads/news/'.$news->image)}}" alt="{{$news->image}}" height="auto" width="100%">
                         </div>
@@ -90,6 +92,17 @@
                     </div>
                     <div class="clearfix"></div>
                 @endforeach
+            </div>
+            <div class="clearfix"></div>
+            <div>
+                <div class="category-title-div">
+                    <div class="category-title"><span class="glyphicon glyphicon-tags"></span> Tags:</div>
+                </div>
+                    <div>
+                        @foreach($tags as $tag)
+                            <span class="btn btn-link" style="background-color: #5cb85c; margin-bottom: 5px;"><a style="color: #fff" href="{{ url('news/tag/'.$tag->id) }}">{{ $tag->name }}</a></span>
+                        @endforeach
+                    </div>
             </div>
             <div class="clearfix"></div>
             <div>
