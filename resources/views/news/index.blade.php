@@ -71,7 +71,7 @@
                 @php
                     $i=0;
                 @endphp
-                @foreach($data->take(5) as $n)
+                @foreach($mostViews as $n)
                     <div class="product-news">
                         <div class="product-image">
                             <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
@@ -102,7 +102,7 @@
                 @php
                     $i=0;
                 @endphp
-                @foreach($review->take(5) as $n)
+                @foreach($reviews as $n)
                     <div class="hot-news">
                         <div>
                             <div class="number">{{$i+1}}</div>
