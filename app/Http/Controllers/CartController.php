@@ -34,18 +34,18 @@ class CartController extends Controller
                 Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
                  'price' => $product->sale_price, 'options' => ['color' => $color->name,
                   'image' => $product->image, 'ram' => $memory->ram, 'rom' => $memory->rom]]);
-                return redirect()->route('home');
+                return redirect()->back();
             } else {
                 Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
                  'price' => $product->price, 'options' => ['color' => $color->name, 'image' => $product->image,
                   'ram' => $memory->ram, 'rom' => $memory->rom]]);
-                return redirect()->route('home');
+                return redirect()->back();
             }
         } else {
             Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1,
              'price' => $product->price, 'options' => ['color' => $color->name, 'image' => $product->image,
               'ram' => $memory->ram, 'rom' => $memory->rom]]);
-            return redirect()->route('home');
+            return redirect()->back();
         }
     }
 
