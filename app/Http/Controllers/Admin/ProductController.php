@@ -152,7 +152,7 @@ class ProductController extends Controller
         } else {
             $product->save();
             Session::flash('message', 'Đã thêm sản phẩm ' .$product->name. ' thành công');
-            Session::flash('alert-class', 'alert-success');  
+            Session::flash('alert-class', 'alert-success');
         }
         return back();
     }
@@ -251,13 +251,13 @@ class ProductController extends Controller
             $file->move("assets/products", $image);
             $product->image = $image;
         }
-        if($product->sale_price > $product->price){
-          Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật thất bại');
-          Session::flash('alert-class', 'alert-error');
-        }else{
-          $product->save();
-          Session::flash('message', 'Đã cập sản phẩm ' .$product->name. ' thành công');
-          Session::flash('alert-class', 'alert-success');
+        if ($product->sale_price > $product->price) {
+            Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật thất bại');
+            Session::flash('alert-class', 'alert-error');
+        } else {
+            $product->save();
+            Session::flash('message', 'Đã cập sản phẩm ' .$product->name. ' thành công');
+            Session::flash('alert-class', 'alert-success');
         }
         return redirect('admin/products');
     }
