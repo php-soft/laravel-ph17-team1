@@ -13,13 +13,13 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::All();
-        $reviews = News::where('list_new_id', '=', '5')->take(7)->get();
-        $mostViews = News::orderBy('view', 'desc')->take(7)->get();
-        $topnews = News::orderBy('id', 'desc')->skip(0)->take(5)->get();
+        $r = News::where('list_new_id', '=', '5')->take(7)->get();
+        $m = News::orderBy('view', 'desc')->take(7)->get();
+        $top = News::orderBy('id', 'desc')->skip(0)->take(5)->get();
         $offset = News::count() - 5;
-        $data = News::orderBy('id', 'desc')->skip(5)->take($offset)->get();
-        $tags = Tag::all();
-        return view('news.index')->with('news', $topnews)->with('data', $data)->with('mostViews', $mostViews)->with('reviews', $reviews)->with('tags', $tags);
+        $d = News::orderBy('id', 'desc')->skip(5)->take($offset)->get();
+        $t = Tag::all();
+        return view('news.index')->with('news', $top)->with('data', $d)->with('mostViews', $m)->with('reviews', $r)->with('tags', $t);
     }
 
     public function load(Request $request)
