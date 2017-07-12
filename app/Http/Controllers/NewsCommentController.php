@@ -28,7 +28,7 @@ class NewsCommentController extends Controller
             $comment->save();
             $n = News::find($request->news_id);
             $comments = $n->comments()->skip(0)->take(5)->get();
-            return view('news.comment')->with('n', $n)->with('comments' ,$comments);
+            return view('news.comment')->with('n', $n)->with('comments', $comments);
         }
     }
 
@@ -46,7 +46,7 @@ class NewsCommentController extends Controller
             $comment->delete();
             $n = News::find($news_id);
             $comments = $n->comments()->skip(0)->take(5)->get();
-            return view('news.comment')->with('n', $n)->with('comments' ,$comments);
+            return view('news.comment')->with('n', $n)->with('comments', $comments);
         }
     }
 
@@ -99,7 +99,7 @@ class NewsCommentController extends Controller
             $n = News::find($request->news_id);
             if ($request->sum > $request->sum_load * 5) {
                 $comments = $n->comments()->skip($request->sum_load * 5)->take(5)->get();
-                $view = html_entity_decode(view('news.comment')->with('n', $n)->with('comments' ,$comments));
+                $view = html_entity_decode(view('news.comment')->with('n', $n)->with('comments', $comments));
                 $sum_load = $request->sum_load + 1;
                 $arr = array('view' => $view, 'sum_load' => $sum_load);
                 echo json_encode($arr);
