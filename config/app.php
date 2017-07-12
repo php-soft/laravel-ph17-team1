@@ -179,7 +179,10 @@ return [
         'Collective\Html\HtmlServiceProvider',
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -233,6 +236,7 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
