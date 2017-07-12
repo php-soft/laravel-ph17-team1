@@ -45,7 +45,7 @@
                             </div>
                             <div class="item-product-price">
                             @if($product->sale_price === null)
-                                <span class="price-num"><h4 style="margin-top: -17px; margin-right: -5px;">{!! number_format($product->price) !!} đ</h4></span>
+                                <span class="price-num"><h4 style="margin-top: -17px; margin-right: -10px;">{!! number_format($product->price) !!} đ</h4></span>
                             @else
                             <span class="price-num">{!! number_format($product->sale_price) !!} đ</span>
                             <p class="subdescription"><del>{!! number_format($product->price) !!} đ</del></p>

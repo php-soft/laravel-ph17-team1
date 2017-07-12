@@ -64,11 +64,17 @@ class ProductController extends Controller
         $screens_add = Screen::pluck('resolution', 'id');
         $utilities_add = Utility::pluck('advanced_security', 'id');
 
-        return View('admin.products.index', compact('products', 'product_gets', 'colors',
-          'manus', 'cates', 'fronts', 'backs', 'batteries', 'connects', 'memories',
-           'designs', 'operas', 'screens', 'utilities', 'colors_add', 'manus_add',
-            'cates_add', 'fronts_add', 'backs_add', 'batteries_add', 'connects_add',
-             'memories_add', 'designs_add', 'operas_add', 'screens_add', 'utilities_add'));
+        return View('admin.products.index')->with('products', $products)
+        ->with('product_gets', $product_gets)->with('colors', $colors)
+        ->with('manus', $manus)->with('cates', $cates)->with('fronts', $fronts)
+        ->with('backs', $backs)->with('batteries', $batteries)->with('connects', $connects)
+        ->with('memories', $memories)->with('designs', $designs)->with('operas', $operas)
+        ->with('screens', $screens)->with('utilities', $utilities)->with('colors_add', $colors_add)
+        ->with('manus_add', $manus_add)->with('cates_add', $cates_add)->with('fronts_add', $fronts_add)
+        ->with('backs_add', $backs_add)->with('batteries_add', $batteries_add)
+        ->with('connects_add', $connects_add)->with('memories_add', $memories_add)
+        ->with('designs_add', $designs_add)->with('operas_add', $operas_add)
+        ->with('screens_add', $screens_add)->with('utilities_add', $utilities_add);
     }
 
     public function new(Request $request)
@@ -140,13 +146,13 @@ class ProductController extends Controller
             $file->move("assets/products", $image);
             $product->image = $image;
         }
-        if($product->sale_price > $product->price){
-          Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Thêm sản phẩm thất bại');
-          Session::flash('alert-class', 'alert-error');
-        }else{
-          $product->save();
-          Session::flash('message', 'Đã thêm sản phẩm ' .$product->name. ' thành công');
-          Session::flash('alert-class', 'alert-success');  
+        if ($product->sale_price > $product->price) {
+            Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Thêm sản phẩm thất bại');
+            Session::flash('alert-class', 'alert-error');
+        } else {
+            $product->save();
+            Session::flash('message', 'Đã thêm sản phẩm ' .$product->name. ' thành công');
+            Session::flash('alert-class', 'alert-success');  
         }
         return back();
     }
@@ -166,7 +172,11 @@ class ProductController extends Controller
         $operas = OperaSystem::pluck('opera_system', 'id');
         $screens = Screen::pluck('resolution', 'id');
         $utilities = Utility::pluck('advanced_security', 'id');
-        return View('admin.products.edit', compact('product', 'colors', 'manus', 'cates', 'fronts', 'backs', 'atteries', 'connects', 'memories', 'designs', 'operas', 'screens', 'utilities'));
+        return View('admin.products.edit')->with('product', $product)->with('colors', $colors)
+        ->with('manus', $manus)->with('cates', $cates)->with('fronts', $fronts)
+        ->with('backs', $backs)->with('batteries', $batteries)->with('connects', $connects)
+        ->with('memories', $memories)->with('designs', $designs)->with('operas', $operas)
+        ->with('screens', $screens)->with('utilities', $utilities);
     }
 
     public function update(Request $request, $id)

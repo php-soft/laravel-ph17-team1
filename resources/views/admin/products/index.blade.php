@@ -154,6 +154,7 @@
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="reset" class="btn btn-default">Reset</button>
               </div>
             </form>
           </div>
