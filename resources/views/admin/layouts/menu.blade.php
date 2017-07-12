@@ -15,12 +15,12 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{url('admin/news')}}">Tin tức</a></li>
-                <li><a href="#">Điện thoại</a></li>
+                <li><a href="{{url('admin/products')}}">Điện thoại</a></li>
                 <li><a href="#">Quản lý kho</a></li>
                 <li><a href="{{ route('adminOrders')}}">Order</a></li>
                 <li><a href="#">Link</a></li>
-                <li><a href="#">Đánh giá</a></li>
-                <li><a href="#">Bình luận</a></li>
+                <li><a href="{{url('admin/votes')}}">Đánh giá</a></li>
+                <li><a href="{{url('admin/reviews')}}">Bình luận</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

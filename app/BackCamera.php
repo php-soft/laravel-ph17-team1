@@ -8,7 +8,8 @@ class BackCamera extends Model
 {
     protected $table = 'back_cameras';
     protected $fillable = [
-        'resolution',
+        'resolution1',
+        'resolution2',
         'film',
         'flash',
         'advanced_photography'

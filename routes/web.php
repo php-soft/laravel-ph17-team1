@@ -57,6 +57,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/orders/statistic', 'OrderController@getStatistic')->name('statistic');
 
     Route::get('/orders/statistic/detail', 'OrderController@getStatisticDetail')->name('statistic');
+
+    Route::get('reviews', 'ReviewController@index');
+    Route::get('reviews/delete/{id}', 'ReviewController@destroy');
+
+    Route::get('votes', 'VoteController@index');
+    Route::get('votes/delete/{id}', 'VoteController@destroy');
+
+    Route::get('products', 'ProductController@index');
+    Route::post('products/new', 'ProductController@new');
+    Route::get('products/edit/{id}', 'ProductController@edit');
+    Route::post('products/update/{id}', 'ProductController@update');
+    Route::get('products/delete/{id}', 'ProductController@destroy');
 });
 
 Route::get('introduce', 'IntroduceController@index');
@@ -79,17 +91,10 @@ Route::get('news/{slug}', 'NewsController@detail');
 Route::get('news/tag/{id}', 'NewsController@indexByTag');
 Route::get('news/listnew/{slug}', 'NewsController@indexByListNew');
 
-
-
-Route::get('products', 'HomeController@index');
-
+Route::get('products', 'ProductController@index');
 Route::get('products/{slug}', 'ProductController@indexByID');
-
 Route::post('products/{slug}/create-vote', 'ProductController@storeVote');
-
 Route::post('products/{slug}/create-review', 'ProductController@storeComment');
-
-Route::get('/products/compare/{slug}VS{slugsame}', 'ProductController@compare')->name('ss');
 
 Route::get('/gio-hang', 'CartController@index')->name('show-cart');
 
@@ -121,3 +126,46 @@ Route::get('/quan-ly-don-hang', 'OrderController@orderByCustomerId')->name('quan
 Route::get('/quan-ly-don-hang/chi-tiet/{id}', 'OrderController@getDetail')->name('getDetail');
 
 Route::get('/chi-tiet-don-hang/{id}', 'OrderController@viewDetailOrder')->name('chi-tiet-don-hang');
+
+Route::get('products/compare/{slug}VS{slugsame}', 'ProductController@compare');
+Route::get('products/dtdd/search', 'ProductController@search')->name('search');
+Route::get('products/dtdd/{name}', 'ProductController@indexByName');
+Route::get('products/dtdd/gia/duoi1trieu', 'ProductController@indexByPriceDown1M')
+->name('duoi1trieu');
+Route::get('products/dtdd/gia/tu1den3trieu', 'ProductController@indexByPrice1to3M')
+->name('tu1den3trieu');
+Route::get('products/dtdd/gia/tu3den7trieu', 'ProductController@indexByPrice3to7M')
+->name('tu3den7trieu');
+Route::get('products/dtdd/gia/tu7den10trieu', 'ProductController@indexByPrice7to10M')
+->name('tu7den10trieu');
+Route::get('products/dtdd/gia/tu10den15trieu', 'ProductController@indexByPrice10to15M')
+->name('tu10den15trieu');
+Route::get('products/dtdd/gia/tren15trieu', 'ProductController@indexByPriceUp15M')
+->name('tren15trieu');
+Route::get('products/dtdd/loai/smart-phone', 'ProductController@indexBySmartPhone')
+->name('smartphone');
+Route::get('products/dtdd/loai/classic-phone', 'ProductController@indexByClassicPhone')
+->name('classicphone');
+Route::get('products/dtdd/loai/android', 'ProductController@indexByAndroid')->name('android');
+Route::get('products/dtdd/loai/ios', 'ProductController@indexByIOS')->name('ios');
+Route::get('products/dtdd/camera/duoi3MP', 'ProductController@indexByCameraDown3MP')
+->name('duoi3MP');
+Route::get('products/dtdd/camera/tu3den5MP', 'ProductController@indexByCamera3to5MP')
+->name('tu3den5MP');
+Route::get('products/dtdd/camera/tu5den8MP', 'ProductController@indexByCamera5to8MP')
+->name('tu5den8MP');
+Route::get('products/dtdd/camera/tu8den12MP', 'ProductController@indexByCamera8to12MP')
+->name('tu8den12MP');
+Route::get('products/dtdd/camera/tren12MP', 'ProductController@indexByCameraUp12MP')->name('tren12MP');
+Route::get('products/dtdd/chatlieu/kimloainguyenkhoi', 'ProductController@indexByDesignUnibodyMetal')
+->name('kimloainguyenkhoi');
+Route::get('products/dtdd/chatlieu/nhuavakimloai', 'ProductController@indexByDesignPlasticMetal')
+->name('nhuavakimloai');
+Route::get('products/dtdd/chatlieu/kimloaivakinhcuongluc', 'ProductController@indexByDesignMetalGlass')
+->name('kimloaivakinhcuongluc');
+Route::get('products/dtdd/chatlieu/nhua', 'ProductController@indexByDesignPlastic')->name('nhua');
+Route::get('products/dtdd/baomat/vantay', 'ProductController@indexBySecurityFinger')->name('vantay');
+Route::get('products/dtdd/baomat/chongnuocbui', 'ProductController@indexByWaterDustProof')->name('chongbuinuoc');
+Route::get('products/dtdd/baomat/2sim', 'ProductController@indexByDoubleSim')->name('2sim');
+Route::get('products/dtdd/baomat/3dtouch', 'ProductController@indexBy3DTouch')->name('3dtouch');
+Route::get('products/dtdd/baomat/pinkhung', 'ProductController@indexByBatteryMax')->name('pinkhung');
