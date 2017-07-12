@@ -102,7 +102,7 @@
                 @php
                     $i=0;
                 @endphp
-                @foreach($reviews as $n)
+                @foreach($reviews->take(5) as $n)
                     <div class="hot-news">
                         <div>
                             <div class="number">{{$i+1}}</div>

@@ -14,7 +14,6 @@ class NewsController extends Controller
     {
         $news = News::All();
         $topnews = News::orderBy('id', 'desc')->skip(0)->take(5)->get();
-        $reviews = News::where('list_new_id', '=', 5)->take(10)->get();
         $mostViews = News::orderBy('view', 'desc')->skip(0)->take(5)->get();
         $offset = News::count() - 5;
         $data = News::orderBy('id', 'desc')->skip(5)->take($offset)->get();
@@ -22,7 +21,7 @@ class NewsController extends Controller
         return view('news.index')->with('news', $topnews)
             ->with('data', $data)
             ->with('mostViews', $mostViews)
-            ->with('reviews', $reviews)
+            ->with('reviews', $news)
             ->with('tags', $tags);
     }
 
