@@ -294,11 +294,11 @@ class OrderController extends Controller
         ->whereBetween('created_at', [$date1, $date2])->get();
         $total = $result->sum('total');
         if ($total == 0) {
-            Alert::info('Không tìm bất kỳ hóa đơn nào tạo ra trong khoảng thời gian trên',
-                'Thông tin')->autoclose(3000);
-            return view('admin.orders.up', compact('total', 'result'));
+            Alert::info('Không tìm bất kỳ hóa đơn nào tạo ra trong 
+                khoảng thời gian trên', 'Thông tin')->autoclose(3000);
+        return view('admin.orders.up', compact('total', 'result'));
         } else {
-            return view('admin.orders.up', compact('total', 'result'));
+        return view('admin.orders.up', compact('total', 'result'));
         }
     }
 }
