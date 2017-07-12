@@ -53,6 +53,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/orders/edit/order/{id}', 'OrderController@getDetailOfOrder')->name('adminGetDetailOfOrder');
 
     Route::get('/orders/group/{id}', 'OrderController@getGroupOrder')->name('getGroupOrder');
+
+    Route::get('/orders/statistic', 'OrderController@getStatistic')->name('statistic');
+
+    Route::get('/orders/statistic/detail', 'OrderController@getStatisticDetail')->name('statistic');
 });
 
 Route::get('introduce', 'IntroduceController@index');

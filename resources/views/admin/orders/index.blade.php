@@ -24,6 +24,11 @@
                         <option value="all">All</option>
                     </select>
                 </div>
+                <div class="pull-right">
+                    <a href="/admin/orders/statistic" class="btn btn-info">
+                        <span class="glyphicon glyphicon-align-left"></span>Thống kê
+                    </a>
+                </div>
                 </form>
                 <div>
                     <br>
