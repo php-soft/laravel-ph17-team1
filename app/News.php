@@ -24,6 +24,6 @@ class News extends Model
     }
     public function comments()
     {
-        return $this->hasMany('App\NewsComment')->orderBy('id', 'desc');;
+        return $this->hasMany('App\NewsComment')->orderBy('id', 'desc');
     }
 }

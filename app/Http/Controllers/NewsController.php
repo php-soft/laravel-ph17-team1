@@ -27,7 +27,6 @@ class NewsController extends Controller
     public function load(Request $request)
     {
         if ($request->ajax()) {
-
             $this->validate($request, [
                             'sum_load'=>'required',
                             'sum'=>'required',
@@ -69,7 +68,7 @@ class NewsController extends Controller
         $n->view = $n->view + 1;
         $n->save();
         $news = News::where('list_new_id', '=', $n->list_new_id)->take(10)->get();
-        $comments = $n->comments()->skip(0)->take(5)->get(); 
+        $comments = $n->comments()->skip(0)->take(5)->get();
         return view('news.detail')->with('n', $n)->with('news', $news)->with('comments', $comments);
     }
 }

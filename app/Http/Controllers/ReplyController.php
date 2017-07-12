@@ -24,8 +24,8 @@ class ReplyController extends Controller
             $session_id = \Auth::user()->id;
             $rely->user_id = $session_id;
             $rely->save();
-        $comment = NewsComment::find($request->news_comment_id);
-        return view('news.reply')->with('comment', $comment);
+            $comment = NewsComment::find($request->news_comment_id);
+            return view('news.reply')->with('comment', $comment);
         }
     }
 
@@ -40,8 +40,8 @@ class ReplyController extends Controller
             $reply = Reply::find($request->reply_id);
             $news_comment_id = $reply->news_comment_id;
             $reply->delete();
-        $comment = NewsComment::find($news_comment_id);
-        return view('news.reply')->with('comment', $comment);
+            $comment = NewsComment::find($news_comment_id);
+            return view('news.reply')->with('comment', $comment);
         }
     }
 }
