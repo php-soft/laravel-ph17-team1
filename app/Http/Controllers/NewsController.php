@@ -13,16 +13,14 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::All();
-        $reviews = News::where('list_new_id', '=', '5')->take(7)->get();
-        $mostViews = News::orderBy('view', 'desc')->take(7)->get();
         $topnews = News::orderBy('id', 'desc')->skip(0)->take(5)->get();
         $offset = News::count() - 5;
         $data = News::orderBy('id', 'desc')->skip(5)->take($offset)->get();
         $tags = Tag::all();
         return view('news.index')->with('news', $topnews)
             ->with('data', $data)
-            ->with('mostViews', $mostViews)
-            ->with('reviews', $reviews)
+            ->with('mostViews', $news)
+            ->with('reviews', $news)
             ->with('tags', $tags);
     }
 
@@ -55,19 +53,13 @@ class NewsController extends Controller
     {
         $tag = Tag::find($id);
         $news = News::all();
-        $reviews = News::where('list_new_id', '=', '5')->take(7)->get();
-        $mostViews = News::orderBy('view', 'desc')->take(7)->get();
-        return view('news.tag')->with('tag', $tag)->with('mostViews', $mostViews)->with('reviews', $mostViews);
+        return view('news.tag')->with('tag', $tag)->with('mostView', $news)->with('review', $news);
     }
     public function indexByListNew($slug)
     {
         $listNew = ListNew::Where('slug', '=', $slug)->get()->first();
         $news = News::all();
-        $reviews = News::where('list_new_id', '=', '5')->take(7)->get();
-        $mostViews = News::orderBy('view', 'desc')->take(7)->get();
-        return view('news.listNew')->with('listNew', $listNew)
-            ->with('mostViews', $mostViews)
-            ->with('reviews', $reviews);
+        return view('news.listNew')->with('listNew', $listNew)->with('mostView', $news)->with('review', $news);
     }
 
     public function detail($slug)
@@ -77,8 +69,6 @@ class NewsController extends Controller
         $n->save();
         $news = News::where('list_new_id', '=', $n->list_new_id)->take(10)->get();
         $comments = $n->comments()->skip(0)->take(5)->get();
-        return view('news.detail')->with('n', $n)
-            ->with('news', $news)
-            ->with('comments', $comments);
+        return view('news.detail')->with('n', $n)->with('news', $news)->with('comments', $comments);
     }
 }
