@@ -43,7 +43,7 @@ class ProductController extends Controller
     public function indexByID($slug)
     {
         $login = Auth::check();
-        if($login==true){
+        if ($login==true) {
             $alow = 1;
         } else {
             $alow = 0;
@@ -479,14 +479,14 @@ class ProductController extends Controller
             $vote->comment = $request->comment;
             $vote->save();
             Session::flash('message', 'Cảm ơn ' .$vote->name .' đã đánh giá sản phẩm chúng tôi');
-            Session::flash('alert-class', 'alert-success');    
+            Session::flash('alert-class', 'alert-success');
         }
         return back();
     }
 
     public function storeComment(Request $request)
     {
-        if (Auth::check() == true){
+        if (Auth::check() == true) {
             $this->validate($request, [
                 'comment' => 'required|min:3',
             ], [
@@ -526,7 +526,7 @@ class ProductController extends Controller
             $review->save();
             Session::flash('message', 'Cảm ơn ' .$review->name . ' đã để lại phản hồi');
             Session::flash('alert-class', 'alert-success');
-        }    
+        }
         return back();
     }
 

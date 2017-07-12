@@ -64,11 +64,11 @@ class ProductController extends Controller
         $screens_add = Screen::pluck('resolution', 'id');
         $utilities_add = Utility::pluck('advanced_security', 'id');
 
-        return View('admin.products.index',compact('products', 'product_gets', 'colors', 
-        'manus', 'cates', 'fronts', 'backs', 'batteries', 'connects', 'memories', 
-        'designs', 'operas', 'screens', 'utilities', 'colors_add', 'manus_add', 
-        'cates_add', 'fronts_add', 'backs_add', 'batteries_add', 'connects_add', 
-        'memories_add', 'designs_add', 'operas_add', 'screens_add', 'utilities_add'));
+        return View('admin.products.index', compact('products', 'product_gets', 'colors',
+          'manus', 'cates', 'fronts', 'backs', 'batteries', 'connects', 'memories',
+           'designs', 'operas', 'screens', 'utilities', 'colors_add', 'manus_add',
+            'cates_add', 'fronts_add', 'backs_add', 'batteries_add', 'connects_add',
+             'memories_add', 'designs_add', 'operas_add', 'screens_add', 'utilities_add'));
     }
 
     public function new(Request $request)
@@ -166,9 +166,7 @@ class ProductController extends Controller
         $operas = OperaSystem::pluck('opera_system', 'id');
         $screens = Screen::pluck('resolution', 'id');
         $utilities = Utility::pluck('advanced_security', 'id');
-        return View('admin.products.edit', compact('product', 'colors', 'manus', 'cates', 
-        'fronts', 'backs', 'batteries', 'connects', 'memories', 
-        'designs', 'operas', 'screens', 'utilities'));
+        return View('admin.products.edit', compact('product', 'colors', 'manus', 'cates', 'fronts', 'backs', 'atteries', 'connects', 'memories', 'designs', 'operas', 'screens', 'utilities'));
     }
 
     public function update(Request $request, $id)
