@@ -19,7 +19,7 @@ class CartController extends Controller
         $total = Cart::total();
         $qty = Cart::count();
         $qtysp = Cart::content()->count();
-        $subtotal = Cart::subtotal();
+        $subtotal = Cart::subtotal(0, '', '');
         return view('pages.cart', compact('qtysp'), compact('subtotal'))->with('products', $products)
             ->with('content', $content)->with('total', $total)->with('qty', $qty);
     }
@@ -94,8 +94,16 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function getUpdateCart()
+    public function cartUpdate(Request $request)
     {
-        echo "đang hoàn thiện";
+        $qty = $request->qty;
+        $rowId = $request->rowId;
+        Cart::update($rowId, $qty); // for update
+        $content = Cart::content(); // display all new data of cart
+        $total = Cart::total();
+        $qty = Cart::count();
+        $qtysp = Cart::content()->count();
+        $subtotal = Cart::subtotal(0, '', '');
+        return view('pages.upCart', compact('content', 'total', 'qty', 'qtysp', 'subtotal'));
     }
 }

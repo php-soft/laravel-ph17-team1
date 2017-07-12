@@ -185,6 +185,9 @@ class OrderController extends Controller
                 ->where('product_id', $data->id)->first();
                 $store1->quantity = $store_qty - $data->qty;
                 $store1->save();
+                $product = Product::find($data->id);
+                $product->tophot = $product->tophot + $data->qty;
+                $product->save();
             }
             Cart::destroy();
             return redirect()->back()->withSuccess('<h3 style="color: red">Đặt hàng thành công! </h3>
@@ -224,7 +227,7 @@ class OrderController extends Controller
             return view('orders.orderByCustomerId')->with('error', $error);
         } else {
             $user = auth()->user()->id;
-            $order = Order::where('customer_id', $user)->orderBy('created_at', 'desc')->paginate(10);
+            $order = Order::where('customer_id', $user)->orderBy('created_at', 'desc')->get();
             return view('orders.orderByCustomerId')->with('order', $order);
         }
     }
@@ -246,4 +249,29 @@ class OrderController extends Controller
         }
         return view('orders.submit')->with('error', $error);
     }
+    public function getDetail($id)
+    {
+        $order_detail = OrderDetail::where('order_id', $id)->get();
+        foreach ($order_detail as $data) {
+            echo "<tr>
+            <td>". $data->product->name. "</td>
+            <td>". $data->color_memory. "</td>
+            <td>". $data->price. "</td>
+            <td>". $data->quantity. "</td>
+            <td>". number_format($data->total). "</td>
+            <td>". date('d/m/Y', strtotime($data->created_at)). "</td>
+            </tr>";
+        }
+    }
+    // public function groupStore(){
+    //     $content = Cart::content();
+    //     $i = 0;
+    //     foreach ($content as $data) {
+    //         $str_pr = StoreProduct::where('product_id', $data->id)->pluck('store_id');
+    //     }
+    //     foreach($str_pr as $data){
+            
+    //     }
+    //     exit;
+    // }
 }
