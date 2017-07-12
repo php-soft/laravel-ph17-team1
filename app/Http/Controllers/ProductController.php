@@ -33,7 +33,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('price', 'desc')->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         
@@ -50,6 +53,9 @@ class ProductController extends Controller
         }
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
 
         $product_tt=Product::where('id', '<>', $product_id)->orderBy('sale_price', 'desc')->limit(3)
         ->pluck('id');
@@ -92,6 +98,9 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $manu_id = Manufactory::where('name', $request->name)->pluck('id');
         $products = Product::where('manufactory_id', $manu_id)->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -101,6 +110,9 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $products = Product::where('price', '<', 1000000)->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -109,7 +121,11 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $products = Product::whereBetween('price', [1000000, 3000000])->get();
+        $products = Product::whereBetween('price', [1000000, 3000000])
+        ->whereBetween('sale_price', [1000000, 3000000])->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -118,7 +134,11 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $products = Product::whereBetween('price', [3000000, 7000000])->get();
+        $products = Product::whereBetween('price', [3000000, 7000000])
+        ->orwhereBetween('sale_price', [3000000, 7000000])->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -127,7 +147,11 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $products = Product::whereBetween('sale_price', [7000000, 10000000])->get();
+        $products = Product::whereBetween('sale_price', [7000000, 10000000])
+        ->orwhereBetween('price', [7000000, 10000000])->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
             ->with('products', $products);
     }
@@ -136,7 +160,11 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $products = Product::whereBetween('sale_price', [10000000, 15000000])->get();
+        $products = Product::whereBetween('sale_price', [10000000, 15000000])
+        ->orWhereBetween('price', [10000000, 15000000])->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -146,6 +174,9 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $products = Product::where('price', '>', 15000000)->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -156,9 +187,10 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'smartphone')->pluck('id');
         $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');
-        //dd($product_id);
         $products = Product::find($product_id);
-        //dd($products);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -169,9 +201,10 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'classicphone')->pluck('id');
         $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');
-        //dd($product_id);
         $products = Product::find($product_id);
-        //dd($products);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -182,9 +215,10 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'android')->pluck('id');
         $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');
-        //dd($product_id);
         $products = Product::find($product_id);
-        //dd($products);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        } 
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -194,10 +228,11 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'ios')->pluck('id');
-        $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');
-        //dd($product_id);
+        $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');     
         $products = Product::find($product_id);
-        //dd($products);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -209,6 +244,9 @@ class ProductController extends Controller
         $back_camera_id = BackCamera::where('resolution1', '<', 3)->orWhere('resolution2', '<', 3)
         ->pluck('id');
         $products = Product::find($back_camera_id);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        } 
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -220,6 +258,9 @@ class ProductController extends Controller
         $back_camera_id = BackCamera::whereBetween('resolution1', [3, 5])
         ->orWhereBetween('resolution2', [3, 5])->pluck('id');
         $products = Product::find($back_camera_id);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }  
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -231,6 +272,9 @@ class ProductController extends Controller
         $back_camera_id = BackCamera::whereBetween('resolution1', [5, 8])
         ->orWhereBetween('resolution2', [5, 8])->pluck('id');
         $products = Product::find($back_camera_id);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        } 
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -241,9 +285,10 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $back_camera_id = BackCamera::whereBetween('resolution1', [8, 12])
         ->orWhereBetween('resolution2', [8, 12])->pluck('id');
-        //dd($back_camera_id);
         $products = Product::where('back_camera_id', $back_camera_id)->get();
-        //dd($products);
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        } 
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -254,6 +299,9 @@ class ProductController extends Controller
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $products = Product::where('back_camera_id', BackCamera::where('resolution1', '>', 12)
         ->orWhere('resolution2', '>', 12)->pluck('id'))->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -270,6 +318,9 @@ class ProductController extends Controller
         ->where('material', 'not like', '%' . $kinh . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('design_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('design_id', $results)->get();
         }
@@ -286,9 +337,12 @@ class ProductController extends Controller
         $results = Design::where('material', 'like', '%' . $nhua . '%')
         ->where('material', 'like', '%' . $kimloai . '%')->pluck('id');
         if (empty($results)) {
-            $products = Product::where('design_id', 0)->get();
+            $products = null;
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
-            $products = Product::where('design_id', $results)->get();
+            $products = Product::find($results);
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
@@ -304,6 +358,9 @@ class ProductController extends Controller
         ->where('material', 'like', '%' . $kimloai . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('design_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('design_id', $results)->get();
         }
@@ -319,6 +376,9 @@ class ProductController extends Controller
         $results = Design::where('material', 'like', '%' . $nhua . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('design_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('design_id', $results)->get();
         }
@@ -334,6 +394,9 @@ class ProductController extends Controller
         $results = Utility::where('advanced_security', 'like', '%' . $vantay . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('utility_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('utility_id', $results)->get();
         }
@@ -351,6 +414,9 @@ class ProductController extends Controller
         ->where('special_function', 'like', '%' . $chongnuoc . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('utility_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('utility_id', $results)->get();
         }
@@ -366,6 +432,9 @@ class ProductController extends Controller
         $results = Connect::where('sim', 'like', '%' . $sim . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('connect_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('connect_id', $results)->get();
         }
@@ -381,6 +450,9 @@ class ProductController extends Controller
         $results = Utility::where('special_function', 'like', '%' . $touch . '%')->pluck('id');
         if (empty($results)) {
             $products = Product::where('utility_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('utility_id', $results)->get();
         }
@@ -395,6 +467,9 @@ class ProductController extends Controller
         $results = Battery::where('battery_capacity', '>', 3000)->pluck('id');
         if (empty($results)) {
             $products = Product::where('battery_id', 0)->get();
+            if (count($products) == 0) {
+                Session::flash('message', 'Không tìm thấy sản phẩm nào');
+            }
         } else {
             $products = Product::where('battery_id', $results)->get();
         }
@@ -407,6 +482,9 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
+        if (count($products) == 0) {
+            Session::flash('message', 'Không tìm thấy sản phẩm nào');
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }

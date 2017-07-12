@@ -49,12 +49,12 @@
                                     </div>
                                 </div>
                                 <div class="item-product-price">
-                                @if ($product->sale_price === null)
-                                    <span class="price-num"><h4 style="margin-top: -17px; margin-right: -10px;">{!! number_format($product->price) !!} đ</h4></span>
-                                @else
-                                <span class="price-num">{!! number_format($product->sale_price) !!} đ</span>
-                                <p class="subdescription"><del>{!! number_format($product->price) !!} đ</del></p>
-                                @endif
+                                    @if ($product->sale_price === null)
+                                        <span class="price-num"><h4 style="margin-top: -17px; margin-right: -10px;">{!! number_format($product->price) !!} đ</h4></span>
+                                    @else
+                                    <span class="price-num">{!! number_format($product->sale_price) !!} đ</span>
+                                    <p class="subdescription"><del>{!! number_format($product->price) !!} đ</del></p>
+                                    @endif
                                 </div>
                             </div>  
                         </div>
@@ -136,8 +136,6 @@
                         </div>
                     </div>
                 </div>
-                </a>
-                <a href="{{url('/them-gio-hang/'.$product->id)}}">Thêm giỏ hàng</a>
             </div>
         @endforeach
     </div>
