@@ -27,8 +27,6 @@ class CreateProductsTable extends Migration
             $table->integer('tophot')->nullable();
             $table->integer('warranty_moth');
             $table->string('status', 255);
-            $table->integer('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('factory_id')->unsigned()->nullable();
             $table->foreign('factory_id')->references('id')->on('manufactories');
             $table->integer('back_camera_id')->unsigned()->nullable();

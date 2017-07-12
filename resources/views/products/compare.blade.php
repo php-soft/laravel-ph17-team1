@@ -2,11 +2,11 @@
 
 @section ('content')
 <div class="container">
-@foreach($products as $product)
-@foreach($product_sames as $product_same)
+@foreach ($products as $product)
+@foreach ($product_sames as $product_same)
     <div class="row">
         <div class="col-md-12">
-            <h3>So sánh điện thoại {{$product->name}} và {{$product_same->name}}</h3>
+            <h3>So sánh điện thoại {{ $product->name }} và {{ $product_same->name }}</h3>
         </div>
     </div>
     <hr>
@@ -18,14 +18,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <a href="{{url('products/' .$product->slug)}}">
-                        <img class="img-responsive" src="{!!$product->image!!}">
+                        <img class="img-responsive" src="{!! $product->image !!}">
                     </a>
                 </div>
                 <div class="col-md-12">
                     <h3>{!! $product->name !!}</h3>
                 </div>
                 <div class="col-md-12">
-                    @if($product->sale_price === null)
+                    @if ($product->sale_price === null)
                         <h4 style="color: red">{!! number_format($product->price) !!} đ</h4>
                     @else 
                         <h4 style="color: red">{!! number_format($product->sale_price) !!} đ</h4>
@@ -49,7 +49,7 @@
                         @for ($i=1; $i <= 5 ; $i++)
                             <span class="glyphicon glyphicon-star{{ ($i <= $avgvote) ? '' : '-empty'}}"></span>
                         @endfor
-                        <a href="#review">{{$count_vote}} đánh giá</a>
+                        <a href="#review">{{ $count_vote }} đánh giá</a>
                     </p>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     <h3>{!! $product_same->name !!}</h3>
                 </div>
                 <div class="col-md-12">
-                    @if($product_same->sale_price === null)
+                    @if ($product_same->sale_price === null)
                         <h4 style="color: red">{!! number_format($product_same->price) !!} đ</h4>
                     @else 
                         <h4 style="color: red">{!! number_format($product_same->sale_price) !!} đ</h4>
@@ -89,7 +89,7 @@
                         @for ($i=1; $i <= 5 ; $i++)
                             <span class="glyphicon glyphicon-star{{ ($i <= $avgvote_same) ? '' : '-empty'}}"></span>
                         @endfor
-                        <a href="#review">{{$count_vote_same}} đánh giá</a>
+                        <a href="#review">{{ $count_vote_same }} đánh giá</a>
                     </p>
                 </div>
             </div>
@@ -104,12 +104,12 @@
             <h4>Màu sản phẩm</h4>
         </div>
         <div class="col-md-4" style="border-right: ridge 1px; border-left: ridge 1px;">
-            <img class="img-responsive" src="{!!$product->image!!}" style=" width: 75px; height: 75px; margin-left: 140px;">
-            <p style="text-align: center;">{{$product->color->name}}</p>
+            <img class="img-responsive" src="{!! $product->image !!}" style=" width: 75px; height: 75px;">
+            <p style="margin-left: 26px;">{{ $product->color->name }}</p>
         </div>
         <div class="col-md-4" style="border-right: ridge 1px;">
-            <img class="img-responsive" src="{!!$product_same->image!!}" style=" width: 75px; height:75px; margin-left: 140px;">
-            <p style="text-align: center;">{{$product_same->color->name}}</p>
+            <img class="img-responsive" src="{!! $product_same->image !!}" style=" width: 75px; height:75px;">
+            <p style="margin-left: 26px;">{{ $product_same->color->name }}</p>
         </div>
         <div class="col-md-2">
             
@@ -145,23 +145,23 @@
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-12 list-group-item disabled">Camera sau</li>
                     <li class="col-md-2 list-group-item">Độ phân giải</li>
-                    @if(!empty($product->backCamera->resolution2))
-                        @if($product->backCamera->resolution2 == $product->backCamera->resolution1)
-                            <li class="col-md-4 list-group-item">Camera kép {{$product->backCamera->resolution1}} MP</li>
+                    @if (!empty($product->backCamera->resolution2))
+                        @if ($product->backCamera->resolution2 == $product->backCamera->resolution1)
+                            <li class="col-md-4 list-group-item">Camera kép {{ $product->backCamera->resolution1 }} MP</li>
                         @else
-                            <li class="col-md-4 list-group-item">2 camera {{$product->backCamera->resolution1}} MP và {{$product->backCamera->resolution2}} MP</li>
+                            <li class="col-md-4 list-group-item">2 camera {{ $product->backCamera->resolution1 }} MP và {{ $product->backCamera->resolution2 }} MP</li>
                         @endif    
                     @else
-                        <li class="col-md-4 list-group-item">{{$product->backCamera->resolution1}} MP</li>
+                        <li class="col-md-4 list-group-item">{{ $product->backCamera->resolution1 }} MP</li>
                     @endif
-                    @if(!empty($product_same->backCamera->resolution2))
+                    @if (!empty($product_same->backCamera->resolution2))
                         @if($product_same->backCamera->resolution2 == $product_same->backCamera->resolution1)
-                            <li class="col-md-4 list-group-item">Camera kép {{$product_same->backCamera->resolution1}} MP</li>
+                            <li class="col-md-4 list-group-item">Camera kép {{ $product_same->backCamera->resolution1 }} MP</li>
                         @else
-                            <li class="col-md-4 list-group-item">2 camera {{$product_same->backCamera->resolution1}} MP và {{$product_same->backCamera->resolution2}} MP</li>
+                            <li class="col-md-4 list-group-item">2 camera {{ $product_same->backCamera->resolution1 }} MP và {{ $product_same->backCamera->resolution2 }} MP</li>
                         @endif    
                     @else
-                        <li class="col-md-4 list-group-item">{{$product_same->backCamera->resolution1}} MP</li>
+                        <li class="col-md-4 list-group-item">{{ $product_same->backCamera->resolution1 }} MP</li>
                     @endif
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Quay phim</li>
@@ -178,33 +178,33 @@
                     <li class="col-md-2 list-group-item" style="height: 102px;">&nbsp;</li>
                     <li class="col-md-12 list-group-item disabled">Camera trướt</li>
                     <li class="col-md-2 list-group-item">Độ phân giải</li>
-                    @if(!empty($product->frontCamera->resolution2))
-                        @if($product->frontCamera->resolution2 == $product->frontCamera->resolution1)
-                            <li class="col-md-4 list-group-item">Camera kép {{$product->frontCamera->resolution1}}</li>
+                    @if (!empty($product->frontCamera->resolution2))
+                        @if ($product->frontCamera->resolution2 == $product->frontCamera->resolution1)
+                            <li class="col-md-4 list-group-item">Camera kép {{ $product->frontCamera->resolution1 }}</li>
                         @else
-                            <li class="col-md-4 list-group-item">2 camera {{$product->frontCamera->resolution1}} MP và {{$product->frontCamera->resolution2}} MP</li>
+                            <li class="col-md-4 list-group-item">2 camera {{ $product->frontCamera->resolution1 }} MP và {{ $product->frontCamera->resolution2 }} MP</li>
                         @endif    
                     @else
-                        <li class="col-md-4 list-group-item">{{$product->frontCamera->resolution1}} MP</li>
+                        <li class="col-md-4 list-group-item">{{ $product->frontCamera->resolution1 }} MP</li>
                     @endif
-                    @if(!empty($product_same->frontCamera->resolution2))
-                        @if($product_same->frontCamera->resolution2 == $product_same->frontCamera->resolution1)
-                            <li class="col-md-4 list-group-item">Camera kép {{$product_same->frontCamera->resolution1}}</li>
+                    @if (!empty($product_same->frontCamera->resolution2))
+                        @if ($product_same->frontCamera->resolution2 == $product_same->frontCamera->resolution1)
+                            <li class="col-md-4 list-group-item">Camera kép {{ $product_same->frontCamera->resolution1 }}</li>
                         @else
-                            <li class="col-md-4 list-group-item">2 camera {{$product_same->frontCamera->resolution1}} MP và {{$product_same->frontCamera->resolution2}} MP</li>
+                            <li class="col-md-4 list-group-item">2 camera {{ $product_same->frontCamera->resolution1 }} MP và {{ $product_same->frontCamera->resolution2 }} MP</li>
                         @endif    
                     @else
-                        <li class="col-md-4 list-group-item">{{$product->frontCamera->resolution1}} MP</li>
+                        <li class="col-md-4 list-group-item">{{ $product->frontCamera->resolution1 }} MP</li>
                     @endif
 
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Video call</li>
-                    @if($product->frontCamera->videocall == 1)
+                    @if ($product->frontCamera->videocall == 1)
                         <li class="col-md-4 list-group-item">Có</li>
                     @else
                         <li class="col-md-4 list-group-item">Không</li>
                     @endif
-                    @if($product_same->frontCamera->videocall == 1)
+                    @if ($product_same->frontCamera->videocall == 1)
                         <li class="col-md-4 list-group-item">Có</li>
                     @else
                         <li class="col-md-4 list-group-item">Không</li>
