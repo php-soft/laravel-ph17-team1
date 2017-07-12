@@ -19,7 +19,8 @@ class NewsController extends Controller
         $offset = News::count() - 5;
         $data = News::orderBy('id', 'desc')->skip(5)->take($offset)->get();
         $tags = Tag::all();
-        return view('news.index')->with('news', $topnews)
+        return view('news.index')
+            ->with('news', $topnews)
             ->with('data', $data)
             ->with('mostViews', $mostViews)
             ->with('reviews', $reviews)
