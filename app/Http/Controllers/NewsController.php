@@ -53,14 +53,14 @@ class NewsController extends Controller
     public function indexByTag($id)
     {
         $tag = Tag::find($id);
-        $news = News::all();
-        return view('news.tag')->with('tag', $tag)->with('mostView', $news)->with('review', $news);
+        $mostViews = News::orderBy('view', 'desc')->skip(0)->take(5)->get();
+        return view('news.tag')->with('tag', $tag)->with('mostView', $mostViews)->with('review', $mostViews);
     }
     public function indexByListNew($slug)
     {
         $listNew = ListNew::Where('slug', '=', $slug)->get()->first();
-        $news = News::all();
-        return view('news.listNew')->with('listNew', $listNew)->with('mostView', $news)->with('review', $news);
+        $mostViews = News::orderBy('view', 'desc')->skip(0)->take(5)->get();
+        return view('news.listNew')->with('listNew', $listNew)->with('mostView', $mostViews)->with('review', $mostViews);
     }
 
     public function detail($slug)
