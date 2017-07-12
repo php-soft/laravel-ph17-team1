@@ -124,7 +124,13 @@ class NewsController extends Controller
     public function destroy($id)
     {
         $news = News::find($id);
-        $tag->news()->detach();
+        $news->tags()->detach();
+        foreach ($news->comments as $comment) {
+            foreach ($comment->replies as $reply) {
+                $reply->delete();
+            }
+            $comment->delete();
+        }
         $news->delete();
         return redirect('admin/news')->withSuccess("Xóa tin thành công");
     }
