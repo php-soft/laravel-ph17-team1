@@ -51,11 +51,11 @@ class ProductController extends Controller
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
 
-        $product_tt=Product::where('id', '<>', $product_id)->orderBy('sale_price', 'asc')->limit(5)
+        $product_tt=Product::where('id', '<>', $product_id)->orderBy('sale_price', 'desc')->limit(3)
         ->pluck('id');
         $product_sames=Product::find($product_tt);
 
-        $news = News::all();
+        $news = News::orderBy('created_at', 'desc')->limit(3)->get();
 
         $product_g=Product::where('id', '<>', $product_id)->pluck('id');
         $product_sss=Product::find($product_g);

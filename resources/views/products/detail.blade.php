@@ -104,7 +104,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 btn-buy">
                             @if($product->status ==1)
-                                <a href="{{url('')}}" class="btn btn-large btn-block btn-primary">MUA NGAY</a>
+                                <a href="{{ url('them-gio-hang/' .$product->id) }}" class="btn btn-large btn-block btn-primary">MUA NGAY</a>
                             @else
                                 <a href="" title="" class="btn btn-large btn-block btn-primary disabled">Tạm hết hàng</a>
                             @endif
@@ -588,7 +588,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
                                     <div class="bt">
                                         <div class="image-m pull-left">
-                                            <img class="img-responsive" src="{!!$new->image!!}">
+                                            <img class="img-responsive" src="{{url('uploads/news/'.$new->image)}}">
                                         </div>
                                     </div> <!-- /div bt -->
                                     <div class="ct">
