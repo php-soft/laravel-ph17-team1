@@ -33,6 +33,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('tags/edit/{id}', 'TagController@edit');
     Route::post('tags/edit/{id}', 'TagController@update');
     Route::get('tags/delete/{id}', 'TagController@destroy');
+
+    Route::get('reviews', 'ReviewController@index');
+    Route::get('reviews/delete/{id}', 'ReviewController@destroy');
+
+    Route::get('votes', 'VoteController@index');
+    Route::get('votes/delete/{id}', 'VoteController@destroy');
+
+    Route::get('products', 'ProductController@index');
+    Route::post('products/new', 'ProductController@new');
+    Route::get('products/edit/{id}', 'ProductController@edit');
+    Route::post('products/update/{id}', 'ProductController@update');
+    Route::get('products/delete/{id}', 'ProductController@destroy');
 });
 
 Route::get('news', 'NewsController@index');

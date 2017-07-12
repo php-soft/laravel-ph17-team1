@@ -36,17 +36,18 @@ class ProductController extends Controller
         $products = Product::all();
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        // $a = Manufactory::where(function($where){
-        //     $where->where('name', '=', 'samsung');
-        //     $where->where('name','=','iphone');
-        //     })->get();
-        // dd($manu_2s);
         
         return View('products.index')->with('products', $products)->with('manu_alls', $manu_alls)
         ->with('manu_2s', $manu_2s);
     }
     public function indexByID($slug)
     {
+        $login = Auth::check();
+        if($login==true){
+            $alow = 1;
+        } else {
+            $alow = 0;
+        }
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
 
@@ -78,10 +79,9 @@ class ProductController extends Controller
         $reviews = Review::where('product_id', $product_id)->orderBy('created_at', 'desc')
         ->paginate(5);
 
-        return view('products.detail')->with('products', $products)->with('news', $news)
-        ->with('product_sames', $product_sames)
-        ->with('product_sss', $product_sss)
-        ->with('count_vote', $count_vote)
+        return view('products.detail')->with('products', $products)->with('alow', $alow)
+        ->with('news', $news)->with('product_sames', $product_sames)
+        ->with('product_sss', $product_sss)->with('count_vote', $count_vote)
         ->with('avgvote', $avgvote)->with('stores', $stores)->with('promotions', $promotions)
         ->with('votes', $votes)->with('reviews', $reviews);
     }
@@ -411,18 +411,58 @@ class ProductController extends Controller
         ->with('products', $products);
     }
 
-    public function storeVote(Request $request)
+    public function storeVote(Request $request, $slug)
     {
-        $this->validate($request, [
+        
+
+        if (Auth::check() == true) {
+            $this->validate($request, [
+                'comment' => 'required|min:3',
+                'star' => 'required',
+            ], [
+                'comment.required' => 'Hãy viết một vài lời bình luận về sản phẩm',
+                'comment.min' => 'Bình luận tối thiểu 80 ký tự',
+                'star.required' => 'Hãy chọn số sao',
+                Session::flash('message', 'Có lỗi xảy ra'),
+                Session::flash('alert-class', 'alert-error'),
+            ]);
+            $product_id = Product::where('slug', $slug)->pluck('id');
+            $products=Product::where('id', $product_id)->first();
+            $vote = Vote::where('product_id', $product_id)->first();
+            $user_id = Auth::user()->id;
+            $user = User::where('id', $user_id)->first();
+            
+            if ($vote->email == $user->email) {
+                Session::flash('message', 'Bạn đánh giá sản phẩm ' .$products->name .' rồi');
+                Session::flash('alert-class', 'alert-error');
+            } else {
+                $vote = new Vote;
+                $vote->product_id = $request->product_id;
+                $vote->customer_id = $user_id;
+                $vote->star = $request->star;
+                $vote->name = $user->name;
+                $vote->email = $user->email;
+                $vote->phone = $user->phonenumber;
+                $vote->comment = $request->comment;
+                $vote->save();
+                Session::flash('message', 'Cảm ơn ' .$user->name . ' đã đánh giá sản phẩm chúng tôi');
+                Session::flash('alert-class', 'alert-error');
+            }
+        } else {
+            $product_id = Product::where('slug', $slug)->pluck('id');
+            $products=Product::where('id', $product_id)->first();
+            $this->validate($request, [
                 'name' => 'required',
-                'email' => 'required|email|unique:votes,email',
+                'star' => 'required',
+                'email' => 'required|email|unique:votes',
                 'phone' => 'required|regex:/[0-9]/',
                 'comment' => 'required|min:3',
             ], [
                 'name.required' => 'Chưa nhập tên',
+                'star.required' => 'Hãy chọn số sao',
                 'email.required' => 'Chưa nhập email',
                 'email.email' => 'Email không hợp lệ',
-                'email.unique' => 'Email đã tồn tại',
+                'email.unique' => 'Bạn đã đánh giá sản phẩm ' .$products->name .' rồi',
                 'phone.required' => 'Chưa nhập số điện thoại',
                 'phone.regex' => 'Số điện thoại không hợp lệ',
                 'comment.required' => 'Hãy viết một vài lời bình luận về sản phẩm',
@@ -430,30 +470,7 @@ class ProductController extends Controller
                 Session::flash('message', 'Có lỗi xảy ra'),
                 Session::flash('alert-class', 'alert-error'),
             ]);
-
-        if (Auth::check() == true) {
-            $user_id = Auth::user()->id;
-            $users_id = User::where('id', $user_id)->first();
-            $users_id->name = $request->name;
-            $users_id->email = $request->email;
-            $users_id->phonenumber = $request->phone;
-            $users_id->save();
             $vote = new Vote;
-            $vote->product_id = $request->product_id;
-            $vote->customer_id = $user_id;
-            $vote->star = $request->star;
-            $vote->name = $request->name;
-            $vote->email = $request->email;
-            $vote->phone = $request->phone;
-            $vote->comment = $request->comment;
-            $vote->save();
-            Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi');
-            Session::flash('alert-class', 'alert-error');
-            return back();
-        } else {
-            $vote = new Vote;
-            $users_id = User::all();
-            $users_id->name = $request->name;
             $vote->product_id = $request->product_id;
             $vote->star = $request->star;
             $vote->name = $request->name;
@@ -461,15 +478,36 @@ class ProductController extends Controller
             $vote->phone = $request->phone;
             $vote->comment = $request->comment;
             $vote->save();
-            Session::flash('message', 'Cảm ơn ' .$users_id->name . ' đã đánh giá sản phẩm chúng tôi');
-            Session::flash('alert-class', 'alert-success');
-            return back();
+            Session::flash('message', 'Cảm ơn ' .$vote->name .' đã đánh giá sản phẩm chúng tôi');
+            Session::flash('alert-class', 'alert-success');    
         }
+        return back();
     }
 
     public function storeComment(Request $request)
     {
-        $this->validate($request, [
+        if (Auth::check() == true){
+            $this->validate($request, [
+                'comment' => 'required|min:3',
+            ], [
+                'comment.required'=> 'Hãy để lại vài dòng bình luận',
+                'comment.min'=> 'Comment tối thiểu 10 ký tự',
+                Session::flash('message', 'Có lỗi xảy ra'),
+                Session::flash('alert-class', 'alert-error'),
+            ]);
+            $user_id = Auth::user()->id;
+            $user = User::where('id', $user_id)->first();
+            $review = new Review;
+            $review->product_id = $request->product_id;
+            $review->name = $user->name;
+            $review->email = $user->email;
+            $review->phone = $user->phonenumber;
+            $review->comment = $request->comment;
+            $review->save();
+            Session::flash('message', 'Cảm ơn ' .$user->name . ' đã để lại phản hồi');
+            Session::flash('alert-class', 'alert-success');
+        } else {
+            $this->validate($request, [
                 'name' => 'required',
                 'comment' => 'required|min:3',
             ], [
@@ -479,16 +517,16 @@ class ProductController extends Controller
                 Session::flash('message', 'Có lỗi xảy ra'),
                 Session::flash('alert-class', 'alert-error'),
             ]);
-
-        $review = new Review;
-        $review->product_id = $request->product_id;
-        $review->name = $request->name;
-        $review->email = $request->email;
-        $review->phone = $request->phone;
-        $review->comment = $request->comment;
-        $review->save();
-        Session::flash('message', 'Cảm ơn ' .$review->name . ' đã để lại phản hồi');
-        Session::flash('alert-class', 'alert-success');
+            $review = new Review;
+            $review->product_id = $request->product_id;
+            $review->name = $request->name;
+            $review->email = $request->email;
+            $review->phone = $request->phone;
+            $review->comment = $request->comment;
+            $review->save();
+            Session::flash('message', 'Cảm ơn ' .$review->name . ' đã để lại phản hồi');
+            Session::flash('alert-class', 'alert-success');
+        }    
         return back();
     }
 

@@ -38,7 +38,7 @@
                         @endif
                         <td class="text-center">{{ $review->comment }}</td>
                         <td class="text-center">
-                            <a href="{{route('reviewdelete', $review->id)}}" class="btn btn-warning" onclick="return confirm('Bạn có muốn xóa đánh giá của {{$review->name}} không?');">
+                            <a href="{{url('admin/reviews/delete/' .$review->id)}}" class="btn btn-warning" onclick="return confirm('Bạn có muốn xóa đánh giá của {{$review->name}} không?');">
                               <span class="glyphicon glyphicon-trash"></span>
                               Delete
                             </a>

@@ -433,15 +433,27 @@
                               </div>  
                             </div>
                             <div class="col-md-4">
-                              <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
-                              </div>
-                              <div class="form-group">
-                                <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)">
-                              </div>
-                              <div class="form-group">
-                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)">
-                              </div>
+                                @if ($alow == 1)
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)" disabled="">
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)" disabled="">
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)" disabled="">
+                                      </div>
+                                @else
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="text" name="email" class="form-control" placeholder="Email (bắt buộc)">
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="Số điện thoại (bắt buộc)">
+                                      </div>      
+                                @endif
                               <div class="form-group">
                               <button type="submit" class="btn btn-large btn-block btn-primary">
                                 Gửi đánh giá
@@ -500,41 +512,47 @@
                                             </textarea>
                                         </div>   
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group btn-send-comment">
-                                                <button type="button" class="btn btn-large btn-block btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
-                                                Gửi
-                                                </button>
-                                            </div>
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">THÔNG TIN NGƯỜI GỬI</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
+                                    @if ($alow == 1)
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary pull-right">GỬI BÌNH LUẬN</button>
+                                        </div>
+                                    @else
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group btn-send-comment">
+                                                    <button type="button" class="btn btn-large btn-block btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
+                                                    Gửi
+                                                    </button>
+                                                </div>
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">THÔNG TIN NGƯỜI GỬI</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <input type="text" name="email" class="form-control" placeholder="Email">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button type="submit" class="btn btn-large btn-block btn-primary">GỬI BÌNH LUẬN</button>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" name="email" class="form-control" placeholder="Email">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" name="phone" class="form-control" placeholder="Số điện thoại">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="submit" class="btn btn-large btn-block btn-primary">GỬI BÌNH LUẬN</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>    
+                                        </div>     
+                                    @endif
                                 </form>
                             </div>
                         </div>

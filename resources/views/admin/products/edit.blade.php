@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
     <script src="//code.jquery.com/jquery-1.12.3.js"></script>
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script
@@ -14,8 +13,7 @@
     <script>tinymce.init({ selector:'textarea' });</script>  
 
   <div class="row">
-    <div class="col-md-2">
-      
+    <div class="col-md-2">   
     </div>
     <div class="col-md-8">
       @if (count($errors) > 0)
@@ -27,7 +25,7 @@
               </ul>
           </div>
         @endif
-      <form action="{{url('admin/products/update-product/' .$product->id)}}" method="post" enctype="multipart/form-data">
+      <form action="{{url('admin/products/update/' .$product->id)}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="name">Tên sản phẩm</label>
@@ -110,15 +108,13 @@
           <div class="form-formcontrols">
               {!! Form::select('frontcamera', $fronts, $product->front_camera_id, ['class'=>'form-control']) !!}
           </div>
-        </div>
-        
+        </div>        
         <div class="form-group">
           <label for="battery">Thời lượng pin</label>
           <div class="form-formcontrols">
               {!! Form::select('battery', $batteries, $product->battery_id, ['class'=>'form-control']) !!}
           </div>
         </div>
-
         <div class="form-group">
           <label for="connect">Kết nối</label>
           <div class="form-formcontrols">
@@ -154,24 +150,19 @@
           <div class="form-formcontrols">
               {!! Form::select('utility', $utilities, $product->utility_id, ['class'=>'form-control']) !!}
           </div>
-        </div>
-        
+        </div>        
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Lưu</button>
           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
         </div>
-      </form>
-       
+      </form>      
     </div>
-    <div class="col-md-2">
-      
+    <div class="col-md-2">     
     </div>
   </div>
-
 @stop
 
 @section('js')
-
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
     <script src="{{asset('js/toastr.min.js')}}"></script>
     <script>
