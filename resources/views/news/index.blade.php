@@ -66,7 +66,7 @@
         <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
             <div>
                 <div class="category-title-div">
-                    <div class="category-title">Sản phẩm mới</div>
+                    <div class="category-title">Tin xem nhiều nhất</div>
                 </div>
                 @php
                     $i=0;
