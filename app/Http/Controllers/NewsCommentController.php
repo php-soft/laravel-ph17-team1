@@ -26,8 +26,9 @@ class NewsCommentController extends Controller
             $session_id = \Auth::user()->id;
             $comment->user_id = $session_id;
             $comment->save();
-        $n = News::find($request->news_id);
-        return view('news.comment')->with('n', $n);
+            $n = News::find($request->news_id);
+            $comments = $n->comments()->skip(0)->take(5)->get();
+            return view('news.comment')->with('n', $n)->with('comments' ,$comments);
         }
     }
 
@@ -43,8 +44,9 @@ class NewsCommentController extends Controller
             $news_id = $comment->news_id;
             $comment->replies()->delete();
             $comment->delete();
-        $n = News::find($news_id);
-        return view('news.comment')->with('n', $n);
+            $n = News::find($news_id);
+            $comments = $n->comments()->skip(0)->take(5)->get();
+            return view('news.comment')->with('n', $n)->with('comments' ,$comments);
         }
     }
 
@@ -79,6 +81,32 @@ class NewsCommentController extends Controller
             $comment->save();
 
             return $comment->like;
+        }
+    }
+
+    public function load(Request $request)
+    {
+        if ($request->ajax()) {
+            $this->validate($request, [
+                            'news_id'=>'required',
+                            'sum'=>'required',
+                            'sum_load'=>'required',
+                        ], [
+                            'news_id.required'=>'Chưa có tin',
+                            'sum.required'=>'Chưa có tổng số tin',
+                            'sum_load.required'=>'Chưa có số tin',
+                        ]);
+            $n = News::find($request->news_id);
+            if ($request->sum > $request->sum_load * 5) {
+                $comments = $n->comments()->skip($request->sum_load * 5)->take(5)->get();
+                $view = html_entity_decode(view('news.comment')->with('n', $n)->with('comments' ,$comments));
+                $sum_load = $request->sum_load + 1;
+                $arr = array('view' => $view, 'sum_load' => $sum_load);
+                echo json_encode($arr);
+            } else {
+                $arr = array('view' => "", 'sum_load' => $request->sum_load);
+                echo json_encode($arr);
+            }
         }
     }
 }

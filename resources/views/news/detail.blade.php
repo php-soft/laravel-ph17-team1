@@ -106,6 +106,34 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+        /*view more*/
+            $('#view_more').on('click', function () {
+                var sum = $('#sum_comments').val();
+                var sum_load = $('#sum_comments_load').val();
+                var news_id = $('#news_id').val();
+                var url = "{{ url('news/comment/load') }}" + "/" + news_id;
+                var ht = $('#comment_box').html();
+                var string = ht + "<span class='glyphicon glyphicon-repeat'></span> Đang tải...";
+                    $('#comment_box').html(string);
+                $.ajax({
+                    url: url,
+                    type: 'post',
+
+                    data: { 'sum': sum,
+                            'sum_load': sum_load,
+                            'news_id': news_id,
+                    },
+                    dataType: 'JSON',
+                    success: function (data){
+                        if (data.view == "") {
+                            $('#view_more').attr('class', 'hidden');
+                        }
+                        $('#sum_comments_load').val(data.sum_load);
+                        $('#comment_box').html(ht + data.view);
+                    }
+                });
+            });
         }); 
 /*Comment*/
         $(document).on('submit', '#comment_input', function (e) {
@@ -186,27 +214,6 @@
                     $("#reply_box_"+news_comment_id).html(data);
                 }
             });
-        });
-
-/*view more*/
-
-        $(document).on('click', '#view_more', function () {
-            var sum = $('#sum_comments').val();
-            var news_comment_id = $(this).find('input').val();
-            var news_id = $('#news_id').val();
-            alert(news_id);
-/*            var url = "{{ url('news/reply/delete') }}" + "/" + reply_id;
-
-            var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $("#reply_box_"+news_comment_id).html();
-            $("#reply_box_"+news_comment_id).html(string);
-            $.ajax({
-                url: url,
-                type: 'post',
-                data: { 'reply_id': reply_id, },
-                success: function (data){
-                    $("#reply_box_"+news_comment_id).html(data);
-                }
-            });*/
         });
 
 /*Like and dislike*/

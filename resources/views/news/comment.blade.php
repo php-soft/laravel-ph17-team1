@@ -1,7 +1,7 @@
                     @php
                         $stt = 1;
                     @endphp
-                    @foreach ($n->comments->take(5) as $comment)
+                    @foreach ($comments as $comment)
                         <div class="clearfix"></div>
                         <div class="comment">
                             <div>

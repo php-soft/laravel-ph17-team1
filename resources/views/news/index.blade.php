@@ -56,22 +56,12 @@
                     </div>
                 </div>
             </div>
-            @foreach ($data as $news)
-                <div class="row">
-                    <div class="small-news">
-                        <div class="small-news-image">
-                            <img src="{{url('uploads/news/'.$news->image)}}" alt="{{$news->image}}" height="auto" width="100%">
-                        </div>
-                        <div class="small-news-content">
-                            <span class="small-news-title"><a href="{{url('news/'.$news->slug)}}">{{$news->title}}</a></span>
-                            
-                            <div class="small-news-desciption"><span>{{$news->description}}</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            @endforeach
-
+            <input type="hidden" name="sum" id="sum" value="{{ count($data) }}">
+            <input type="hidden" name="sum_load" id="sum_load" value="1">
+            <input type="hidden" name="onload" id="onload" value="0">
+            <div id="news_box">
+                @include('news.news')
+            </div>
         </div>
         <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
             <div>
@@ -81,13 +71,13 @@
                 @php
                     $i=0;
                 @endphp
-                @foreach($mostView as $n)
+                @foreach($data->take(5) as $n)
                     <div class="product-news">
                         <div class="product-image">
-                            <img src="{{url('uploads/news/'.$news->image)}}" alt="{{$news->image}}" height="auto" width="100%">
+                            <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
                         </div>
                         <div class="product-content">
-                            <span class="product-title"><a href="{{url('news/'.$news->slug)}}">{{$news->title}}</a></span>
+                            <span class="product-title"><a href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></span>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -112,7 +102,7 @@
                 @php
                     $i=0;
                 @endphp
-                @foreach($review as $n)
+                @foreach($review->take(5) as $n)
                     <div class="hot-news">
                         <div>
                             <div class="number">{{$i+1}}</div>
@@ -132,4 +122,50 @@
             </div>
         </div>
     </div>
+@stop
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+        /*view more*/
+        $(window).scroll(function() {
+           if($(window).scrollTop() + $(window).height() > $(document).height() - 150) {
+                var onload = $('#onload').val();
+                if (onload == 0) {
+                    $('#onload').val('1');
+                    var sum = $('#sum').val();
+                    var sum_load = $('#sum_load').val();
+                    if (sum > sum_load * 5) {
+                        var url = "{{ url('news/load') }}";
+                        var ht = $('#news_box').html();
+                        var string = ht + "<button class='btn btn-block'><span class='glyphicon glyphicon-refresh'></span> Đang tải</button>";
+                        $('#news_box').html(string);
+                        $.ajax({
+                            url: url,
+                            type: 'post',
+
+                            data: { 'sum': sum,
+                                    'sum_load': sum_load,
+                            },
+                            dataType: 'JSON',
+                            success: function (data){
+                                if (data.view == "") {
+                                    $('#view_more').attr('class', 'hidden');
+                                }
+                                $('#sum_load').val(data.sum_load);
+                                $('#news_box').html(ht + data.view);
+                                $('#onload').val('0');
+                            }
+                        });
+                    }
+                }
+           }
+        });
+        }); 
+    </script>
 @stop

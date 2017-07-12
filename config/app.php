@@ -177,6 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
 
     ],
@@ -229,6 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
     ],
 
 ];
