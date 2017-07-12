@@ -14,29 +14,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('news') }}"><span class="fa fa-home"></span></a>
+                <a class="navbar-brand" href="{{ url('news') }}"><span class="glyphicon glyphicon-home"></span></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('news') }}">Tin mới</a></li>
-                    <li><a href="#">Sản phẩm</a></li>
-                    <li><a href="#">Công nghệ</a></li>
-                    <li><a href="#">Mẹo hay</a></li>
-                    <li><a href="#">Đánh giá</a></li>
-                    <li><a href="#">Game</a></li>
+                    <li><a href="{{ url('news/listnew/tin-tuc') }}">Tin tức</a></li>
+                    <li><a href="{{ url('news/listnew/san-pham') }}">Sản phẩm</a></li>
+                    <li><a href="{{ url('news/listnew/meo-hay') }}">Mẹo hay</a></li>
+                    <li><a href="{{ url('news/listnew/danh-gia') }}">Đánh giá</a></li>
+                    <li><a href="{{ url('news/listnew/game-app') }}">Game</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                            <li><a href="{{ route('register') }}">Đăng ký</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu" style="background: #3B5998">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                 </ul>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Bạn muốn tìm gì?">
-                    </div>
-                    <button type="submit" class="btn btn-default">Tìm</button>
-                </form>            
             </div><!-- /.navbar-collapse -->
         </div>
     </nav>

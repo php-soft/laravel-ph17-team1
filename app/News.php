@@ -18,9 +18,12 @@ class News extends Model
     {
         return $this->belongsTo('App\User');
     }
-
     public function tags()
     {
         return $this->belongsToMany('App\Tag', 'news_tags', 'news_id', 'tag_id');
+    }
+    public function comments()
+    {
+        return $this->hasMany('App\NewsComment')->orderBy('id', 'desc');
     }
 }

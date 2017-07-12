@@ -28,16 +28,18 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'title'=>'required|unique:News,title',
+                'title'=>'required|unique:News,title|max:255',
                 'list_new_id'=>'required',
-                'description'=>'required',
+                'description'=>'required|max:255',
                 'content'=>'required',
                 'image'=>'required|image|mimes:jpg,png,jpeg',
             ], [
                 'title.required'=>'Bạn chưa nhập tiêu đề tin',
                 'title.unique'=>'Tiêu đề tin đã tồn tại',
+                'title.max'=>'Tiêu đề tiêu đề vượt quá 255 kí tự',
                 'list_new_id.required'=>'Bạn chưa chọn danh mục',
                 'description.required'=>'Bạn chưa nhập mô tả',
+                'description.max'=>'Mô tả vượt quá 255 kí tự',
                 'content.required'=>'Bạn chưa nhập nội dung',
                 'image.required'=>'Bạn chọn ảnh đại diện cho tin',
                 'image.mimes'=>'Ảnh đại diện phải là tệp có đuôi jpg, png.',
@@ -76,15 +78,17 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-                'title'=>'required',
+                'title'=>'required|max:255',
                 'list_new_id'=>'required',
-                'description'=>'required',
+                'description'=>'required|max:255',
                 'content'=>'required',
                 'image'=>'image|mimes:jpg,png,jpeg',
             ], [
                 'title.required'=>'Bạn chưa nhập tiêu đề tin',
+                'title.max'=>'Tiêu đề vượt quá 255 kí tự',
                 'list_new_id.required'=>'Bạn chưa chọn danh mục',
                 'description.required'=>'Bạn chưa nhập mô tả',
+                'description.max'=>'Mô tả vượt quá 255 kí tự',
                 'content.required'=>'Bạn chưa nhập nội dung',
                 'image.mimes'=>'Ảnh đại diện phải là tệp có đuôi jpg, png.',
                 'image.image'=>'Tệp bạn chọn không phải là hình ảnh',
@@ -120,6 +124,13 @@ class NewsController extends Controller
     public function destroy($id)
     {
         $news = News::find($id);
+        $news->tags()->detach();
+        foreach ($news->comments as $comment) {
+            foreach ($comment->replies as $reply) {
+                $reply->delete();
+            }
+            $comment->delete();
+        }
         $news->delete();
         return redirect('admin/news')->withSuccess("Xóa tin thành công");
     }

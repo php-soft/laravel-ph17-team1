@@ -8,7 +8,7 @@ class NewsComment extends Model
 {
     protected $table = "news_comments";
     protected $fillable = [
-        'content', 'user_id', 'news_id'
+        'content', 'user_id', 'news_id', 'like'
     ];
     public function news()
     {
@@ -17,5 +17,9 @@ class NewsComment extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    public function replies()
+    {
+        return $this->hasMany('App\Reply');
     }
 }

@@ -4,6 +4,25 @@
         <a href="{{url('admin/news/create')}}" class="btn btn-success pull-right">Thêm tin mới</a>
         <a href="{{url('admin/tags')}}" class="btn btn-success pull-right" style="margin-right: 10px">Quản lý tags tin tức</a>
     </h3>
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{Session::get('success')}}
+        </div>
+    @endif
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (session('message'))
+        <div class="alert alert-danger">
+            {{ session('message') }}
+        </div>
+    @endif
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
         <thead>
             <tr>

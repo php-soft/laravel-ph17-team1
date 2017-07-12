@@ -61,10 +61,21 @@ Route::get('installment', 'InstallmentController@index');
 Route::get('regulation', 'RegulationController@index');
 
 Route::get('news', 'NewsController@index');
+Route::post('news/load', 'NewsController@load');
+Route::post('news/comment/{id}', 'NewsCommentController@store')->middleware('auth');
+Route::post('news/comment/delete/{id}', 'NewsCommentController@destroy')->middleware('auth');
+Route::post('news/comment/load/{id}', 'NewsCommentController@load');
+Route::post('news/reply/{id}', 'ReplyController@store')->middleware('auth');
+Route::post('news/reply/delete/{id}', 'ReplyController@destroy')->middleware('auth');
+
+Route::post('news/like/{id}', 'NewsCommentController@like');
+Route::post('news/dislike/{id}', 'NewsCommentController@dislike');
+
 Route::get('news/{slug}', 'NewsController@detail');
 Route::get('news/tag/{id}', 'NewsController@indexByTag');
-Route::post('news/comment/{id}', 'NewsCommentController@store')->middleware('auth');
-Route::post('news/reply/{id}', 'ReplyController@store')->middleware('auth');
+Route::get('news/listnew/{slug}', 'NewsController@indexByListNew');
+
+
 
 Route::get('products', 'HomeController@index');
 
