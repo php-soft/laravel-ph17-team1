@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h2>SẢN PHẨM MỚI</h2>    
+            <h2>SẢN PHẨM HOT</h2>    
         </div>
     </div>
     <div class="row">
-        @foreach ($newproducts as $product)
+        @foreach ($hotproducts as $product)
             <div class="col-sm-6 col-md-4">
                 <div class="item">
                     <a href="{{url('products/' .$product->slug)}}">
@@ -73,11 +73,11 @@
     <hr>
     <div class="row">
         <div class="col-md-3">
-            <h2>SẢN PHẨM HOT</h2>    
+            <h2>SẢN PHẨM MỚI</h2>    
         </div>
     </div>
     <div class="row">
-        @foreach ($hotproducts as $product)
+        @foreach ($newproducts as $product)
             <div class="col-sm-6 col-md-4">
                 <div class="item">
                     <a href="{{url('products/' .$product->slug)}}">
@@ -136,6 +136,8 @@
                         </div>
                     </div>
                 </div>
+                </a>
+                <a href="{{url('/them-gio-hang/'.$product->id)}}">Thêm giỏ hàng</a>
             </div>
         @endforeach
     </div>

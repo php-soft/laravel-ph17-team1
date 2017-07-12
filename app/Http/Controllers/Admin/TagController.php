@@ -62,6 +62,7 @@ class TagController extends Controller
     public function destroy($id)
     {
         $tag = Tag::find($id);
+        $tag->news()->detach();
         $tag->delete();
         return redirect('admin/tags')->withSuccess("Xóa tag thành công");
     }

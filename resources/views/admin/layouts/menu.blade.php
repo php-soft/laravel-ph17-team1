@@ -17,7 +17,7 @@
                 <li><a href="{{url('admin/news')}}">Tin tức</a></li>
                 <li><a href="{{url('admin/products')}}">Điện thoại</a></li>
                 <li><a href="#">Quản lý kho</a></li>
-                <li><a href="#">Order</a></li>
+                <li><a href="{{ route('adminOrders')}}">Order</a></li>
                 <li><a href="#">Link</a></li>
                 <li><a href="{{url('admin/votes')}}">Đánh giá</a></li>
                 <li><a href="{{url('admin/reviews')}}">Bình luận</a></li>

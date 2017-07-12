@@ -4,7 +4,9 @@
 @stop
 @section('content')
     <h2>
-        Tag: {{ $tag->name }}
+        <span class="btn btn-link" style="color: #fff; background-color: #5cb85c; margin-bottom: 5px;">
+            Tag: {{ $tag->name }}
+        </span>
     </h2>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -21,10 +23,6 @@
                 </div>
             <div class="clearfix"></div>
             @endforeach
-
-            <button class="btn btn-info pull-left" style="margin-left: 50%">Xem thêm <span class="glyphicon glyphicon-arrow-down"></span></button>
-            <div class="clearfix"></div>
-
         </div>
         <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
             <div>
