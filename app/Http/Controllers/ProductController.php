@@ -218,7 +218,7 @@ class ProductController extends Controller
         $products = Product::find($product_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
-        } 
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -228,7 +228,7 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $category_id = Category::where('name', 'ios')->pluck('id');
-        $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');     
+        $product_id=ProductCategory::where('category_id', $category_id)->pluck('product_id');
         $products = Product::find($product_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
@@ -246,7 +246,7 @@ class ProductController extends Controller
         $products = Product::find($back_camera_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
-        } 
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -260,7 +260,7 @@ class ProductController extends Controller
         $products = Product::find($back_camera_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
-        }  
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -274,7 +274,7 @@ class ProductController extends Controller
         $products = Product::find($back_camera_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
-        } 
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
@@ -288,7 +288,7 @@ class ProductController extends Controller
         $products = Product::where('back_camera_id', $back_camera_id)->get();
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
-        } 
+        }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
         ->with('products', $products);
     }
