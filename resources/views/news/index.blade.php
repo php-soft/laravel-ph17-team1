@@ -66,12 +66,12 @@
         <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
             <div>
                 <div class="category-title-div">
-                    <div class="category-title">Sản phẩm mới</div>
+                    <div class="category-title">Tin xem nhiều nhất</div>
                 </div>
                 @php
                     $i=0;
                 @endphp
-                @foreach($data->take(5) as $n)
+                @foreach($mostViews as $n)
                     <div class="product-news">
                         <div class="product-image">
                             <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
@@ -102,7 +102,7 @@
                 @php
                     $i=0;
                 @endphp
-                @foreach($review->take(5) as $n)
+                @foreach($reviews->take(5) as $n)
                     <div class="hot-news">
                         <div>
                             <div class="number">{{$i+1}}</div>
