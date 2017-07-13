@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateColorsTable extends Migration
+class AddSoftDeleteForProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateColorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('colors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 255);
-            $table->string('image', 255);
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->softDeletes();    
         });
     }
 
@@ -28,6 +25,8 @@ class CreateColorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colors');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 }
