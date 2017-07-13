@@ -10,6 +10,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.0",
+        "unisharp/laravel-ckeditor": "^4.6",
+        "unisharp/laravel-filemanager": "^1.8",
         "uxweb/sweet-alert": "^1.4",
         "yajra/laravel-datatables-oracle": "^7.5"
     },

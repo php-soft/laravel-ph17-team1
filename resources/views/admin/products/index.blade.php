@@ -1,8 +1,8 @@
-@extends('admin.layouts.master')
+@extends ('admin.layouts.master')
 
-@section('content')
-<meta name="_token" content="{!! csrf_token() !!}">
-
+@section ('content')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+<link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 <style>
   .dataTables_length{
     margin-right: 390px;
@@ -12,7 +12,7 @@
   }
 </style>
 <div class="row">
-  <div class="col-md-12"> 
+  <div class="col-md-12">
     @if (count($errors) > 0)
       <div class="alert alert-danger">
           <ul>
@@ -202,105 +202,105 @@
         <tbody>
           <?php $stt=1; ?>
           {{ csrf_field() }}
-          @foreach($products as $key => $product)
+          @foreach ($products as $key => $product)
           <tr>
-            <td><p>{{$stt++}}</p>
+            <td><p>{{ $stt++ }}</p>
               <a href="{{url('admin/products/edit/' .$product->id)}}" class="btn btn-danger">Sửa</a><br><br>
               <a href="{{url('admin/products/delete/' .$product->id)}}" class="btn btn-warning" onclick="return confirm('Bạn có muốn xóa sản phẩm {{$product->name}} không?');">
                 <span class="glyphicon glyphicon-trash"></span>
                 Delete
               </a>
             </td>
-            <td>{{$product->name}}</td>
-            <td>{{$product->color->name}}</td>
-            <td>{{$product->manufactory->name}}</td>
-            <td>{{$product->slug}}</td>
-            <td>{{number_format($product->price)}} đ</td>
-            @if(empty($product->sale_price))
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->color->name }}</td>
+            <td>{{ $product->manufactory->name }}</td>
+            <td>{{ $product->slug }}</td>
+            <td>{{ number_format($product->price) }} đ</td>
+            @if (empty($product->sale_price))
               <td> đ</td>
             @else  
-              <td>{{number_format($product->sale_price)}} đ</td>
+              <td>{{ number_format($product->sale_price) }} đ</td>
             @endif  
-            <td>{{$product->description}}</td>
+            <td>{{ $product->description }}</td>
             <td><img src="{!!$product->image!!}" class="thumbnail" height="100" width="auto"></td>
-            <td>{{$product->accessory}}</td>
-            <td>{{$product->warranty_moth}} tháng</td>
+            <td>{{ $product->accessory }}</td>
+            <td>{{ $product->warranty_moth }} tháng</td>
             <td>
-            @foreach($cates as $cate)
-              <p>{{$cate}}</p>
+            @foreach ($cates as $cate)
+              <p>{{ $cate }}</p>
             @endforeach
             </td>
             <td>
-              @if(empty($product->frontCamera->resolution2))
-              <p>{{$product->frontCamera->resolution1}} MP</p>
+              @if (empty($product->frontCamera->resolution2))
+              <p>{{ $product->frontCamera->resolution1 }} MP</p>
               @else
-              <p>{{$product->frontCamera->resolution1}} MP</p>
-              <p>{{$product->frontCamera->resolution2}} MP</p>
+              <p>{{ $product->frontCamera->resolution1 }} MP</p>
+              <p>{{ $product->frontCamera->resolution2 }} MP</p>
               @endif
             </td>
             <td>
-              @if(empty($product->backCamera->resolution2))
-              <p>{{$product->backCamera->resolution1}} MP</p>
+              @if (empty($product->backCamera->resolution2))
+              <p>{{ $product->backCamera->resolution1 }} MP</p>
               @else
-              <p>{{$product->backCamera->resolution1}} MP</p>
-              <p>{{$product->backCamera->resolution2}} MP</p>
+              <p>{{ $product->backCamera->resolution1 }} MP</p>
+              <p>{{ $product->backCamera->resolution2 }} MP</p>
               @endif
             </td>
             <td>
-              <p>{{$product->battery->battery_capacity}}</p>
-              <p>{{$product->battery->battery_type}}</p>
-              <p>{{$product->battery->battery_tech}}</p>
+              <p>{{ $product->battery->battery_capacity }}</p>
+              <p>{{ $product->battery->battery_type }}</p>
+              <p>{{ $product->battery->battery_tech }}</p>
             </td>
             <td>
-              <p>{{$product->connect->network_mobile}}</p>
-              <p>{{$product->connect->sim}}</p>
+              <p>{{ $product->connect->network_mobile }}</p>
+              <p>{{ $product->connect->sim }}</p>
             </td>
-            <td><p>{{$product->connect->wifi}}</p></td>
+            <td><p>{{ $product->connect->wifi }}</p></td>
             <td>
-              <p>{{$product->connect->gps}}</p>
-              <p>{{$product->connect->bluetooth}}</p>
-            </td>
-            <td>
-              <p>{{$product->connect->connect_port}}</p>
-              <p>{{$product->connect->jack_phone}}</p>
-              <p>{{$product->connect->other_connect}}</p>
+              <p>{{ $product->connect->gps }}</p>
+              <p>{{ $product->connect->bluetooth }}</p>
             </td>
             <td>
-              <p>{{$product->memory->ram}} GB</p>
-              <p>{{$product->memory->rom}} GB</p>
-              <p>{{$product->memory->available_memory}} GB</p>
-              <p>{{$product->memory->external_memory_card}} GB</p>
+              <p>{{ $product->connect->connect_port }}</p>
+              <p>{{ $product->connect->jack_phone }}</p>
+              <p>{{ $product->connect->other_connect }}</p>
             </td>
             <td>
-              <p>{{$product->design->design}}</p>
-              <p>{{$product->design->material}}</p>
+              <p>{{ $product->memory->ram }} GB</p>
+              <p>{{ $product->memory->rom }} GB</p>
+              <p>{{ $product->memory->available_memory }} GB</p>
+              <p>{{ $product->memory->external_memory_card }} GB</p>
             </td>
             <td>
-              <p>{{$product->design->size}}</p>
-              <p>{{$product->design->weigth}}</p>
+              <p>{{ $product->design->design }}</p>
+              <p>{{ $product->design->material }}</p>
             </td>
             <td>
-              <p>{{$product->operaSystem->opera_system}}</p>
-              <p>{{$product->operaSystem->chipset}}</p>
+              <p>{{ $product->design->size }}</p>
+              <p>{{ $product->design->weigth }}</p>
             </td>
             <td>
-              <p>{{$product->operaSystem->cpu_speed}}</p>
-              <p>{{$product->operaSystem->cpu}}</p> </td>
-            <td>
-              <p>{{$product->screen->tech_screen}}</p>
-              <p>{{$product->screen->resolution}}</p>
-              <p>{{$product->screen->width_screen}}</p>
-              <p>{{$product->screen->touch_screen}}</p>
+              <p>{{ $product->operaSystem->opera_system }}</p>
+              <p>{{ $product->operaSystem->chipset }}</p>
             </td>
             <td>
-              <p>{{$product->utility->advanced_security}}</p>
-              <p>{{$product->utility->special_function}}</p>
+              <p>{{ $product->operaSystem->cpu_speed }}</p>
+              <p>{{ $product->operaSystem->cpu }}</p> </td>
+            <td>
+              <p>{{ $product->screen->tech_screen }}</p>
+              <p>{{ $product->screen->resolution }}</p>
+              <p>{{ $product->screen->width_screen }}</p>
+              <p>{{ $product->screen->touch_screen }}</p>
             </td>
             <td>
-              <p>{{$product->utility->recording}}</p>
-              <p>{{$product->utility->radio}}</p>
-              <p>{{$product->utility->movie}}</p>
-              <p>{{$product->utility->music}}</p>
+              <p>{{ $product->utility->advanced_security }}</p>
+              <p>{{ $product->utility->special_function }}</p>
+            </td>
+            <td>
+              <p>{{ $product->utility->recording }}</p>
+              <p>{{ $product->utility->radio }}</p>
+              <p>{{ $product->utility->movie }}</p>
+              <p>{{ $product->utility->music }}</p>
             </td>
           </tr>
           @endforeach
@@ -311,29 +311,22 @@
 </div>
 @stop
 
-@section('js')
-    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+@section ('js')
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script
-      src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <link rel="stylesheet"
-      href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
-    <script
-      src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>  
-    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
-    <script src="{{asset('js/toastr.min.js')}}"></script>
+    <script>tinymce.init({ selector:'textarea' });</script> 
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script>
-        @if(Session::has('message'))
+        @if (Session::has('message'))
             toastr.success("{{Session::get('message')}}")
         @endif
     </script>
     <script>
       $(document).ready(function() {
-        $('#table').DataTable( {
+        $('#table').dataTable({
             "lengthMenu": [[1, 2, 5, 10, 25, 50, -1], [1, 2, 5, 10, 25, 50, "All"]],
-        } );
-    } );
+        });
+      });
     </script>
 @stop

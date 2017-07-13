@@ -14,13 +14,14 @@ class NewsController extends Controller
     {
         $news = News::All();
         $topnews = News::orderBy('id', 'desc')->skip(0)->take(5)->get();
+        $mostViews = News::orderBy('view', 'desc')->skip(0)->take(5)->get();
         $offset = News::count() - 5;
         $data = News::orderBy('id', 'desc')->skip(5)->take($offset)->get();
         $tags = Tag::all();
         return view('news.index')->with('news', $topnews)
             ->with('data', $data)
-            ->with('mostView', $news)
-            ->with('review', $news)
+            ->with('mostViews', $mostViews)
+            ->with('reviews', $news)
             ->with('tags', $tags);
     }
 
@@ -52,14 +53,14 @@ class NewsController extends Controller
     public function indexByTag($id)
     {
         $tag = Tag::find($id);
-        $news = News::all();
-        return view('news.tag')->with('tag', $tag)->with('mostView', $news)->with('review', $news);
+        $views = News::orderBy('view', 'desc')->skip(0)->take(5)->get();
+        return view('news.tag')->with('tag', $tag)->with('mostView', $views)->with('review', $views);
     }
     public function indexByListNew($slug)
     {
         $listNew = ListNew::Where('slug', '=', $slug)->get()->first();
-        $news = News::all();
-        return view('news.listNew')->with('listNew', $listNew)->with('mostView', $news)->with('review', $news);
+        $views = News::orderBy('view', 'desc')->skip(0)->take(5)->get();
+        return view('news.listNew')->with('listNew', $listNew)->with('mostView', $views)->with('review', $views);
     }
 
     public function detail($slug)

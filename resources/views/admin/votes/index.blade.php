@@ -17,7 +17,6 @@
         </tr>
         {{ csrf_field() }}
         <?php $stt=1 ?>
-
         @foreach ($votes as $vote)
           <tr>
             <td class="text-center">{{ $stt++ }}</td>

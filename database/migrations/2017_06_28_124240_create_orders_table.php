@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('madh', 255);
             $table->integer('customer_id')->unsigned()->nullable();
+            $table->string('madh', 255)->nullable();
             $table->foreign('customer_id')->references('id')->on('users');
             $table->integer('employee_id')->unsigned()->nullable();
             $table->foreign('employee_id')->references('id')->on('users');
