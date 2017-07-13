@@ -76,4 +76,19 @@
     <script type="text/javascript">
         $('.select2-multi').select2();
     </script>
+
+    <script src="{{ url('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url('vendor/unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
+    <script>
+      var options = {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+      };
+    </script>
+    <script>
+        $('textarea').ckeditor(options);
+        // $('.textarea').ckeditor(); // if class is prefered.
+    </script>
 @stop
