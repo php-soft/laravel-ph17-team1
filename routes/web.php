@@ -54,9 +54,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/orders/group/{id}', 'OrderController@getGroupOrder')->name('getGroupOrder');
 
-    Route::get('/orders/statistic', 'OrderController@getStatistic')->name('statistic');
+    Route::get('/orders/statistic/date', 'OrderController@getStatistic')->name('statistic');
 
-    Route::get('/orders/statistic/detail', 'OrderController@getStatisticDetail')->name('statistic');
+    Route::get('/orders/statistic/date/detail', 'OrderController@getStatisticDetail')->name('statistic');
 
     Route::get('reviews', 'ReviewController@index');
     Route::get('reviews/delete/{id}', 'ReviewController@destroy');
