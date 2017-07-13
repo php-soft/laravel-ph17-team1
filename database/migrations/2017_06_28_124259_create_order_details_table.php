@@ -21,12 +21,8 @@ class CreateOrderDetailsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->string('color_memory', 255)->nullable();
             $table->decimal('price', 10, 0);
-            $table->decimal('sale_price', 10, 0)->nullable();
             $table->integer('quantity');
             $table->decimal('total', 10, 0);
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('complete_date')->nullable();
-            $table->boolean('status');
             $table->timestamps();
         });
     }

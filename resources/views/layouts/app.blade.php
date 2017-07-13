@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('dist/sweetalert.css') }}">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     
@@ -122,7 +125,7 @@
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
     <script src="//code.jquery.com/jquery-1.12.3.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
      <!-- datatable thien -->
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -131,11 +134,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     <!-- script toastr alert -->
     <script src="{{asset('js/toastr.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         @if(Session::has('message'))
             toastr.success("{{Session::get('message')}}")
         @endif
     </script>
-    <!-- end script toastr alert -->
 </body>
 </html>

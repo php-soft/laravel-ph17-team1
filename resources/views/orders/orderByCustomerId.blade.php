@@ -21,6 +21,7 @@
                             <thead>
                                 <tr>
                                     <td>STT</td>
+                                    <td>Mã đơn hàng</td>
                                     <td>Họ và tên</td>
                                     <td>Email</td>
                                     <td>Số điện thoại</td>
@@ -37,6 +38,7 @@
                                 @foreach($order as $data)
                                     <tr>
                                         <td>{{$i++}}</td>
+                                        <td>{{$data->madh}}</td>
                                         <td>{{$data->shipping_name}}</td>
                                         <td>{{$data->shipping_email}}</td>
                                         <td>{{$data->shipping_phone}}</td>

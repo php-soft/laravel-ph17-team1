@@ -12,11 +12,12 @@ class StatusSeeder extends Seeder
     public function run()
     {
         DB::table('statuses')->insert([
-        	['name' => "Đang xử lý"],
-        	['name' => "Đã xử lý"],
-        	['name' => "Đã gửi đi"],
-        	['name' => "Giao thành công"],
-        	['name' => "Hủy đơn hàng"],
+        	['id' => 1, 'name' => "Chờ xác nhận"],
+        	['id' => 2,'name' => "Đã xác nhận"],
+        	['id' => 3,'name' => "Đã xử lý"],
+        	['id' => 4,'name' => "Đang gửi đi"],
+            ['id' => 5,'name' => "Giao thành công"],
+        	['id' => 6,'name' => "Hủy"],
         ]);
     }
 }

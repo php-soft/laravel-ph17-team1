@@ -24,10 +24,29 @@
                         <option value="all">All</option>
                     </select>
                 </div>
-                <div class="pull-right">
-                    <a href="/admin/orders/statistic" class="btn btn-info">
-                        <span class="glyphicon glyphicon-align-left"></span>Thống kê
-                    </a>
+                <div class="pull-right col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-align-left"> </span> Thống kê
+                        <span class="caret"> </span></button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/admin/orders/statistic/date" class="text-center">
+                                    <span class="glyphicon glyphicon-arrow-right pull-left"></span>Theo ngày
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/orders/statistic/month" class="text-center">
+                                    <span class="glyphicon glyphicon-arrow-right pull-left"></span>Theo tháng
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/orders/statistic/quarter" class="text-center">
+                                    <span class="glyphicon glyphicon-arrow-right pull-left"></span>Theo quý
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 </form>
                 <div>
