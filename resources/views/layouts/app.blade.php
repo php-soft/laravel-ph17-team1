@@ -19,6 +19,7 @@
     <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
     <link href="{{ asset('css/product.css') }}" rel="stylesheet">
     <link href="{{ asset('css/detail-product.css') }}" rel="stylesheet">
+    <link href="{{url('css/index_news.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('dist/sweetalert.css') }}">

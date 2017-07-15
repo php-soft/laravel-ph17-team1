@@ -5,57 +5,61 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <div id="first-news">
-                        <div id="first-news-image">
-                            <img src="{{url('uploads/news/'.$news['0']->image)}}" alt="{{$news['0']->image}}" width="100%" height="auto">
-                        </div>
-                        <div id="first-news-title"><a href="{{url('news/'.$news['0']->slug)}}">{{$news['0']->title}}</a></div>
-                        <div id="first-news-description">{{$news['0']->description}}</div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="row">
-                        <div class="list-news">
-                            <div class="list-news-image">
-                            <img src="{{url('uploads/news/'.$news['1']->image)}}" alt="{{$news['1']->image}}" width="100%" height="auto">
-                            </div>
-                            <div class="list-news-content">
-                                <span class="list-news-title">                            <a href="{{url('news/'.$news['1']->slug)}}">{{$news['1']->title}}</a></span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="list-news">
-                            <div class="list-news-image">
-                            <img src="{{url('uploads/news/'.$news['2']->image)}}" alt="{{$news['1']->image}}" width="100%" height="auto">
-                            </div>
-                            <div class="list-news-content">
-                                <span class="list-news-title">                            <a href="{{url('news/'.$news['1']->slug)}}">{{$news['2']->title}}</a></span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="list-news">
-                            <div class="list-news-image">
-                            <img src="{{url('uploads/news/'.$news['3']->image)}}" alt="{{$news['1']->image}}" width="100%" height="auto">
-                            </div>
-                            <div class="list-news-content">
-                                <span class="list-news-title">                            <a href="{{url('news/'.$news['1']->slug)}}">{{$news['3']->title}}</a></span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="list-news">
-                            <div class="list-news-image">
-                            <img src="{{url('uploads/news/'.$news['4']->image)}}" alt="{{$news['1']->image}}" width="100%" height="auto">
-                            </div>
-                            <div class="list-news-content">
-                                <span class="list-news-title">                            <a href="{{url('news/'.$news['1']->slug)}}">{{$news['4']->title}}</a></span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+            <div class="row" style="margin-bottom: 20px; margin-top: 10px">
+                <div class="col-md-12" style="padding: 4px;">
+
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+
+                            @php
+                                $stt = 0;
+                            @endphp
+                            @foreach ($news as $n)
+
+                                <div @if ($stt == 0) class="item active" @else class="item" @endif>
+                                  <img src="{{ url('uploads/news/'.$n->image) }}">
+                                   <div class="carousel-caption">
+                                    <h4><a href="{{ url('news/'.$n->slug) }}">{{ $n->title }}</a></h4>
+                                    <p> {{ $n->description }} <a class="label label-primary" href="{{ url('news/'.$n->slug) }}">Xem thêm</a></p>
+                                  </div>
+                                </div><!-- End Item -->
+
+                                @php
+                                    $stt++;
+                                @endphp
+                            @endforeach
+
+                        </div><!-- End Carousel Inner -->
+
+                    <ul class="list-group col-sm-4" id="list-link">
+                        @php
+                            $stt = 0;
+                        @endphp
+                        @foreach ($news as $n)
+                            <li data-target="#myCarousel" data-slide-to="{{ $stt }}" @if ($stt == 0) class="list-group-item active" @else class="list-group-item" @endif><span>{{ $n->title }}</span></li>
+                            @php
+                                $stt++;
+                            @endphp
+                        @endforeach
+                    </ul>
+
+                      <!-- Controls -->
+                      <div class="carousel-controls">
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                          </a>
+                      </div>
+
+                    </div><!-- End Carousel -->
+
                 </div>
             </div>
+
             <input type="hidden" name="sum" id="sum" value="{{ count($data) }}">
             <input type="hidden" name="sum_load" id="sum_load" value="1">
             <input type="hidden" name="onload" id="onload" value="0">
@@ -168,4 +172,34 @@
         });
         }); 
     </script>
+    <script>
+        $(document).ready(function(){
+            var clickEvent = false;
+            $('#myCarousel').carousel({
+                interval:   4000    
+            }).on('click', '.list-group li', function() {
+                    clickEvent = true;
+                    $('.list-group li').removeClass('active');
+                    $(this).addClass('active');     
+            }).on('slid.bs.carousel', function(e) {
+                if(!clickEvent) {
+                    var count = $('.list-group').children().length -1;
+                    var current = $('.list-group li.active');
+                    current.removeClass('active').next().addClass('active');
+                    var id = parseInt(current.data('slide-to'));
+                    if(count == id) {
+                        $('.list-group li').first().addClass('active'); 
+                    }
+                }
+                clickEvent = false;
+            });
+        });
+        $(window).on('load', function() {
+            var boxheight = $('#myCarousel .carousel-inner').innerHeight();
+            var itemlength = $('#myCarousel .item').length;
+            var triggerheight = Math.round(boxheight/itemlength+1);
+            $('#myCarousel .list-group-item').outerHeight(triggerheight);
+        });
+    </script>
+
 @stop

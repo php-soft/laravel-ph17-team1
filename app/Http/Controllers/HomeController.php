@@ -7,6 +7,7 @@ use App\Product;
 use App\Promotion;
 use App\PromotionProduct;
 use App\Vote;
+use App\News;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,7 @@ class HomeController extends Controller
     {
         $newproducts = Product::orderBy('created_at', 'desc')->limit(3)->get();
         $hotproducts = Product::orderBy('tophot', 'desc')->limit(3)->get();
-        return view('home')->with('newproducts', $newproducts)->with('hotproducts', $hotproducts);
+        $news = News::orderBy('id', 'desc')->take(4)->get();
+        return view('home')->with('newproducts', $newproducts)->with('hotproducts', $hotproducts)->with('news',$news);
     }
 }
