@@ -50,6 +50,37 @@ class NewsController extends Controller
         }
     }
 
+    public function loadByListNew(Request $request)
+    {
+        if ($request->ajax()) {
+            $this->validate($request, [
+                            'sum_load'=>'required',
+                            'sum'=>'required',
+                            'list_new_id'=>'required',
+                        ], [
+                            'sum.required'=>'Chưa có tổng số tin',
+                            'sum_load.required'=>'Chưa có số tin',
+                            'list_new_id.required'=>'Chưa danh mục',
+                        ]);
+            
+            if ($request->sum > $request->sum_load * 5) {
+                $offset = News::where('list_new_id', '=', $request->list_new_id)->count() - ($request->sum_load * 5);
+                $data = News::where('list_new_id', '=', $request->list_new_id)
+                    ->orderBy('id', 'desc')
+                    ->skip($request->sum_load * 5)
+                    ->take($offset)->get();
+                $view = html_entity_decode(view('news.news')->with('data', $data));
+                $sum_load = $request->sum_load + 1;
+                $arr = array('view' => $view, 'sum_load' => $sum_load);
+                echo json_encode($arr);
+            } else {
+                $arr = array('view' => "", 'sum_load' => $request->sum_load);
+                echo json_encode($arr);
+            }
+        }
+    }
+
+
     public function indexByTag($id)
     {
         $tag = Tag::find($id);

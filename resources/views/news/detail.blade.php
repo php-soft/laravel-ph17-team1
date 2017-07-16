@@ -45,6 +45,7 @@
                         {{ Auth::user()->name }}
                     @endif
                 </h5>
+                <input type="hidden" name="onload" id="onload" value="0">
                 <form action="{{ url('news/comment/'.$n->id) }}" style="margin-bottom: 10px;" id="comment_input" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <input type="hidden" id="_token" name="_token" value="{{csrf_token()}}">
@@ -109,140 +110,199 @@
 
         /*view more*/
             $('#view_more').on('click', function () {
-                var sum = $('#sum_comments').val();
-                var sum_load = $('#sum_comments_load').val();
-                var news_id = $('#news_id').val();
-                var url = "{{ url('news/comment/load') }}" + "/" + news_id;
-                var ht = $('#comment_box').html();
-                var string = ht + "<span class='glyphicon glyphicon-repeat'></span> Đang tải...";
-                    $('#comment_box').html(string);
-                $.ajax({
-                    url: url,
-                    type: 'post',
+                var onload = $('#onload').val();
+                if (onload == 0) {
+                    $('#onload').val('1');
+                    var sum = $('#sum_comments').val();
+                    var sum_load = $('#sum_comments_load').val();
+                    var news_id = $('#news_id').val();
+                    var url = "{{ url('news/comment/load') }}" + "/" + news_id;
+                    var ht = $('#comment_box').html();
+                    var string = ht + "<span class='glyphicon glyphicon-repeat'></span> Đang tải...";
+                        $('#comment_box').html(string);
+                    $.ajax({
+                        url: url,
+                        type: 'post',
 
-                    data: { 'sum': sum,
-                            'sum_load': sum_load,
-                            'news_id': news_id,
-                    },
-                    dataType: 'JSON',
-                    success: function (data){
-                        if (data.view == "") {
-                            $('#view_more').attr('class', 'hidden');
+                        data: { 'sum': sum,
+                                'sum_load': sum_load,
+                                'news_id': news_id,
+                        },
+                        dataType: 'JSON',
+                        success: function (data){
+                            if (data.view == "") {
+                                $('#view_more').attr('class', 'hidden');
+                            }
+                            $('#sum_comments_load').val(data.sum_load);
+                            $('#comment_box').html(ht + data.view);
+                            $('#onload').val('0');
+                        },
+                        error: function (error) {
+                            $('#onload').val('0');
+                            alert('Lỗi; ' + eval(error));
                         }
-                        $('#sum_comments_load').val(data.sum_load);
-                        $('#comment_box').html(ht + data.view);
-                    }
-                });
+                    });
+                }
             });
         }); 
 /*Comment*/
         $(document).on('submit', '#comment_input', function (e) {
-            var news_id = $('#news_id').val();
-            var comment_content = $('#comment_content').val();
-            var url = "{{ url('news/comment') }}" + "/" + news_id;
-            if (comment_content === "") {
-                alert("Bạn chưa nhập nội dung bình luận");
-            }
-            else {
-                var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $('#comment_box').html();
-                $('#comment_box').html(string);
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: { 'content': comment_content,
-                            'news_id': news_id,},
-                    success: function (data){
-                        $('#comment_box').html(data);
-                    }
-                });
+            var onload = $('#onload').val();
+            if (onload == 0) {
+                $('#onload').val('1');
+                var news_id = $('#news_id').val();
+                var comment_content = $('#comment_content').val();
+                var url = "{{ url('news/comment') }}" + "/" + news_id;
+                if (comment_content === "") {
+                    alert("Bạn chưa nhập nội dung bình luận");
+                }
+                else {
+                    var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $('#comment_box').html();
+                    $('#comment_box').html(string);
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { 'content': comment_content,
+                                'news_id': news_id,},
+                        success: function (data){
+                            $('#comment_box').html(data);
+                            $('#onload').val('0');
+                        },
+                        error: function (error) {
+                            $('#onload').val('0');
+                            alert('Lỗi; ' + eval(error));
+                        }
+                    });
+                }
             }
             return false;
         });
 
 /*Delete Comment*/
         $(document).on('click', '.delete-comment', function () {
-            var news_comment_id = $(this).attr('id');
-            var url = "{{ url('news/comment/delete') }}" + "/" + news_comment_id;
+            var onload = $('#onload').val();
+            if (onload == 0) {
+                $('#onload').val('1');
+                var news_comment_id = $(this).attr('id');
+                var url = "{{ url('news/comment/delete') }}" + "/" + news_comment_id;
 
-            var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $('#comment_box').html();
-            $('#comment_box').html(string);
-            $.ajax({
-                url: url,
-                type: 'post',
-                data: { 'news_comment_id': news_comment_id, },
-                success: function (data){
-                    $('#comment_box').html(data);
-                }
-            });
+                var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $('#comment_box').html();
+                $('#comment_box').html(string);
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: { 'news_comment_id': news_comment_id, },
+                    success: function (data){
+                        $('#comment_box').html(data);
+                        $('#onload').val('0');
+                    },
+                    error: function (error) {
+                        $('#onload').val('0');
+                        alert('Lỗi; ' + eval(error));
+                    }
+                });
+            }
         });
 
 /*reply*/
         $(document).on('submit', '.reply_input', function (e) {
-            var news_comment_id = $(this).find('.news_comment_id').val();
-            var reply_content = $(this).find('.content').val();
-            var url = "{{ url('news/reply') }}" + "/" + news_comment_id;
-            if (reply_content === "") {
-                alert("Bạn chưa nhập nội dung trả lời");
-            }
-            else {
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: { 'content': reply_content,
-                            'news_comment_id': news_comment_id, },
-                    success: function (data){
-                        $("#reply_box_"+news_comment_id).html(data);
-                    }
-                });
+            var onload = $('#onload').val();
+            if (onload == 0) {
+                $('#onload').val('1');
+                var news_comment_id = $(this).find('.news_comment_id').val();
+                var reply_content = $(this).find('.content').val();
+                var url = "{{ url('news/reply') }}" + "/" + news_comment_id;
+                if (reply_content === "") {
+                    alert("Bạn chưa nhập nội dung trả lời");
+                }
+                else {
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { 'content': reply_content,
+                                'news_comment_id': news_comment_id, },
+                        success: function (data){
+                            $("#reply_box_"+news_comment_id).html(data);
+                            $('#onload').val('0');
+                        },
+                        error: function (error) {
+                            $('#onload').val('0');
+                            alert('Lỗi; ' + eval(error));
+                        }
+                    });
+                }
             }
             return false;
         });
 
 /*Delete Comment*/
         $(document).on('click', '.delete-reply', function () {
-            var reply_id = $(this).attr('id');
-            var news_comment_id = $(this).find('input').val();
-            var url = "{{ url('news/reply/delete') }}" + "/" + reply_id;
+            var onload = $('#onload').val();
+            if (onload == 0) {
+                $('#onload').val('1');
+                var reply_id = $(this).attr('id');
+                var news_comment_id = $(this).find('input').val();
+                var url = "{{ url('news/reply/delete') }}" + "/" + reply_id;
 
-            var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $("#reply_box_"+news_comment_id).html();
-            $("#reply_box_"+news_comment_id).html(string);
-            $.ajax({
-                url: url,
-                type: 'post',
-                data: { 'reply_id': reply_id, },
-                success: function (data){
-                    $("#reply_box_"+news_comment_id).html(data);
-                }
-            });
+                var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $("#reply_box_"+news_comment_id).html();
+                $("#reply_box_"+news_comment_id).html(string);
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: { 'reply_id': reply_id, },
+                    success: function (data){
+                        $("#reply_box_"+news_comment_id).html(data);
+                        $('#onload').val('0');
+                    },
+                    error: function (error) {
+                        $('#onload').val('0');
+                        alert('Lỗi; ' + eval(error));
+                    }
+                });
+            }
         });
 
 /*Like and dislike*/
         $(document).on('click', ".like", function () {
-            var id = $(this).attr('id');
-            if ($(this).html() == 'Like') {
-                $(this).html('Liked');
-                $(this).attr('class', 'like btn btn-lin btn-xs label-warning');
-                var url = "{{ url('news/like') }}" + "/" + id;
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: { 'news_comment_id': id, },
-                    success: function (data){
-                        $("#sum_like_"+id).html(data);
-                    }
-                });
-            } else {
-                $(this).html('Like');
-                $(this).attr('class', 'like btn btn-lin btn-xs label-default');
-                var url = "{{ url('news/dislike') }}" + "/" + id;
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: { 'news_comment_id': id, },
-                    success: function (data){
-                        $("#sum_like_"+id).html(data);
-                    }
-                });
+            var onload = $('#onload').val();
+            if (onload == 0) {
+                $('#onload').val('1');
+                var id = $(this).attr('id');
+                if ($(this).html() == 'Like') {
+                    $(this).html('Liked');
+                    $(this).attr('class', 'like btn btn-lin btn-xs label-warning');
+                    var url = "{{ url('news/like') }}" + "/" + id;
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { 'news_comment_id': id, },
+                        success: function (data){
+                            $("#sum_like_"+id).html(data);
+                            $('#onload').val('0');
+                        },
+                        error: function (error) {
+                            $('#onload').val('0');
+                            alert('Lỗi; ' + eval(error));
+                        }
+                    });
+                } else {
+                    $(this).html('Like');
+                    $(this).attr('class', 'like btn btn-lin btn-xs label-default');
+                    var url = "{{ url('news/dislike') }}" + "/" + id;
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { 'news_comment_id': id, },
+                        success: function (data){
+                            $("#sum_like_"+id).html(data);
+                            $('#onload').val('0');
+                        },
+                        error: function (error) {
+                            $('#onload').val('0');
+                            alert('Lỗi; ' + eval(error));
+                        }
+                    });
+                }
             }
             return false;
         });

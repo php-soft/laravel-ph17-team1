@@ -11,6 +11,6 @@ class ListNew extends Model
     protected $fillable = ['name', 'slug'];
     public function news()
     {
-        return $this->hasMany('App\News');
+        return $this->hasMany('App\News')->orderBY('id', 'desc');
     }
 }

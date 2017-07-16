@@ -164,6 +164,10 @@
                                 $('#sum_load').val(data.sum_load);
                                 $('#news_box').html(ht + data.view);
                                 $('#onload').val('0');
+                            },
+                            error: function (error) {
+                                $('#onload').val('0');
+                                alert('Lỗi; ' + eval(error));
                             }
                         });
                     }
