@@ -23,7 +23,7 @@
             {{ session('message') }}
         </div>
     @endif
-    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
             <tr>
                 <th>#ID</th>
@@ -55,4 +55,11 @@
             @endforeach
         </tbody>
     </table>
+@stop
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#dataTables').DataTable();
+        });
+    </script>
 @stop

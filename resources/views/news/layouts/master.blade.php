@@ -10,6 +10,7 @@
     <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
         <!-- css news -->
     <link href="{{url('css/index_news.css')}}" rel="stylesheet">
+    <link href="{{url('css/slide_news.css')}}" rel="stylesheet">
 </head>
 
 <body>

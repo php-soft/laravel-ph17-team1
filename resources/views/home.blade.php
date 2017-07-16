@@ -3,6 +3,68 @@
 @section ('content')
 <div class="container">
     <div class="row">
+        <div class="col-md-8">
+            <div id="carousel-id" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @php
+                        $stt = 0;
+                    @endphp
+                    @foreach ($news->take(3) as $n)
+                        <li data-target="#carousel-id" data-slide-to="{{ $stt }}" @if ($stt == 2) class="active" @endif></li>
+                        @php
+                            $stt++;
+                        @endphp
+                    @endforeach
+                </ol>
+                <div class="carousel-inner">
+                    @php
+                        $stt = 0;
+                    @endphp
+                    @foreach ($news->take(3) as $n)
+                        @php
+                            if ($stt == 0)
+                                $x = "First";
+                            else if ($stt == 1)
+                                $x = "Second";
+                                else
+                                    $x = "Third";
+                        @endphp
+
+                        <div style="height: 370px" @if ($stt == 2) class="item active" @else class="item" @endif>
+                            <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:{{ $x }} slide" alt="Third slide" src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h3><a style="color: blue" href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                        @php
+                            $stt++;
+                        @endphp
+                    @endforeach
+                </div>
+                <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+
+        <div class="col-md-4" style="border: thin solid #ccc; padding: 3px; ">
+            <a href="{{ url('news') }}" class="btn btn-link label-danger" style="color: #fff"><strong>TIN TỨC</strong></a>
+            @foreach($news as $n)
+                <div class="product-news" style="height: 70px">
+                    <div class="product-image">
+                        <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
+                    </div>
+                    <div class="product-content">
+                        <span class="product-title"><a href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            @endforeach
+            <a class="btn btn-link label-success pull-right" style="color: #fff" href="{{ url('news') }}">Xem thêm</a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <h2>SẢN PHẨM HOT</h2>    
         </div>
