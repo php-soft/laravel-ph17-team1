@@ -65,7 +65,10 @@ class NewsController extends Controller
             
             if ($request->sum > $request->sum_load * 5) {
                 $offset = News::where('list_new_id', '=', $request->list_new_id)->count() - ($request->sum_load * 5);
-                $data = News::where('list_new_id', '=', $request->list_new_id)->orderBy('id', 'desc')->skip($request->sum_load * 5)->take($offset)->get();
+                $data = News::where('list_new_id', '=', $request->list_new_id)
+                    ->orderBy('id', 'desc')
+                    ->skip($request->sum_load * 5)
+                    ->take($offset)->get();
                 $view = html_entity_decode(view('news.news')->with('data', $data));
                 $sum_load = $request->sum_load + 1;
                 $arr = array('view' => $view, 'sum_load' => $sum_load);
