@@ -28,7 +28,10 @@ class NewsCommentController extends Controller
             $comment->save();
             $n = News::find($request->news_id);
             $comments = $n->comments()->skip(0)->take(5)->get();
-            return view('news.comment')->with('n', $n)->with('comments', $comments);
+            $view = html_entity_decode(view('news.comment')->with('n', $n)->with('comments', $comments));
+            $sum = count($n->comments);
+            $arr = array('view' => $view, 'sum' => $sum);
+            echo json_encode($arr);
         }
     }
 
@@ -46,7 +49,10 @@ class NewsCommentController extends Controller
             $comment->delete();
             $n = News::find($news_id);
             $comments = $n->comments()->skip(0)->take(5)->get();
-            return view('news.comment')->with('n', $n)->with('comments', $comments);
+            $view = html_entity_decode(view('news.comment')->with('n', $n)->with('comments', $comments));
+            $sum = count($n->comments);
+            $arr = array('view' => $view, 'sum' => $sum);
+            echo json_encode($arr);
         }
     }
 

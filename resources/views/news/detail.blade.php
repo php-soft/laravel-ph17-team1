@@ -2,9 +2,12 @@
 @section('title')
     {{ $n->title }}
 @stop
+@section('css')
+    <link href="{{url('css/news-detail.css')}}" rel="stylesheet">
+@stop
 @section('content')
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+        <div class="col-md-offset-2 col-xs-12 col-sm-12 col-md-7 col-lg-8">
             <h4>
                 <a class="btn btn-link label-primary" style="color: #FFF" href="{{ url('news') }}">Trang chủ</a></span> <a class="btn btn-link label-warning" style="color: #FFF" href="{{ url('news/listnew/'.$n->listNew->slug) }}">{{$n->listNew->name}}</a>
             </h4>
@@ -61,39 +64,104 @@
                 <div id="comment_box">
                  @include('news.comment')
                 </div>
-                <script type="text/javascript">
-                    var sum = document.getElementById('sum_comments').value;
-                    var sum_load = document.getElementById('sum_comments_load').value *5;
-                    if( sum > sum_load ) 
-                        document.write("<buton id='view_more' type='text' class='btn btn-block pull-left label-primary'><strong style='color: #fff; line-height: 18px; font-size: 18px'>Xem thêm <span class='glyphicon glyphicon-chevron-down'></strong></span></buton>");
-                </script>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-            <div>
-                <div class="category-title-div">
-                    <div class="category-title">Tin cùng chuyên mục</div>
-                </div>
-                @php
-                    $i=0;
-                @endphp
-                @foreach($news as $n)
-                    <div class="hot-news">
-                        <div>
-                            <div class="number">{{$i+1}}</div>
-                            <span class="hot-news-title"><a href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div  style="text-indent: 1em">
-                            <span>{{ substr($n->description, 0, 200) }}....</span>
+
+                <buton id='view_more' type='text' class='btn btn-block btn-default pull-left <?php if (count($n->comments) < 6) echo "hidden"; ?>'>Xem thêm</buton>
+                <div class="clearfix"></div>
+                <br>
+                <div class="tabbable-panel">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">
+                                Tin cùng chuyên mục </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">
+                                Tin tức khác </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_default_1">
+
+                                <div id="myCarouselWrapper" class="container-fluid" style="padding: 0">
+
+                                    <div id="myCarousel" class="carousel slide" style="padding: 0">
+
+                                            <div class="carousel-inner" role="listbox">
+
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @foreach($news as $n)
+                                                    <div @if ($i == 0) class="item active" @else class="item"  @endif style="margin-left: 3px">
+                                                        <div class="item-item col-md-3 col-sm-4">
+                                                            <a href="{{url('news/'.$n->slug)}}"><img src="{{url('uploads/news/'.$n->image)}}" class="img-responsive"></a>
+                                                            <h4><a style="color: #777" href="{{url('news/'.$n->slug)}}">{{ $n->title }}</a></h4>
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                @endforeach
+
+                                            </div>
+
+                                            <!-- Controls -->
+                                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="tab_default_2">
+                                <div id="myCarouselWrapper2" class="container-fluid" style="padding: 0">
+
+                                    <div id="myCarousel2" class="carousel slide" style="padding: 0">
+
+                                            <div class="carousel-inner" role="listbox">
+
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @foreach($otherNews as $n)
+                                                    <div @if ($i == 0) class="item active" @else class="item"  @endif style="margin-left: 3px">
+                                                        <div class="item-item col-md-3 col-sm-4">
+                                                            <a href="{{url('news/'.$n->slug)}}"><img src="{{url('uploads/news/'.$n->image)}}" class="img-responsive"></a>
+                                                            <h4><a style="color: #777" href="{{url('news/'.$n->slug)}}">{{ $n->title }}</a></h4>
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                @endforeach
+
+                                            </div>
+
+                                            <!-- Controls -->
+                                            <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    @php
-                        $i++;
-                    @endphp
-                @endforeach
+                </div>
+
             </div>
         </div>
         <div class="clearfix"></div>
@@ -118,8 +186,7 @@
                     var news_id = $('#news_id').val();
                     var url = "{{ url('news/comment/load') }}" + "/" + news_id;
                     var ht = $('#comment_box').html();
-                    var string = ht + "<span class='glyphicon glyphicon-repeat'></span> Đang tải...";
-                        $('#comment_box').html(string);
+                    $('#view_more').html("<span class='glyphicon glyphicon-repeat'></span> Đang tải...");
                     $.ajax({
                         url: url,
                         type: 'post',
@@ -130,11 +197,12 @@
                         },
                         dataType: 'JSON',
                         success: function (data){
-                            if (data.view == "") {
+                            if (sum <= data.sum_load * 5) {
                                 $('#view_more').attr('class', 'hidden');
                             }
                             $('#sum_comments_load').val(data.sum_load);
                             $('#comment_box').html(ht + data.view);
+                            $('#view_more').html("Xem thêm");
                             $('#onload').val('0');
                         },
                         error: function (error) {
@@ -150,6 +218,7 @@
             var onload = $('#onload').val();
             if (onload == 0) {
                 $('#onload').val('1');
+                var sum = $('#sum_comments').val();
                 var news_id = $('#news_id').val();
                 var comment_content = $('#comment_content').val();
                 var url = "{{ url('news/comment') }}" + "/" + news_id;
@@ -157,15 +226,23 @@
                     alert("Bạn chưa nhập nội dung bình luận");
                 }
                 else {
-                    var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $('#comment_box').html();
+                    var string = "<button class='btn btn-block btn-default'><span class='glyphicon glyphicon-repeat'></span> Đang tải...</button>" + $('#comment_box').html();
                     $('#comment_box').html(string);
                     $.ajax({
                         url: url,
                         type: 'post',
                         data: { 'content': comment_content,
+                                'sum': sum,
                                 'news_id': news_id,},
+                        dataType: 'JSON',
                         success: function (data){
-                            $('#comment_box').html(data);
+                            $('#comment_box').html(data.view);
+                            $('#sum_comments').val(data.sum);
+                            $('#sum-comments').html("(" + data.sum + ")");
+                            $('#sum_comments_load').val("1");
+                            if ( data.sum > 5 ) {
+                                $('#view_more').attr('class', 'btn btn-block btn-default pull-left');
+                            }
                             $('#onload').val('0');
                         },
                         error: function (error) {
@@ -183,17 +260,29 @@
             var onload = $('#onload').val();
             if (onload == 0) {
                 $('#onload').val('1');
+                var sum = $('#sum_comments').val();
                 var news_comment_id = $(this).attr('id');
                 var url = "{{ url('news/comment/delete') }}" + "/" + news_comment_id;
 
-                var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $('#comment_box').html();
+                var string = "<button class='btn btn-block btn-default'><span class='glyphicon glyphicon-repeat'></span> Đang tải...</button>" + $('#comment_box').html();
                 $('#comment_box').html(string);
                 $.ajax({
                     url: url,
                     type: 'post',
-                    data: { 'news_comment_id': news_comment_id, },
+                    data: { 'news_comment_id': news_comment_id,
+                            'sum': sum, },
+                    dataType: 'JSON',
                     success: function (data){
-                        $('#comment_box').html(data);
+                        $('#comment_box').html(data.view);
+                        $('#sum_comments').val(data.sum);
+                        $('#sum-comments').html("(" + data.sum + ")");
+                        $('#sum_comments_load').val("1");
+                        if ( data.sum < 6 ) {
+                            $('#view_more').attr('class', 'btn btn-block btn-default pull-left hidden');
+                        }
+                        else {
+                            $('#view_more').attr('class', 'btn btn-block btn-default pull-left');
+                        }
                         $('#onload').val('0');
                     },
                     error: function (error) {
@@ -244,7 +333,7 @@
                 var news_comment_id = $(this).find('input').val();
                 var url = "{{ url('news/reply/delete') }}" + "/" + reply_id;
 
-                var string = "<span class='glyphicon glyphicon-repeat'></span> Đang tải..." + $("#reply_box_"+news_comment_id).html();
+                var string = "<button class='btn btn-block btn-default'><span class='glyphicon glyphicon-repeat'></span> Đang tải...</button>" + $("#reply_box_"+news_comment_id).html();
                 $("#reply_box_"+news_comment_id).html(string);
                 $.ajax({
                     url: url,
@@ -305,6 +394,28 @@
                 }
             }
             return false;
+        });
+    </script>
+    <script>
+        $('#myCarousel').carousel({
+          interval: 4000
+        });
+
+        $('.carousel .item').each(function(){
+          var next = $(this).next();
+          if (!next.length) {
+            next = $(this).siblings(':first');
+          }
+          next.children(':first-child').clone().appendTo($(this));
+
+          for (var i=0;i<2;i++) {
+            next=next.next();
+            if (!next.length) {
+              next = $(this).siblings(':first');
+            }
+
+            next.children(':first-child').clone().appendTo($(this));
+          }
         });
     </script>
 @stop

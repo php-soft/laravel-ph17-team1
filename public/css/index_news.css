@@ -23,8 +23,6 @@ body {
     background-color: #fff;
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px #ccc;
     padding: .3em;
 }
 .comment-content {
