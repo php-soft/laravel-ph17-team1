@@ -72,8 +72,8 @@
 .carousel-inner .active.left { left: -25%; }
 .carousel-inner .next        { left:  25%; }
 .carousel-inner .prev    { left: -25%; }
-.carousel-control        { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+.carousel-control        { width:  2%; }
+.carousel-control.left,.carousel-control.right {margin-left:5px;background-image:none;}
 .carousel-inner .item-item {
-  padding:4px !important;
+    padding:4px !important;
 }

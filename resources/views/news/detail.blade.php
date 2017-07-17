@@ -396,6 +396,7 @@
             return false;
         });
     </script>
+
     <script>
         $('#myCarousel').carousel({
           interval: 4000
