@@ -102,6 +102,9 @@ class NewsController extends Controller
         $news = News::where('list_new_id', '=', $n->list_new_id)->orderBy('id', 'desc')->take(10)->get();
         $otherNews = News::orderBy('id', 'desc')->take(10)->get();
         $comments = $n->comments()->skip(0)->take(5)->get();
-        return view('news.detail')->with('n', $n)->with('news', $news)->with('otherNews', $otherNews)->with('comments', $comments);
+        return view('news.detail')
+            ->with('n', $n)->with('news', $news)
+            ->with('otherNews', $otherNews)
+            ->with('comments', $comments);
     }
 }
