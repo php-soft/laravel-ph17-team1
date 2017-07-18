@@ -7,7 +7,7 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-md-offset-2 col-xs-12 col-sm-12 col-md-7 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8" style="background-color: #fff">
             <h4>
                 <a class="btn btn-link label-primary" style="color: #FFF" href="{{ url('news') }}">Trang chủ</a></span> <a class="btn btn-link label-warning" style="color: #FFF" href="{{ url('news/listnew/'.$n->listNew->slug) }}">{{$n->listNew->name}}</a>
             </h4>
@@ -44,8 +44,10 @@
                 <h5>
                     @if (Auth::guest())
                         <label class="label-warning label label-xs">Đăng nhập để bình luận</label> <button class="btn btn-danger btn-xs" id="login">Đăng nhập</button>
+                        <input type="hidden" id="check_login" value="0">
                     @else
                         {{ Auth::user()->name }}
+                        <input type="hidden" id="check_login" value="1">
                     @endif
                 </h5>
                 <input type="hidden" name="onload" id="onload" value="0">
@@ -162,6 +164,43 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" >
+            <div class="tabbable-panel" style="background-color: #fff">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_product" data-toggle="tab">
+                                Sản phẩm mới </a>
+                        </li>
+                        <li>
+                            <a href="#tab_product_2" data-toggle="tab">
+                                Sp </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_product">
+                            @php
+                                $i=0;
+                            @endphp
+                            @foreach($mostViews as $n)
+                                <div class="product-news">
+                                    <div class="product-image">
+                                        <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
+                                    </div>
+                                    <div class="product-content">
+                                        <span class="product-title"><a href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane" id="tab_product_2">
+                            tab 2
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -502,15 +541,18 @@
     <script>
         $(document).ready(function($) {
             $('#login').on('click', function (){
-                $('#myModal').modal('show');
+                if ($('#check_login').val() == 0)
+                    $('#myModal').modal('show');
             });
         $('.comment_input').on('click', function (){
-                $('#myModal').modal('show');
+                if ($('#check_login').val() == 0)
+                    $('#myModal').modal('show');
             });
         });
         $(document).on('click', function () {
             $('.reply_input').on('click', function (){
-                $('#myModal').modal('show');
+                if ($('#check_login').val() == 0)
+                    $('#myModal').modal('show');
             });
         })
     </script>

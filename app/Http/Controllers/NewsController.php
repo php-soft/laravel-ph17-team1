@@ -105,6 +105,7 @@ class NewsController extends Controller
         return view('news.detail')
             ->with('n', $n)->with('news', $news)
             ->with('otherNews', $otherNews)
+            ->with('mostViews', $otherNews)
             ->with('comments', $comments);
     }
 }

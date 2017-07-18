@@ -1,6 +1,8 @@
-<div id="logo">
-    <div class="row">
-        <div class="col-xs-4"><img height="100" width="auto" src="{{url('images/news/pages/logo.jpg')}}" alt=""></div>
+<div style="background-color: #fff">
+    <div id="logo">
+        <div class="row">
+            <div class="col-xs-4"><img height="100" width="auto" src="{{url('images/news/pages/logo.jpg')}}" alt=""></div>
+        </div>
     </div>
 </div>
 <div id="header">

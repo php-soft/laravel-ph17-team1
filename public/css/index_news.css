@@ -1,6 +1,10 @@
 body {
-  background-color: #fff;
   font-family: 'Roboto Condensed',sans-serif;
+}
+
+#myCarousel .list-group .active {
+    background-color: #3B5998 !important;
+    color: #fff !important;
 }
 
 .titledetail {
@@ -245,21 +249,21 @@ body {
 
 /* category title */
 .category-title-div {
-    box-shadow: 3px 3px 6px #ccc;
-    margin-top: 30px;
+    border-bottom: 4px solid #f3565d;
+    margin-top: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
-    border-bottom: 4px solid #5cb85c;
+
 }
 .category-title {
     padding: 4px;
     line-height: 25px;
     overflow: hidden;
     font-size: 20px;
-    color: #fff;
+    color: #999;
     font-family: 'Roboto Condensed',sans-serif;
     font-weight: 600;
-    background-color: #3B5998;
+    background-color: #fff;
 }
 /* hot-news */
 .hot-news {
@@ -303,9 +307,8 @@ body {
 /* product */
 .product-news {
     float: left;
-    padding: .3em;
     margin-bottom: .3em;
-    height: 100px;
+    height: 80px;
     float: left;
     width: 100%;
 }
