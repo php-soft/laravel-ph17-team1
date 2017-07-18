@@ -4,7 +4,7 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="background-color: #fff; padding-bottom: 20px">
             <div class="row" style="margin-bottom: 20px; margin-top: 10px">
                 <div class="col-md-12" style="padding: 4px;">
 
@@ -67,7 +67,7 @@
                 @include('news.news')
             </div>
         </div>
-        <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
+        <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4" style="background-color: #fff;">
             <div>
                 <div class="category-title-div">
                     <div class="category-title">Tin xem nhiều nhất</div>
@@ -90,7 +90,7 @@
             <div class="clearfix"></div>
             <div>
                 <div class="category-title-div">
-                    <div class="category-title"><span class="glyphicon glyphicon-tags"></span> Tags:</div>
+                    <div class="category-title"><span class="glyphicon glyphicon-tags"></span> Tags</div>
                 </div>
                     <div>
                         @foreach($tags as $tag)

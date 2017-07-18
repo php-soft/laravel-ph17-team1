@@ -7,7 +7,7 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-md-offset-2 col-xs-12 col-sm-12 col-md-7 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8" style="background-color: #fff">
             <h4>
                 <a class="btn btn-link label-primary" style="color: #FFF" href="{{ url('news') }}">Trang chủ</a></span> <a class="btn btn-link label-warning" style="color: #FFF" href="{{ url('news/listnew/'.$n->listNew->slug) }}">{{$n->listNew->name}}</a>
             </h4>
@@ -43,13 +43,15 @@
                 @endif
                 <h5>
                     @if (Auth::guest())
-                        <span class="alert-danger">Đăng nhập để bình luận!</span> <a href="{{ route('login') }}">Đăng nhập</a>
+                        <label class="label-warning label label-xs">Đăng nhập để bình luận</label> <button class="btn btn-danger btn-xs" id="login">Đăng nhập</button>
+                        <input type="hidden" id="check_login" value="0">
                     @else
                         {{ Auth::user()->name }}
+                        <input type="hidden" id="check_login" value="1">
                     @endif
                 </h5>
                 <input type="hidden" name="onload" id="onload" value="0">
-                <form action="{{ url('news/comment/'.$n->id) }}" style="margin-bottom: 10px;" id="comment_input" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('news/comment/'.$n->id) }}" style="margin-bottom: 10px;" class="comment_input" id="comment_input" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <input type="hidden" id="_token" name="_token" value="{{csrf_token()}}">
                         <input type="hidden" id="news_id" name="news_id" value="{{ $n->id }}">
@@ -164,7 +166,121 @@
 
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" >
+            <div class="tabbable-panel" style="background-color: #fff">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_product" data-toggle="tab">
+                                Sản phẩm mới </a>
+                        </li>
+                        <li>
+                            <a href="#tab_product_2" data-toggle="tab">
+                                Sp </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_product">
+                            @php
+                                $i=0;
+                            @endphp
+                            @foreach($mostViews as $n)
+                                <div class="product-news">
+                                    <div class="product-image">
+                                        <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
+                                    </div>
+                                    <div class="product-content">
+                                        <span class="product-title"><a href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane" id="tab_product_2">
+                            tab 2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="clearfix"></div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ĐĂNG NHẬP</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <label for="password" class="col-md-4 control-label">Password</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control" name="password" required>
+
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-8 col-md-offset-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Login
+                                        </button>
+
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            Forgot Your Password?
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
     </div>
 @stop
 @section('js')
@@ -397,6 +513,7 @@
         });
     </script>
 
+    <!-- slide -->
     <script>
         $('#myCarousel').carousel({
           interval: 4000
@@ -418,5 +535,25 @@
             next.children(':first-child').clone().appendTo($(this));
           }
         });
+    </script>
+
+    <!-- model -->
+    <script>
+        $(document).ready(function($) {
+            $('#login').on('click', function (){
+                if ($('#check_login').val() == 0)
+                    $('#myModal').modal('show');
+            });
+        $('.comment_input').on('click', function (){
+                if ($('#check_login').val() == 0)
+                    $('#myModal').modal('show');
+            });
+        });
+        $(document).on('click', function () {
+            $('.reply_input').on('click', function (){
+                if ($('#check_login').val() == 0)
+                    $('#myModal').modal('show');
+            });
+        })
     </script>
 @stop
