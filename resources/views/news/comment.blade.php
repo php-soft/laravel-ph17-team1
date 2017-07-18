@@ -32,7 +32,7 @@
                                         <input type="hidden" class="news_comment_id" name="news_comment_id" value="{{ $comment->id }}">
                                         <input name="content" type="text" class="content form-control input-sm" placeholder="Nhập nội dung trả lời bình luận tại đây" value="">
                                         <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-warning btn-sm">Trả lời</button>
+                                            <button @if (Auth::guest()) disabled=disable @endif type="submit" class="btn btn-success btn-sm">Trả lời</button>
                                         </span>
                                     </div>
                                 </form>
