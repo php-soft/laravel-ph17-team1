@@ -60,7 +60,8 @@ class ProductController extends Controller
 
         $cate_id = ProductCategory::where('product_id', $product_id)->pluck('category_id');
         $pros_cate = ProductCategory::where('category_id', $cate_id)->pluck('product_id');
-        $product_tt = Product::where('id', '<>', $product_id)->orwhere('id', $pros_cate)->orderBy('price', 'desc')->limit(3)->pluck('id');
+        $product_tt = Product::where('id', '<>', $product_id)->orwhere('id', $pros_cate)
+        ->orderBy('price', 'desc')->limit(3)->pluck('id');
         $product_sames = Product::find($product_tt);
 
         $news = News::orderBy('created_at', 'desc')->limit(3)->get();

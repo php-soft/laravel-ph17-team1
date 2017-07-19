@@ -377,7 +377,7 @@
                                     <h3>Đánh giá chi tiết sản phẩm</h3>
                                     <p>{!!$product->description!!} Với thiết kế không quá nhiều thay đổi, vẫn bảo tồn vẻ đẹp truyền thống từ thời iPhone 6 Plus,  iPhone 7 Plus được trang bị nhiều nâng cấp đáng giá như camera kép, đạt chuẩn chống nước chống bụi cùng cấu hình cực mạnh.</p>
                                     <div id="wrapper">    
-                                        <div id="yourdiv">
+                                        <div id="newsimg">
                                             <img src="{!!$product->image!!}">
                                         </div>
                                     </div>
@@ -447,7 +447,7 @@
                                             <input type="text" name="phone" class="form-control" value="{{ $user->phonenumber }}" placeholder="Số điện thoại (bắt buộc)" disabled>
                                         </div>
                                     @endforeach
-                                @else ($login ==1)
+                                @else
                                     <div class="form-group">
                                         <input type="text" name="name" class="form-control" placeholder="Họ tên (bắt buộc)">
                                       </div>
