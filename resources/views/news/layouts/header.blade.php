@@ -23,10 +23,10 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a class="btn btn-link label-warning" href="{{ url('news/listnew/tin-tuc') }}">Tin tức</a></li>
-                    <li><a class="btn btn-link label-success" href="{{ url('news/listnew/san-pham') }}">Sản phẩm</a></li>
-                    <li><a class="btn btn-link label-primary" href="{{ url('news/listnew/meo-hay') }}">Mẹo hay</a></li>
-                    <li><a class="btn btn-link label-danger" href="{{ url('news/listnew/danh-gia') }}">Đánh giá</a></li>
-                    <li><a class="btn btn-link label-success" href="{{ url('news/listnew/game-app') }}">Game</a></li>
+                    <li><a class="btn btn-link label-success" href="{{ url('news/listnew/san-pham') }}"><span class="glyphicon glyphicon-phone" style="font-size: 16px"></span> Sản phẩm</a></li>
+                    <li><a class="btn btn-link label-primary" href="{{ url('news/listnew/meo-hay') }}"><span class="glyphicon glyphicon-ok" style="font-size: 16px"></span> Mẹo hay</a></li>
+                    <li><a class="btn btn-link label-danger" href="{{ url('news/listnew/danh-gia') }}"><span class="glyphicon glyphicon-star" style="font-size: 16px"></span> Đánh giá</a></li>
+                    <li><a class="btn btn-link label-success" href="{{ url('news/listnew/game-app') }}"><span class="glyphicon glyphicon-tower" style="font-size: 16px"></span> Game</a></li>
                     <li><a class="btn btn-link label-warning" href="{{ url('products') }}">Mua điện thoại</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
