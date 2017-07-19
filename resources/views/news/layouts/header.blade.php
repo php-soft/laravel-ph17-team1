@@ -1,7 +1,7 @@
 <div style="background-color: #fff">
     <div id="logo">
         <div class="row">
-            <div class="col-xs-4"><img height="100" width="auto" src="{{url('images/news/pages/logo.jpg')}}" alt=""></div>
+            <div class="col-xs-4"><a href="{{ url('/') }}"><img height="100" width="auto" src="{{url('images/news/pages/logo.jpg')}}" alt="logo"></a></div>
         </div>
     </div>
 </div>
