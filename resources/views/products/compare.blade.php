@@ -1,5 +1,10 @@
 @extends ('layouts.app')
 
+@section ('css')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/rating5star.css') }}">
+@stop
+
 @section ('content')
 <div class="container">
 @foreach ($products as $product)
@@ -45,11 +50,11 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <p style="margin-top:23px; color: orange">
+                    <p style="color: orange">
                         @for ($i=1; $i <= 5 ; $i++)
                             <span class="glyphicon glyphicon-star{{ ($i <= $avgvote) ? '' : '-empty'}}"></span>
                         @endfor
-                        <a href="#review">{{ $count_vote }} đánh giá</a>
+                        <label>{{ $count_vote }} đánh giá</label>
                     </p>
                 </div>
             </div>
@@ -71,7 +76,7 @@
                         <h4 style="color: red">{!! number_format($product_same->sale_price) !!} đ</h4>
                     @endif
                 </div>
-                <div class="col-md-12" style="height: 80px;">
+                <div class="col-md-12">
                     <div class="promotion-list">
                         @foreach ($promotion_sames as $promotion_same)
                             <tr>
@@ -85,11 +90,11 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <p style="margin-top:23px; color: orange">
+                    <p style="color: orange">
                         @for ($i=1; $i <= 5 ; $i++)
                             <span class="glyphicon glyphicon-star{{ ($i <= $avgvote_same) ? '' : '-empty'}}"></span>
                         @endfor
-                        <a href="#review">{{ $count_vote_same }} đánh giá</a>
+                        <label>{{ $count_vote_same }} đánh giá</label>
                     </p>
                 </div>
             </div>
@@ -128,20 +133,20 @@
                 <ul class="list-group">
                     <li class="col-md-12 list-group-item disabled">Màn hình</li>
                     <li class="col-md-2 list-group-item">Công nghệ màn hình</li>
-                    <li class="col-md-4 list-group-item">{!! $product->screen->tech_screen !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->screen->tech_screen !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->screen->technology !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->screen->technology !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Độ phân giải</li>
                     <li class="col-md-4 list-group-item">{!! $product->screen->resolution !!}</li>
                     <li class="col-md-4 list-group-item">{!! $product_same->screen->resolution !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Màn hình rộng</li>
-                    <li class="col-md-4 list-group-item">{!! $product->screen->width_screen !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->screen->width_screen !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->screen->width !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->screen->width !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Mặt kính cảm ứng</li>
-                    <li class="col-md-4 list-group-item">{!! $product->screen->touch_screen !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->screen->touch_screen !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->screen->touch !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->screen->touch !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-12 list-group-item disabled">Camera sau</li>
                     <li class="col-md-2 list-group-item">Độ phân giải</li>
@@ -173,30 +178,13 @@
                     <li class="col-md-4 list-group-item">{!! $product_same->backCamera->flash !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item" style="height: 102px;">Chụp ảnh nâng cao</li>
-                    <li class="col-md-4 list-group-item" style="height: 102px;">{!! $product->backCamera->advanced_photography !!}</li>
-                    <li class="col-md-4 list-group-item" style="height: 102px;">{!! $product_same->backCamera->advanced_photography !!}</li>
+                    <li class="col-md-4 list-group-item" style="height: 102px;">{!! $product->backCamera->advanced !!}</li>
+                    <li class="col-md-4 list-group-item" style="height: 102px;">{!! $product_same->backCamera->advanced !!}</li>
                     <li class="col-md-2 list-group-item" style="height: 102px;">&nbsp;</li>
                     <li class="col-md-12 list-group-item disabled">Camera trướt</li>
                     <li class="col-md-2 list-group-item">Độ phân giải</li>
-                    @if (!empty($product->frontCamera->resolution2))
-                        @if ($product->frontCamera->resolution2 == $product->frontCamera->resolution1)
-                            <li class="col-md-4 list-group-item">Camera kép {{ $product->frontCamera->resolution1 }}</li>
-                        @else
-                            <li class="col-md-4 list-group-item">2 camera {{ $product->frontCamera->resolution1 }} MP và {{ $product->frontCamera->resolution2 }} MP</li>
-                        @endif    
-                    @else
-                        <li class="col-md-4 list-group-item">{{ $product->frontCamera->resolution1 }} MP</li>
-                    @endif
-                    @if (!empty($product_same->frontCamera->resolution2))
-                        @if ($product_same->frontCamera->resolution2 == $product_same->frontCamera->resolution1)
-                            <li class="col-md-4 list-group-item">Camera kép {{ $product_same->frontCamera->resolution1 }}</li>
-                        @else
-                            <li class="col-md-4 list-group-item">2 camera {{ $product_same->frontCamera->resolution1 }} MP và {{ $product_same->frontCamera->resolution2 }} MP</li>
-                        @endif    
-                    @else
-                        <li class="col-md-4 list-group-item">{{ $product->frontCamera->resolution1 }} MP</li>
-                    @endif
-
+                    <li class="col-md-4 list-group-item">{{ $product->frontCamera->resolution }} MP</li>
+                    <li class="col-md-4 list-group-item">{{ $product_same->frontCamera->resolution }} MP</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Video call</li>
                     @if ($product->frontCamera->videocall == 1)
@@ -252,8 +240,8 @@
 
                     <li class="col-md-12 list-group-item disabled">Kết nối</li>
                     <li class="col-md-2 list-group-item">Mạng di động</li>
-                    <li class="col-md-4 list-group-item">{!! $product->connect->network_mobile !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->connect->network_mobile !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->connect->network !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->connect->network !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">SIM</li>
                     <li class="col-md-4 list-group-item">{!! $product->connect->sim !!}</li>
@@ -272,16 +260,16 @@
                     <li class="col-md-4 list-group-item">{!! $product_same->connect->bluetooth !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Cổng kết nối/sạc</li>
-                    <li class="col-md-4 list-group-item">{!! $product->connect->connect_port !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->connect->connect_port !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->connect->port !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->connect->port !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Jack tai nghe</li>
-                    <li class="col-md-4 list-group-item">{!! $product->connect->jack_phone !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->connect->jack_phone !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->connect->jack !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->connect->jack !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Kết nối khác</li>
-                    <li class="col-md-4 list-group-item">{!! $product->connect->other_connect !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->connect->other_connect !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->connect->other !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->connect->other !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
 
                     <li class="col-md-12 list-group-item disabled">Thiết kế - Trọng lượng</li>
@@ -304,22 +292,22 @@
 
                     <li class="col-md-12 list-group-item disabled">Thông tin pin - Sạc</li>
                     <li class="col-md-2 list-group-item">Dung lượng pin</li>
-                    <li class="col-md-4 list-group-item">{!! $product->battery->battery_capacity !!} mAh</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->battery->battery_capacity !!} mAh</li>
+                    <li class="col-md-4 list-group-item">{!! $product->battery->capacity !!} mAh</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->battery->capacity !!} mAh</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Loại pin</li>
-                    <li class="col-md-4 list-group-item">{!! $product->battery->battery_type !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->battery->battery_type !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->battery->type !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->battery->type !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Công nghệ pin</li>
-                    <li class="col-md-4 list-group-item">{!! $product->battery->battery_tech !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->battery->battery_tech !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->battery->technology !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->battery->technology !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
 
                     <li class="col-md-12 list-group-item disabled">Tiện ích</li>
                     <li class="col-md-2 list-group-item">Bảo mật nâng cao</li>
-                    <li class="col-md-4 list-group-item">{!! $product->utility->advanced_security !!}</li>
-                    <li class="col-md-4 list-group-item">{!! $product_same->utility->advanced_security !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product->utility->security !!}</li>
+                    <li class="col-md-4 list-group-item">{!! $product_same->utility->security !!}</li>
                     <li class="col-md-2 list-group-item">&nbsp;</li>
                     <li class="col-md-2 list-group-item">Tính năng đặc biệt</li>
                     <li class="col-md-4 list-group-item">{!! $product->utility->special_function !!}</li>

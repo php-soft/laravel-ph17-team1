@@ -625,7 +625,7 @@
                                             <li>Pin: {!!$product_same->battery->battery_capacity!!} mAh</li>
                                         </ul>
                                     </div>
-                                    <a href="{{url('/products/compare/' .$product->slug .'VS' .$product_same->slug)}}" class="pull-right">So sánh chi tiết </a>
+                                    <a href="{{url('/products/compare/' .$product->slug .'VS' .$product_same->slug)}}" class="pull-right" target="_blank">So sánh chi tiết </a>
                                 </div>
                             </a>
                         @endforeach
