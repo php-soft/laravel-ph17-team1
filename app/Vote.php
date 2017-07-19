@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vote extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $table = 'votes';
     protected $fillable = [
         'customer_id',
