@@ -65,9 +65,9 @@
         });
     });
   </script>
-  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+  <script src="{{ asset('js/toastr.min.js') }}"></script>
   <script>
     @if (Session::has('message'))
         toastr.success("{{Session::get('message')}}")
