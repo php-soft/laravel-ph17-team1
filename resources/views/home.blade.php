@@ -1,5 +1,10 @@
 @extends ('layouts.app')
 
+@section ('css')
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/product.css') }}">
+@stop
+
 @section ('content')
 <div class="container">
     <div class="row">
