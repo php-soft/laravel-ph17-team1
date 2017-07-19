@@ -220,7 +220,7 @@ class ProductController extends Controller
                 $product_category4->category_id = $request->category4;
                 $product_category4->product_id = $product->id;
                 $product_category4->save();
-            } 
+            }
             Session::flash('message', 'Đã thêm sản phẩm ' .$product->name. ' thành công');
             Session::flash('alert-class', 'alert-success');
         }
@@ -359,19 +359,19 @@ class ProductController extends Controller
         $product->screen_id = $request->screen;
         $product->utility_id = $request->utility;
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $name = $file->getClientOriginalName();
-            $image = '/assets/products/'.$name;
-            $file->move("assets/products", $image);
-            $product->image = $image;
-          } elseif (empty($request->hasFile('image'))) {
-            $file = $request->img;
-            $image = $file;
-            $product->image = $image;
-          }
+          $file = $request->file('image');
+          $name = $file->getClientOriginalName();
+          $image = '/assets/products/'.$name;
+          $file->move("assets/products", $image);
+          $product->image = $image;
+        } elseif (empty($request->hasFile('image'))) {
+          $file = $request->img;
+          $image = $file;
+          $product->image = $image;
+        }
         if ($product->sale_price > $product->price or $product->sale_price == $product->price) {
-          Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật sản phẩm thất bại');
-          return redirect('admin/products');
+            Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật sản phẩm thất bại');
+            return redirect('admin/products');
         }
         if ($request->category1 == true and $request->category2 == true
           and $request->category3 == true and $request->category4 == true) {
