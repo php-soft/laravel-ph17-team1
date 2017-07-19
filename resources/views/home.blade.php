@@ -88,14 +88,12 @@
                                     <p>HDH: {!! $product->operaSystem->opera_system !!}</p>
                                     <p>CPU: {!! $product->operaSystem->chipset !!}</p>
                                     <p>RAM: {!! $product->memory->ram !!} GB, ROM: {!! $product->memory->rom !!} GB</p>
-                                     @if (!empty($product->backCamera->resolution2) and !empty($product->frontCamera->resolution2))
-                                        <p> Camera kép: {{ $product->backCamera->resolution1 }} MP, Selfie: Camera kép {{ $product->frontCamera->resolution1 }} MP</p>
+                                    @if (!empty($product->backCamera->resolution2) and $product->backCamera->resolution1 == $product->backCamera->resolution2)
+                                        <p> Camera kép: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution }} MP</p>
                                     @elseif (!empty($product->backCamera->resolution2))
-                                        <p>Camera kép: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution1 }} MP</p>
-                                    @elseif (!empty($product->frontCamera->resolution2))
-                                        <p>Camera: {{ $product->backCamera->resolution1 }} MP, Selfie: Camera kép {{ $product->frontCamera->resolution1 }} MP</p>
+                                        <p>2 Camera: {{ $product->backCamera->resolution1 }} MP và {{ $product->backCamera->resolution2 }} MP, Selfie: {{ $product->frontCamera->resolution1 }} MP</p>
                                     @else
-                                        <p>Camera: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution1 }} MP</p>
+                                        <p>Camera: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution }} MP</p>
                                     @endif
                                     <p>PIN: {!! $product->battery->battery_capacity !!}, SIM: {!! $product->connect->sim !!}</p>
                                 </div>
@@ -157,14 +155,12 @@
                                     <p>HDH: {!! $product->operaSystem->opera_system !!}</p>
                                     <p>CPU: {!! $product->operaSystem->chipset !!}</p>
                                     <p>RAM: {!! $product->memory->ram !!} GB, ROM: {!! $product->memory->rom !!} GB</p>
-                                     @if (!empty($product->backCamera->resolution2) and !empty($product->frontCamera->resolution2))
-                                        <p> Camera kép: {{ $product->backCamera->resolution1 }} MP, Selfie: Camera kép {{ $product->frontCamera->resolution1 }} MP</p>
+                                    @if (!empty($product->backCamera->resolution2) and $product->backCamera->resolution1 == $product->backCamera->resolution2)
+                                        <p> Camera kép: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution }} MP</p>
                                     @elseif (!empty($product->backCamera->resolution2))
-                                        <p>Camera kép: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution1 }} MP</p>
-                                    @elseif (!empty($product->frontCamera->resolution2))
-                                        <p>Camera: {{ $product->backCamera->resolution1 }} MP, Selfie: Camera kép {{ $product->frontCamera->resolution1 }} MP</p>
+                                        <p>2 Camera: {{ $product->backCamera->resolution1 }} MP và {{ $product->backCamera->resolution2 }} MP, Selfie: {{ $product->frontCamera->resolution1 }} MP</p>
                                     @else
-                                        <p>Camera: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution1 }} MP</p>
+                                        <p>Camera: {{ $product->backCamera->resolution1 }} MP, Selfie: {{ $product->frontCamera->resolution }} MP</p>
                                     @endif
                                     <p>PIN: {!! $product->battery->battery_capacity !!}, SIM: {!! $product->connect->sim !!}</p>
                                 </div>
