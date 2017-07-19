@@ -157,17 +157,22 @@ class ProductController extends Controller
         if ($product->sale_price > $product->price or $product->sale_price == $product->price) {
             Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Thêm sản phẩm thất bại');
             Session::flash('alert-class', 'alert-error');
-        } elseif ($request->category1 == true and $request->category2 == true and $request->category3 == true and $request->category4 == true) {
+        } elseif ($request->category1 == true and $request->category2 == true
+          and $request->category3 ==true and $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
         } elseif ($request->category1 == true and $request->category2 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category1 == true and $request->category3 == true and $request->category4 == true) {
+        } elseif ($request->category1 == true and $request->category3 == true
+          and $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category2 == true and $request->category3 == true and $request->category4 == true) {
+        } elseif ($request->category2 == true and $request->category3 == true
+          and $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category1 == true and $request->category2 == true and $request->category3 == true) {
+        } elseif ($request->category1 == true and $request->category2 == true
+          and $request->category3 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category1 == true and $request->category2 == true and $request->category4 == true) {
+        } elseif ($request->category1 == true and $request->category2 == true
+          and $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
         } elseif ($request->category2 == true and $request->category3 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
@@ -354,125 +359,130 @@ class ProductController extends Controller
         $product->screen_id = $request->screen;
         $product->utility_id = $request->utility;
         if ($request->hasFile('image')) {
-              $file = $request->file('image');
-              $name = $file->getClientOriginalName();
-              $image = '/assets/products/'.$name;
-              $file->move("assets/products", $image);
-              $product->image = $image;
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $image = '/assets/products/'.$name;
+            $file->move("assets/products", $image);
+            $product->image = $image;
           } elseif (empty($request->hasFile('image'))) {
-              $file = $request->img;
-              $image = $file;
-              $product->image = $image;
+            $file = $request->img;
+            $image = $file;
+            $product->image = $image;
           }
         if ($product->sale_price > $product->price or $product->sale_price == $product->price) {
-              Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật sản phẩm thất bại');
-              return redirect('admin/products');
-          }
-        if ($request->category1 == true and $request->category2 == true and $request->category3 == true and $request->category4 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
+          Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật sản phẩm thất bại');
+          return redirect('admin/products');
+        }
+        if ($request->category1 == true and $request->category2 == true
+          and $request->category3 == true and $request->category4 == true) {
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
           } elseif ($request->category1 == true and $request->category2 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
-          } elseif ($request->category1 == true and $request->category3 == true and $request->category4 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
-          } elseif ($request->category2 == true and $request->category3 == true and $request->category4 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
-          } elseif ($request->category1 == true and $request->category2 == true and $request->category3 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
-          } elseif ($request->category1 == true and $request->category2 == true and $request->category4 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
+          } elseif ($request->category1 == true and $request->category3 == true
+            and $request->category4 == true) {
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
+          } elseif ($request->category2 == true and $request->category3 == true
+            and $request->category4 == true) {
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
+          } elseif ($request->category1 == true and $request->category2 == true
+            and $request->category3 == true) {
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
+          } elseif ($request->category1 == true and $request->category2 == true
+            and $request->category4 == true) {
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
           } elseif ($request->category2 == true and $request->category3 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
           } elseif ($request->category2 == true and $request->category4 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
           } elseif ($request->category3 == true and $request->category4 == true) {
-              Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
-              return redirect('admin/products');
+            Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
+            return redirect('admin/products');
           }
         if ($request->category1 == true and $request->category3 == true) {
-              $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
-              //dd($cate_pros);
-              foreach ($cate_pros as $cate_pro) {
-                ProductCategory::find($cate_pro)->delete();
-              }
-              $product_category1 = new ProductCategory;
-              $product_category1->category_id = $request->category1;
-              $product_category1->product_id = $product->id;
-              $product_category1->save();
-              $product_category3 = new ProductCategory;
-              $product_category3->category_id = $request->category3;
-              $product_category3->product_id = $product->id;
-              $product_category3->save();
+            $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
+            //dd($cate_pros);
+            foreach ($cate_pros as $cate_pro) {
+              ProductCategory::find($cate_pro)->delete();
+            }
+            $product_category1 = new ProductCategory;
+            $product_category1->category_id = $request->category1;
+            $product_category1->product_id = $product->id;
+            $product_category1->save();
+            $product_category3 = new ProductCategory;
+            $product_category3->category_id = $request->category3;
+            $product_category3->product_id = $product->id;
+            $product_category3->save();
           } elseif ($request->category1 == true and $request->category4 == true) {
-              $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
-              foreach ($cate_pros as $cate_pro) {
-                ProductCategory::find($cate_pro)->delete();
-              }
-              $product_category1 = new ProductCategory;
-              $product_category1->category_id = $request->category1;
-              $product_category1->product_id = $product->id;
-              $product_category1->save();
-              $product_category4 = new ProductCategory;
-              $product_category4->category_id = $request->category4;
-              $product_category4->product_id = $product->id;
-              $product_category4->save();
+            $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
+            foreach ($cate_pros as $cate_pro) {
+              ProductCategory::find($cate_pro)->delete();
+            }
+            $product_category1 = new ProductCategory;
+            $product_category1->category_id = $request->category1;
+            $product_category1->product_id = $product->id;
+            $product_category1->save();
+            $product_category4 = new ProductCategory;
+            $product_category4->category_id = $request->category4;
+            $product_category4->product_id = $product->id;
+            $product_category4->save();
           } elseif ($request->category1 == true) {
-              $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
-              foreach ($cate_pros as $cate_pro) {
-                ProductCategory::find($cate_pro)->delete();
-              }
-              $product_category1 = new ProductCategory;
-              $product_category1->category_id = $request->category1;
-              $product_category1->product_id = $product->id;
-              $product_category1->save();
+            $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
+            foreach ($cate_pros as $cate_pro) {
+              ProductCategory::find($cate_pro)->delete();
+            }
+            $product_category1 = new ProductCategory;
+            $product_category1->category_id = $request->category1;
+            $product_category1->product_id = $product->id;
+            $product_category1->save();
           } elseif ($request->category2 == true) {
-              $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
-              foreach ($cate_pros as $cate_pro) {
-                ProductCategory::find($cate_pro)->delete();
-              }
-              $product_category2 = new ProductCategory;
-              $product_category2->category_id = $request->category2;
-              $product_category2->product_id = $product->id;
-              $product_category2->save();
+            $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
+            foreach ($cate_pros as $cate_pro) {
+              ProductCategory::find($cate_pro)->delete();
+            }
+            $product_category2 = new ProductCategory;
+            $product_category2->category_id = $request->category2;
+            $product_category2->product_id = $product->id;
+            $product_category2->save();
           } elseif ($request->category3 == true) {
-              $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
-              foreach ($cate_pros as $cate_pro) {
-                ProductCategory::find($cate_pro)->delete();
-              }
-              $product_category3 = new ProductCategory;
-              $product_category3->category_id = $request->category3;
-              $product_category3->product_id = $product->id;
-              $product_category3->save();
+            $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
+            foreach ($cate_pros as $cate_pro) {
+              ProductCategory::find($cate_pro)->delete();
+            }
+            $product_category3 = new ProductCategory;
+            $product_category3->category_id = $request->category3;
+            $product_category3->product_id = $product->id;
+            $product_category3->save();
           } elseif ($request->category4 == true) {
-              $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
-              foreach ($cate_pros as $cate_pro) {
-                ProductCategory::find($cate_pro)->delete();
-              }
-              $product_category4 = new ProductCategory;
-              $product_category4->category_id = $request->category4;
-              $product_category4->product_id = $product->id;
-              $product_category4->save();
+            $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
+            foreach ($cate_pros as $cate_pro) {
+              ProductCategory::find($cate_pro)->delete();
+            }
+            $product_category4 = new ProductCategory;
+            $product_category4->category_id = $request->category4;
+            $product_category4->product_id = $product->id;
+            $product_category4->save();
           } else {
               
           }
-        $product->save();
-        Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
-        Session::flash('alert-class', 'alert-success');
-        return redirect('admin/products/afterupdate');
+      $product->save();
+      Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
+      Session::flash('alert-class', 'alert-success');
+      return redirect('admin/products/afterupdate');
     }
 
     public function destroy($id)
     {
-        Product::find($id)->delete();
-        Session::flash('message', 'Đã xóa thành công');
-        Session::flash('alert-class', 'alert-success');
-        return redirect('admin/products');
+      Product::find($id)->delete();
+      Session::flash('message', 'Đã xóa thành công');
+      Session::flash('alert-class', 'alert-success');
+      return redirect('admin/products');
     }
 }
