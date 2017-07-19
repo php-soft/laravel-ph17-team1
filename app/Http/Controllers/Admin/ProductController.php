@@ -87,44 +87,44 @@ class ProductController extends Controller
     {
         $this->validate($request, [
                 'name'=>'required',
-                  'color' => 'required',
-                  'manufactory' => 'required',
-                  'editor1' => 'required|min:3',
-                  'accessory' => 'required',
-                  'status' => 'required',
-                  'warranty_moth' => 'required',
-                  'backcamera' => 'required',
-                  'battery'=>'required',
-                  'connect'=>'required',
-                  'memory'=>'required',
-                  'design'=>'required',
-                  'operasystem'=>'required',
-                  'screen'=>'required',
-                  'utility'=>'required',
-                  'image'=>'required',
-            ],[
+                'color' => 'required',
+                'manufactory' => 'required',
+                'editor1' => 'required|min:3',
+                'accessory' => 'required',
+                'status' => 'required',
+                'warranty_moth' => 'required',
+                'backcamera' => 'required',
+                'battery'=>'required',
+                'connect'=>'required',
+                'memory'=>'required',
+                'design'=>'required',
+                'operasystem'=>'required',
+                'screen'=>'required',
+                'utility'=>'required',
+                'image'=>'required',
+            ], [
                 'name.required'=>'Tên trống',
-                  'color.required' => 'Màu trống',
-                  'price.required' => 'Giá trống',
-                  'price.regex' => 'Giá phải là số',
-                  'price.max' => 'Giá tối đa là 30 triệu đồng',
-                  'manufactory.required' => 'Hãng sản xuất trống',
-                  'editor1.required' => 'Mô tả trống',
-                  'editor1.min' => 'Mô tả tối thiểu 50 ký tự',
-                  'accessory.required' => 'Phụ kiện trống',
-                  'status.required' => 'Tình trạng trống',
-                  'warranty_moth.required' => 'Thời gian bảo hành trống',
-                  'backcamera.required' => 'Camera sau trống',
-                  'battery.required'=>'Pin trống',
-                  'connect.required'=>'Kết nối trống',
-                  'memory.required'=>'Bộ nhớ trống',
-                  'design.required'=>'Thiết kế trống',
-                  'operasystem.required'=>'HDH trống',
-                  'screen.required'=>'Màn hình trống',
-                  'utility.required'=>'Chức năng đặc biệt trống',
-                  'image.required'=>'Image trống',
-                  Session::flash('message', 'Có lỗi xảy ra'),
-                  Session::flash('alert-class', 'alert-error'),
+                'color.required' => 'Màu trống',
+                'price.required' => 'Giá trống',
+                'price.regex' => 'Giá phải là số',
+                'price.max' => 'Giá tối đa là 30 triệu đồng',
+                'manufactory.required' => 'Hãng sản xuất trống',
+                'editor1.required' => 'Mô tả trống',
+                'editor1.min' => 'Mô tả tối thiểu 50 ký tự',
+                'accessory.required' => 'Phụ kiện trống',
+                'status.required' => 'Tình trạng trống',
+                'warranty_moth.required' => 'Thời gian bảo hành trống',
+                'backcamera.required' => 'Camera sau trống',
+                'battery.required'=>'Pin trống',
+                'connect.required'=>'Kết nối trống',
+                'memory.required'=>'Bộ nhớ trống',
+                'design.required'=>'Thiết kế trống',
+                'operasystem.required'=>'HDH trống',
+                'screen.required'=>'Màn hình trống',
+                'utility.required'=>'Chức năng đặc biệt trống',
+                'image.required'=>'Image trống',
+                Session::flash('message', 'Có lỗi xảy ra'),
+                Session::flash('alert-class', 'alert-error'),
             ]);
         $product = new Product;
         $product->name = $request->name;
@@ -156,21 +156,21 @@ class ProductController extends Controller
         if ($product->sale_price > $product->price or $product->sale_price == $product->price) {
             Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Thêm sản phẩm thất bại');
             Session::flash('alert-class', 'alert-error');
-        } elseif ($request->category1 == true and $request->category2 == true and 
+        } elseif ($request->category1 == true and $request->category2 == true and
             $request->category3 ==true and $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
         } elseif ($request->category1 == true and $request->category2 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category1 == true and $request->category3 == true and 
+        } elseif ($request->category1 == true and $request->category3 == true and
             $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category2 == true and $request->category3 == true and 
+        } elseif ($request->category2 == true and $request->category3 == true and
             $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category1 == true and $request->category2 == true and 
+        } elseif ($request->category1 == true and $request->category2 == true and
             $request->category3 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
-        } elseif ($request->category1 == true and $request->category2 == true and 
+        } elseif ($request->category1 == true and $request->category2 == true and
             $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ');
         } elseif ($request->category2 == true and $request->category3 == true) {
@@ -295,7 +295,7 @@ class ProductController extends Controller
         ->with('screens', $screens)->with('utilities', $utilities);
     }
 
-     public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
                   'name'=>'required',
@@ -371,26 +371,26 @@ class ProductController extends Controller
             Session::flash('message', 'Giá khuyến mãi phải nhỏ hơn giá gốc! Cập nhật sản phẩm thất bại');
             return redirect('admin/products');
         }
-        if ($request->category1 == true and $request->category2 == true and 
+        if ($request->category1 == true and $request->category2 == true and
             $request->category3 == true and $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
             return redirect('admin/products');
         } elseif ($request->category1 == true and $request->category2 == true) {
             Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
             return redirect('admin/products');
-        } elseif ($request->category1 == true and $request->category3 == true and 
+        } elseif ($request->category1 == true and $request->category3 == true and
               $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
             return redirect('admin/products');
-        } elseif ($request->category2 == true and $request->category3 == true and 
+        } elseif ($request->category2 == true and $request->category3 == true and
               $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
             return redirect('admin/products');
-        } elseif ($request->category1 == true and $request->category2 == true and 
+        } elseif ($request->category1 == true and $request->category2 == true and
               $request->category3 == true) {
             Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
             return redirect('admin/products');
-        } elseif ($request->category1 == true and $request->category2 == true and 
+        } elseif ($request->category1 == true and $request->category2 == true and
               $request->category4 == true) {
             Session::flash('message', 'Danh mục không hợp lệ! Cập nhật thất bại');
             return redirect('admin/products');
@@ -407,7 +407,7 @@ class ProductController extends Controller
         if ($request->category1 == true and $request->category3 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
-              ProductCategory::find($cate_pro)->delete();
+              	ProductCategory::find($cate_pro)->delete();
             }
             $product_category1 = new ProductCategory;
             $product_category1->category_id = $request->category1;
@@ -467,13 +467,13 @@ class ProductController extends Controller
             $product_category4->product_id = $product->id;
             $product_category4->save();
         } else {
-              
+        	//
         }
         $product->save();
         Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
         Session::flash('alert-class', 'alert-success');
         return redirect('admin/products/afterupdate');
-    }
+	}
 
     public function destroy($id)
     {
