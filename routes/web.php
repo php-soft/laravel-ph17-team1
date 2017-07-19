@@ -65,7 +65,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('votes/delete/{id}', 'VoteController@destroy');
 
     Route::get('products', 'ProductController@index');
-    Route::post('products/new', 'ProductController@new');
+    Route::get('products/afterupdate', 'ProductController@indexAfterUpdate');
+    Route::get('products/{slug}', 'ProductController@indexByID');
+    Route::post('products/create', 'ProductController@create');
     Route::get('products/edit/{id}', 'ProductController@edit');
     Route::post('products/update/{id}', 'ProductController@update');
     Route::get('products/delete/{id}', 'ProductController@destroy');

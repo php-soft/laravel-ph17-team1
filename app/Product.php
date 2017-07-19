@@ -36,9 +36,9 @@ class Product extends Model
         'memory_id',
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsToMany('App\Category', 'product_categories', 'product_id', 'category_id');
     }
 
     public function backCamera()
