@@ -417,7 +417,7 @@ class ProductController extends Controller
             $product_category3->category_id = $request->category3;
             $product_category3->product_id = $product->id;
             $product_category3->save();
-          } elseif ($request->category1 == true and $request->category4 == true) {
+        } elseif ($request->category1 == true and $request->category4 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
                   ProductCategory::find($cate_pro)->delete();
@@ -430,7 +430,7 @@ class ProductController extends Controller
             $product_category4->category_id = $request->category4;
             $product_category4->product_id = $product->id;
             $product_category4->save();
-          } elseif ($request->category1 == true) {
+        } elseif ($request->category1 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
                   ProductCategory::find($cate_pro)->delete();
@@ -439,7 +439,7 @@ class ProductController extends Controller
             $product_category1->category_id = $request->category1;
             $product_category1->product_id = $product->id;
             $product_category1->save();
-          } elseif ($request->category2 == true) {
+        } elseif ($request->category2 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
                   ProductCategory::find($cate_pro)->delete();
@@ -448,7 +448,7 @@ class ProductController extends Controller
             $product_category2->category_id = $request->category2;
             $product_category2->product_id = $product->id;
             $product_category2->save();
-          } elseif ($request->category3 == true) {
+        } elseif ($request->category3 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
                   ProductCategory::find($cate_pro)->delete();
@@ -457,7 +457,7 @@ class ProductController extends Controller
             $product_category3->category_id = $request->category3;
             $product_category3->product_id = $product->id;
             $product_category3->save();
-          } elseif ($request->category4 == true) {
+        } elseif ($request->category4 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
                   ProductCategory::find($cate_pro)->delete();
@@ -466,20 +466,20 @@ class ProductController extends Controller
             $product_category4->category_id = $request->category4;
             $product_category4->product_id = $product->id;
             $product_category4->save();
-          } else {
+        } else {
               
-          }
-          $product->save();
-          Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
-          Session::flash('alert-class', 'alert-success');
-          return redirect('admin/products/afterupdate');
+        }
+        $product->save();
+        Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
+        Session::flash('alert-class', 'alert-success');
+        return redirect('admin/products/afterupdate');
     }
 
     public function destroy($id)
     {
-          Product::find($id)->delete();
-          Session::flash('message', 'Đã xóa thành công');
-          Session::flash('alert-class', 'alert-success');
-          return redirect('admin/products');
+        Product::find($id)->delete();
+        Session::flash('message', 'Đã xóa thành công');
+        Session::flash('alert-class', 'alert-success');
+        return redirect('admin/products');
     }
 }
