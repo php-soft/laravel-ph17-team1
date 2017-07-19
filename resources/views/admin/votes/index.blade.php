@@ -2,6 +2,7 @@
 
 @section ('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 @stop
 
 @section ('content')
@@ -61,4 +62,10 @@
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+  <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script>
+        @if (Session::has('message'))
+            toastr.success("{{Session::get('message')}}")
+        @endif
+    </script>
 @stop
