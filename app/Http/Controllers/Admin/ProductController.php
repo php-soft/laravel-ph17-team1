@@ -407,7 +407,7 @@ class ProductController extends Controller
         if ($request->category1 == true and $request->category3 == true) {
             $cate_pros = ProductCategory::where('product_id', $product->id)->pluck('id');
             foreach ($cate_pros as $cate_pro) {
-              	ProductCategory::find($cate_pro)->delete();
+                ProductCategory::find($cate_pro)->delete();
             }
             $product_category1 = new ProductCategory;
             $product_category1->category_id = $request->category1;
@@ -467,13 +467,16 @@ class ProductController extends Controller
             $product_category4->product_id = $product->id;
             $product_category4->save();
         } else {
-        	//
+            $product->save();
+            Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
+            Session::flash('alert-class', 'alert-success');
+            return redirect('admin/products/afterupdate');
         }
         $product->save();
         Session::flash('message', 'Đã cập nhật sản phẩm ' .$product->name. ' thành công');
         Session::flash('alert-class', 'alert-success');
         return redirect('admin/products/afterupdate');
-	}
+    }
 
     public function destroy($id)
     {
