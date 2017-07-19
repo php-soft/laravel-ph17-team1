@@ -521,8 +521,7 @@ class ProductController extends Controller
                 $vote->save();
                 Session::flash('message', 'Cảm ơn ' .$user->name . ' đã đánh giá sản phẩm chúng tôi');
                 Session::flash('alert-class', 'alert-error');
-            }
-            else {
+            } else {
                 Session::flash('message', 'Bạn đã đánh giá sản phẩm ' .$products->name .' rồi');
                 Session::flash('alert-class', 'alert-error');
             }
