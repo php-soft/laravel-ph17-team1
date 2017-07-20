@@ -1,0 +1,2 @@
+{!! Charts::assets() !!}
+{!! $chart->render() !!}
