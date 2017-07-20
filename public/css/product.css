@@ -130,6 +130,7 @@
 }
 
 .btn.buy{
+    float: left;
     background-color: #40c781;
     text-align:center;
     line-height:25px;
@@ -148,7 +149,32 @@
          -o-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
 }
+
+.compare{
+    margin-left: 20px;
+    background-color: #40c781;
+    text-align:center;
+    line-height:25px;
+    font-weight:700;
+    color:#fff;
+    border-radius:3px;
+    text-decoration:none;
+    opacity:1;
+    border:0px solid #35a76e;
+    border-bottom-width:2px;
+    height: 35px;
+    width: 40px;
+    -webkit-transition: all 0.2s ease-in-out;
+       -moz-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+         -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+}
 .btn.buy:hover{
+    background-color:#34a46c;
+}
+.compare:hover{
+    text-decoration: none;
     background-color:#34a46c;
 }
 .expand{
@@ -192,27 +218,6 @@
     width:30%;
     float:right;
     text-align: right;
-}
-/* Style / Theming */
-
-body{
-    /* IE10 Consumer Preview */ 
-    background-image: -ms-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #E3E3E3 100%);
-
-    /* Mozilla Firefox */ 
-    background-image: -moz-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #E3E3E3 100%);
-
-    /* Opera */ 
-    background-image: -o-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #E3E3E3 100%);
-
-    /* Webkit (Safari/Chrome 10) */ 
-    background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, #FFFFFF), color-stop(1, #E3E3E3));
-
-    /* Webkit (Chrome 11+) */ 
-    background-image: -webkit-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #E3E3E3 100%);
-
-    /* W3C Markup, IE10 Release Preview */ 
-    background-image: radial-gradient(circle farthest-corner at center, #FFFFFF 0%, #E3E3E3 100%);
 }
 
 /*Prduct title*/
@@ -326,4 +331,18 @@ body{
         -ms-transition: all 0.3s ease-in-out;
          -o-transition: all 0.3s ease-in-out;
             transition: all 0.3s ease-in-out;
+}
+.tinhnang{
+  width: 410px;
+}
+.tinhnang li a{
+  text-decoration: none;
+  color: #666;
+}
+.tinhnang li span{
+  color: #666;
+  margin-top: 5px;
+}
+.tinhnang li a:hover{
+  color: orange;
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tag;
 use App\News;
 use App\ListNew;
+use App\Product;
 
 class NewsController extends Controller
 {
@@ -102,10 +103,11 @@ class NewsController extends Controller
         $news = News::where('list_new_id', '=', $n->list_new_id)->orderBy('id', 'desc')->take(10)->get();
         $otherNews = News::orderBy('id', 'desc')->take(10)->get();
         $comments = $n->comments()->skip(0)->take(5)->get();
+        $products =  Product::OrderBy('id', 'desc')->take(5)->get();
         return view('news.detail')
             ->with('n', $n)->with('news', $news)
             ->with('otherNews', $otherNews)
-            ->with('mostViews', $otherNews)
+            ->with('products', $products)
             ->with('comments', $comments);
     }
 }

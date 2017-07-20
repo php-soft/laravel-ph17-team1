@@ -184,14 +184,36 @@
                             @php
                                 $i=0;
                             @endphp
-                            @foreach($mostViews as $n)
-                                <div class="product-news">
-                                    <div class="product-image">
-                                        <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
+                            @foreach($products as $product)
+                                <div class="product-news" style="height: 150px">
+                                <a href="{{url('products/' .$product->slug)}}" style="text-decoration: none; color: #333">
+                                    <div class="product-image" style="height: 130px">
+                                        <img src="{!!$product->image!!}" alt="{{$product->image}}" height="auto" width="100%">
                                     </div>
                                     <div class="product-content">
-                                        <span class="product-title"><a href="{{url('news/'.$n->slug)}}">{{$n->title}}</a></span>
+                                        <span class="product-title">
+                                        <h4 class="same-name">{!! $product->name !!}</h4>
+                                        @if($product->sale_price === null)
+                                            <h4 class="same-price" style="color: red">{!! number_format($product->price) !!} đ</h4>
+                                        @else 
+                                            <h4 class="same-price" style="color: red">{!! number_format($product->sale_price) !!} đ</h4>
+                                        @endif
+                                        <ul type="none">
+                                            <li>Màn Hình: {!!$product->screen->technology!!}</li>
+                                            @if(!empty($product->backCamera->resolution2))
+                                                @if($product->backCamera->resolution2 == $product->backCamera->resolution1)
+                                                    <li>Camera kép: {{$product->backCamera->resolution1}} MP</li>
+                                                @else
+                                                    <li>2 Cameera: {{$product->backCamera->resolution1}} MP và {{$product->backCamera->resolution2}} MP</li>
+                                                @endif    
+                                            @else
+                                                <li>Camera sau: {{$product->backCamera->resolution1}} MP</li>
+                                            @endif
+                                            <li>Pin: {!!$product->battery->capacity!!} mAh</li>
+                                        </ul>
+                                        </span>
                                     </div>
+                                </a>
                                 </div>
                                 <div class="clearfix"></div>
                             @endforeach
