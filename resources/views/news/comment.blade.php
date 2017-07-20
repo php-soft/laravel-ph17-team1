@@ -6,9 +6,11 @@
                         <div class="comment">
                             <div>
                                 <strong class="color-777">{{ $comment->user->name }}</strong>
-                                <div class="pull-right">
-                                    <button class="btn-link glyphicon glyphicon-trash delete-comment" id="{{$comment->id}}"></button>
-                                </div>
+                                @if (!Auth::guest() && Auth::user()->id == $comment->user_id)
+                                    <div class="pull-right">
+                                        <button class="btn-link glyphicon glyphicon-trash delete-comment" id="{{$comment->id}}"></button>
+                                    </div>
+                                @endif
                             </div>
                             <div class="comment-content">
                                 <span>{{ $comment->content }}</span>
@@ -30,7 +32,7 @@
                                         <input type="hidden" class="news_comment_id" name="news_comment_id" value="{{ $comment->id }}">
                                         <input name="content" type="text" class="content form-control input-sm" placeholder="Nhập nội dung trả lời bình luận tại đây" value="">
                                         <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-warning btn-sm">Trả lời</button>
+                                            <button @if (Auth::guest()) disabled=disable @endif type="submit" class="btn btn-success btn-sm">Trả lời</button>
                                         </span>
                                     </div>
                                 </form>

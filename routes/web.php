@@ -103,7 +103,9 @@ Route::post('news/dislike/{id}', 'NewsCommentController@dislike');
 
 Route::get('news/{slug}', 'NewsController@detail');
 Route::get('news/tag/{id}', 'NewsController@indexByTag');
+
 Route::get('news/listnew/{slug}', 'NewsController@indexByListNew');
+Route::post('news/listnew/load', 'NewsController@loadByListNew');
 
 Route::get('products', 'ProductController@index');
 Route::get('products/{slug}', 'ProductController@indexByID');
