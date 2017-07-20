@@ -11,6 +11,7 @@
     href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet"
     href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
     src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <div class="container">
@@ -41,8 +42,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin/orders/statistic/quarter" class="text-center">
-                                    <span class="glyphicon glyphicon-arrow-right pull-left"></span>Theo quý
+                                <a href="/admin/orders/statistic/year" class="text-center">
+                                    <span class="glyphicon glyphicon-arrow-right pull-left"></span>Theo năm
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/orders/statistic/group-year" class="text-center">
+                                    <span class="glyphicon glyphicon-arrow-right pull-left"></span>Năm gần đây
                                 </a>
                             </li>
                         </ul>
