@@ -15,10 +15,10 @@ class CreateScreensTable extends Migration
     {
         Schema::create('screens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tech_screen', 255);
-            $table->string('resolution', 255);
-            $table->string('width_screen', 255);
-            $table->string('touch_screen', 255);
+            $table->string('technology', 255)->nullable();
+            $table->string('resolution', 255)->nullable();
+            $table->string('width', 255);
+            $table->string('touch', 255)->nullable();
             $table->timestamps();
         });
     }

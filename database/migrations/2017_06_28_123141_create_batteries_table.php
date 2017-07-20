@@ -15,9 +15,9 @@ class CreateBatteriesTable extends Migration
     {
         Schema::create('batteries', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('battery_capacity');
-            $table->string('battery_type', 255);
-            $table->string('battery_tech', 255);
+            $table->integer('capacity')->nullable();
+            $table->string('type', 255)->nullable();
+            $table->string('technology', 255)->nullable();
             $table->timestamps();
         });
     }
