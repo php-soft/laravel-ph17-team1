@@ -242,9 +242,8 @@ class ProductController extends Controller
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
         $back_camera_id = BackCamera::where('resolution1', '<', 3)->pluck('id');
-        //dd($back_camera_id);
         $product_id = Product::where('back_camera_id', $back_camera_id)->pluck('id');
-        $products = Product::find($back_camera_id);
+        $products = Product::find($product_id);
         if (count($back_camera_id) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
