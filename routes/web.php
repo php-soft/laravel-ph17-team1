@@ -70,8 +70,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/orders/statistic/group-year/{quantity}', 'OrderController@getGroupYearUpdate')
     ->name('group-year-up');
 
-    Route::get('/orders/statistic/chart', 'OrderController@chart');
-
     Route::get('reviews', 'ReviewController@index');
     Route::get('reviews/delete/{id}', 'ReviewController@destroy');
 
