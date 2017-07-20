@@ -48,11 +48,17 @@
             </div>
         </div>
 
-        <div class="col-md-4" style="border: thin solid #ccc; padding: 3px; ">
-            <a href="{{ url('news') }}" class="btn btn-link label-danger" style="color: #fff"><strong>TIN TỨC</strong></a>
+        <div class="col-md-4" style="background-color: #fff; padding: 3px; ">
+            <div style="display: block; overflow: hidden; border-bottom: 4px solid #f3565d; margin-bottom: 10px">
+                <h4 style="color: #fff; background-color: #f3565d; margin: 0; padding: 12px 10px 8px; float: left;">
+                    <a style="color: #fff; font-weight: 100;" href="{{ url('news') }}">TIN TỨC</a>
+                </h4>
+                <b style="float: left; width: 0; height: 0; border-left: 0 solid transparent;  border-right: 20px solid transparent;  border-bottom: 39px solid #ccc;"></b>
+            </div>
+            
             @foreach($news as $n)
-                <div class="product-news" style="height: 70px">
-                    <div class="product-image">
+                <div class="product-news">
+                    <div class="product-image pull-right">
                         <img src="{{url('uploads/news/'.$n->image)}}" alt="{{$n->image}}" height="auto" width="100%">
                     </div>
                     <div class="product-content">
@@ -61,7 +67,6 @@
                 </div>
                 <div class="clearfix"></div>
             @endforeach
-            <a class="btn btn-link label-success pull-right" style="color: #fff" href="{{ url('news') }}">Xem thêm</a>
         </div>
     </div>
     <div class="row">
