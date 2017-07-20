@@ -24,6 +24,14 @@ class DatabaseSeeder extends Seeder
         $this->call(UtilitySeeder::class);
         $this->call(DesignSeeder::class);
         $this->call(ManufactorySeeder::class);
-        $this->call(ScreenSeeder::class);
+        $this->call(VoucherSeeder::class);
+        $this->call(PromotionSeeder::class);
+        $this->call(StatusSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(VoteSeeder::class);
+        $this->call(ReviewSeeder::class);
+        $this->call(Banner_SlideSeeder::class);
+        $this->call(List_NewSeeder::class);
+        $this->call(NewsSeeder::class);
     }
 }
