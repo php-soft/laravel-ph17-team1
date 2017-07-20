@@ -176,7 +176,8 @@ class OrderController extends Controller
     {
         $now = new \DateTime('now');
         $year = $now->format('Y');
-        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))->where('orders.status_id', '=', 5)
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
             ->groupBy(DB::raw('orders.created_at'))->get(); //must alias the aggregate column as aggregate
         $chart = Charts::database($data, 'bar', 'highcharts')
         ->title('Thống kê theo tháng năm'. $year)
@@ -189,13 +190,14 @@ class OrderController extends Controller
     public function getStatisticMonthDetail($month)
     {
         if ($month<10) {
-                $month =  sprintf('%02d', $month);
-            }
+            $month =  sprintf('%02d', $month);
+        }
         // $month = strval($month);
         $now = new \DateTime('now');
         $year = $now->format('Y');
-        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))->where('orders.status_id', '=', 5)
-            ->groupBy(DB::raw('orders.created_at'))->get(); //must alias the aggregate column as aggregate
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+        ->groupBy(DB::raw('orders.created_at'))->get();
         $chart = Charts::database($data, 'bar', 'highcharts')
         ->title('Thống kê theo tháng năm'. $year)
         ->elementLabel($year)
@@ -233,9 +235,11 @@ class OrderController extends Controller
         return view('admin.statistic.year', compact('chart', 'total', 'result'));
     }
 
-    public function getGroupYear(){
-        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))->where('orders.status_id', '=', 5)
-            ->groupBy(DB::raw('orders.created_at'))->get(); //must alias the aggregate column as aggregate
+    public function getGroupYear()
+    {
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+            ->groupBy(DB::raw('orders.created_at'))->get();
         $chart = Charts::database($data, 'bar', 'highcharts')
         ->title('Số liệu thống kê các năm')
         ->elementLabel('3 năm')
@@ -245,10 +249,9 @@ class OrderController extends Controller
         return view('admin.statistic.groupyear', compact('chart'));
     }
     public function getGroupYearUpdate($quantity){
-        $now = new \DateTime('now');
-        $year = $now->format('Y');
-        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))->where('orders.status_id', '=', 5)
-            ->groupBy(DB::raw('orders.created_at'))->get(); //must alias the aggregate column as aggregate
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+        ->groupBy(DB::raw('orders.created_at'))->get();
         $chart = Charts::database($data, 'bar', 'highcharts')
         ->title('Số liệu thống kê các năm')
         ->elementLabel($quantity. ' năm')
@@ -274,7 +277,8 @@ class OrderController extends Controller
   //     ->responsive(false)
   //     ->groupByMonth();
 
-  // // to display a specific year, pass the parameter. For example to display the months of 2016 and display a fancy output label:
+  // // to display a specific year, pass the parameter.
+        // For example to display the months of 2016 and display a fancy output label:
   // $chart = Charts::database(Order::all(), 'bar', 'highcharts')
   //     ->elementLabel("Total")
   //     ->dimensions(1000, 500)
@@ -294,23 +298,23 @@ class OrderController extends Controller
     // ->dataset('Element 1', Order::all())
     // ->dataset('Element 2', OrderDetail::all())
     // ->groupByMonth(2017, true);
-        $data = Order::all()->sum('total');
-        // dd($data);
-        $chart = Charts::multi('bar', 'material')
-            // Setup the chart settings
-            ->title("My Cool Chart")
-            // A dimension of 0 means it will take 100% of the space
-            ->dimensions(0, 400) // Width x Height
-            // This defines a preset of colors already done:)
-            ->template("material")
-            // You could always set them manually
-            // ->colors(['#2196F3', '#F44336', '#FFC107'])
-            // Setup the diferent datasets (this is a multi chart)
-            ->dataset('Element 1', [5,20,100])
-            ->dataset('Element 2', [15,30,80])
-            ->dataset('Element 3', [25,10,40])
-            // Setup what the values mean
-            ->labels(['One', 'Two', 'Three']);
-        return view('admin.orders.chart', compact('chart'));
+        // $data = Order::all()->sum('total');
+        // // dd($data);
+        // $chart = Charts::multi('bar', 'material')
+        //     // Setup the chart settings
+        //     ->title("My Cool Chart")
+        //     // A dimension of 0 means it will take 100% of the space
+        //     ->dimensions(0, 400) // Width x Height
+        //     // This defines a preset of colors already done:)
+        //     ->template("material")
+        //     // You could always set them manually
+        //     // ->colors(['#2196F3', '#F44336', '#FFC107'])
+        //     // Setup the diferent datasets (this is a multi chart)
+        //     ->dataset('Element 1', [5,20,100])
+        //     ->dataset('Element 2', [15,30,80])
+        //     ->dataset('Element 3', [25,10,40])
+        //     // Setup what the values mean
+        //     ->labels(['One', 'Two', 'Three']);
+        // return view('admin.orders.chart', compact('chart'));
     }
 }
