@@ -19,12 +19,13 @@ class CreateVotesTable extends Migration
             $table->foreign('customer_id')->references('id')->on('users');
             $table->integer('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->string('name', 255)->nullable();
-            $table->string('phone', 11)->nullable();
-            $table->string('email', 255)->nullable();
-            $table->integer('star')->nullable();
-            $table->string('comment', 255)->nullable();
+            $table->string('name', 255);
+            $table->string('phone', 11);
+            $table->string('email', 255);
+            $table->integer('star');
+            $table->text('comment');
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

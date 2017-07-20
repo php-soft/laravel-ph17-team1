@@ -15,10 +15,10 @@ class CreateOperaSystemsTable extends Migration
     {
         Schema::create('opera_systems', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('opera_system', 255);
-            $table->string('chipset', 255);
-            $table->string('cpu_speed', 255);
-            $table->string('cpu', 255);
+            $table->string('opera_system', 255)->nullable();
+            $table->string('chipset', 255)->nullable();
+            $table->string('cpu_speed', 255)->nullable();
+            $table->string('cpu', 255)->nullable();
             $table->timestamps();
         });
     }

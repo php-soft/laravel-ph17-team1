@@ -19,9 +19,10 @@ class CreateReviewsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->string('name', 255);
             $table->string('email', 255)->nullable();
-            $table->string('phone', 11)->nullable();
-            $table->string('comment', 1000)->nullable();
+            $table->string('phone', 255)->nullable();
+            $table->text('comment');
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

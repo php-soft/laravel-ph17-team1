@@ -15,9 +15,9 @@ class CreateFrontCamerasTable extends Migration
     {
         Schema::create('front_cameras', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('resolution', 255);
-            $table->boolean('videocall', 255);
-            $table->string('other_info', 255);
+            $table->string('resolution', 255)->nullable();
+            $table->boolean('videocall', 255)->nullable();
+            $table->string('other_info', 255)->nullable();
             $table->timestamps();
         });
     }
