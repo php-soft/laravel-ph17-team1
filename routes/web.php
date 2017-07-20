@@ -54,9 +54,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/orders/group/{id}', 'OrderController@getGroupOrder')->name('getGroupOrder');
 
-    Route::get('/orders/statistic/date', 'OrderController@getStatistic')->name('statistic');
+    Route::get('/orders/statistic/date', 'OrderController@getStatisticDate')->name('getdate');
 
-    Route::get('/orders/statistic/date/detail', 'OrderController@getStatisticDetail')->name('statistic');
+    Route::get('/orders/statistic/date/detail', 'OrderController@getStatisticDateDetail')->name('date');
+
+    Route::get('/orders/statistic/month', 'OrderController@getStatisticMonth')->name('getmonth');
+
+    Route::get('/orders/statistic/month/detail/{month}', 'OrderController@getStatisticMonthDetail')
+    ->name('month');
+    Route::get('/orders/statistic/year', 'OrderController@getStatisticYear')->name('getyear');
+
+    Route::get('/orders/statistic/group-year', 'OrderController@getGroupYear')
+    ->name('group-year');
+
+    Route::get('/orders/statistic/group-year/{quantity}', 'OrderController@getGroupYearUpdate')
+    ->name('group-year-up');
 
     Route::get('reviews', 'ReviewController@index');
     Route::get('reviews/delete/{id}', 'ReviewController@destroy');

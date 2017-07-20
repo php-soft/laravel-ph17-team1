@@ -263,15 +263,4 @@ class OrderController extends Controller
             </tr>";
         }
     }
-    // public function groupStore(){
-    //     $content = Cart::content();
-    //     $i = 0;
-    //     foreach ($content as $data) {
-    //         $str_pr = StoreProduct::where('product_id', $data->id)->pluck('store_id');
-    //     }
-    //     foreach($str_pr as $data){
-            
-    //     }
-    //     exit;
-    // }
 }
