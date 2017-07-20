@@ -15,10 +15,11 @@ class CreateBackCamerasTable extends Migration
     {
         Schema::create('back_cameras', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('resolution', 255);
-            $table->string('film', 255);
-            $table->string('flash', 255);
-            $table->string('advanced_photography', 255);
+            $table->integer('resolution1')->nullable();
+            $table->integer('resolution2')->nullable();
+            $table->string('film', 255)->nullable();
+            $table->string('flash', 255)->nullable();
+            $table->string('advanced', 255)->nullable();
             $table->timestamps();;
         });
     }

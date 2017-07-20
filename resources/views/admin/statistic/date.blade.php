@@ -37,16 +37,16 @@
             // alert(todate);
             if(todate == 0 || fromdate==0) {
                 swal(
-				  	'Lỗi',
-				  	'Xin vui lòng nhập đầy đủ thông tin!',
-				  	'error'
-				);
+                    'Lỗi',
+                    'Xin vui lòng nhập đầy đủ thông tin!',
+                    'error'
+                );
             } else if(fromdate > todate){
-            	swal(
-				  	'Lỗi',
-				  	'Ngày bắt đầu không được lớn hơn ngày kết thúc!',
-				  	'error'
-				);	
+                swal(
+                    'Lỗi',
+                    'Ngày bắt đầu không được lớn hơn ngày kết thúc!',
+                    'error'
+                );    
             } else {
                 $.ajax({
                     type: 'get',

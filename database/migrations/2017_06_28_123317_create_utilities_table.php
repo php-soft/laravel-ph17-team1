@@ -15,12 +15,12 @@ class CreateUtilitiesTable extends Migration
     {
         Schema::create('utilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('advanced_security', 255);
-            $table->string('special_function', 255);
-            $table->string('recording', 255);
-            $table->string('radio', 255);
-            $table->string('movie', 255);
-            $table->string('music', 255);
+            $table->string('security', 255)->nullable();
+            $table->string('special_function', 255)->nullable();
+            $table->string('recording', 255)->nullable();
+            $table->string('radio', 255)->nullable();
+            $table->string('movie', 255)->nullable();
+            $table->string('music', 255)->nullable();
             $table->timestamps();
         });
     }

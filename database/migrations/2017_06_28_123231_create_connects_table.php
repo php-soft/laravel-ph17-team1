@@ -15,14 +15,14 @@ class CreateConnectsTable extends Migration
     {
         Schema::create('connects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('network_mobile', 255);
-            $table->string('sim', 255);
-            $table->string('wifi', 255);
-            $table->string('gps', 255);
-            $table->string('bluetooth', 255);
-            $table->string('connect_port', 255);
-            $table->string('jack_phone', 255);
-            $table->string('other_connect', 255);
+            $table->string('network', 255)->nullable();
+            $table->string('sim', 255)->nullable();
+            $table->string('wifi', 255)->nullable();
+            $table->string('gps', 255)->nullable();
+            $table->string('bluetooth', 255)->nullable();
+            $table->string('port', 255)->nullable();
+            $table->string('jack', 255)->nullable();
+            $table->string('other', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -9,9 +9,12 @@ use App\Order;
 use App\OrderDetail;
 use App\Status;
 use App\StoreProduct;
+use App\User;
+use App\Product;
 use Input;
 use Alert;
 use DB;
+use Charts;
 
 class OrderController extends Controller
 {
@@ -136,157 +139,24 @@ class OrderController extends Controller
     {
         $order = Order::withTrashed()->find($id);
         $order_detail = OrderDetail::where('order_id', $id)->get();
-        echo  "<h3>Mã đơn hàng: ". $order->madh."</h3>
-        <p>Tên khách hàng: ". $order->shipping_name."</p>
-        <p>Số điện thoại: ". $order->shipping_phone. "</p>
-        <p>Địa chỉ: ". $order->shipping_address. "</p>
-        <p>Email: ". $order->shipping_email. "</p>
-        <p>Tổng cộng: ". number_format($order->total). "VNĐ</p>
-        <p>Trạng thái: ". $order->status->name. "</p>
-        <table width='100%' class='table table-striped table-bordered table-hover'>
-        <thead>
-        <tr>
-        <td>Tên sản phẩm</td>
-        <td>Màu và bộ nhớ</td>
-        <td>Giá</td>
-        <td>Số lượng</td>
-        <td>Thành tiền</td>
-        <td>Ngày tạo đơn hàng</td>
-        </tr>
-        </thead>
-        <tbody>";
-        foreach ($order_detail as $data) {
-            echo "<tr>
-            <td>". $data->product->name. "</td>
-            <td>". $data->color_memory. "</td>
-            <td>". $data->price. "</td>
-            <td>". $data->quantity. "</td>
-            <td>". number_format($data->total). "</td>
-            <td>". date('d/m/Y', strtotime($data->created_at)). "</td>
-            </tr>";
-        }
-        echo "</tbody>
-        </table>";
+        return view('admin.orders.order_detail', compact('order', 'order_detail'));
     }
-
-    // public function getDetailOfOrder($id)
-    // {
-    //     $order = Order::find($id);
-    //     $status_id = $order->status_id;
-    //     $status = Status::all();
-    //     // echo "<div class='modal-body'><form class= 'form-horizontal'
-    //     // action='/admin/orders/edit/$order->id' method='put'>
-    //     // <div class='form-group col-sm-12'>
-    //     // <label class='control-label col-sm-4'>Tên khách hàng: </label>
-    //     // <div class='col-sm-8'>
-    //     // <input type='text' class='form-control' style='width:100%' name='shipping_name' value='".
-    //     // $order->shipping_name."' disabled='disabled'>
-    //     // </div>
-    //     // </div>
-    //     // <div class='form-group col-sm-12'>
-    //     // <label class='control-label col-sm-4'>Số điện thoại: </label>
-    //     // <div class='col-sm-8'>
-    //     // <input type='number' class='form-control' style='width:100%' name='shipping_phone' value='".
-    //     // $order->shipping_phone."' disabled='disabled'>
-    //     // </div>
-    //     // </div>
-    //     // <div class='form-group col-sm-12'>
-    //     // <label class='control-label col-sm-4'>Địa chỉ: </label>
-    //     // <div class='col-sm-8'>
-    //     // <input type='text' class='form-control' style='width:100%' name='shipping_address' value='".
-    //     // $order->shipping_address."' disabled='disabled'>
-    //     // </div>
-    //     // </div>
-    //     // <div class='form-group col-sm-12'>
-    //     // <label class='control-label col-sm-4'>Email: </label>
-    //     // <div class='col-sm-8'>
-    //     // <input type='email' class='form-control' style='width:100%' name='shipping_email' value='".
-    //     // $order->shipping_email."' disabled='disabled'>
-    //     // </div>
-    //     // </div>
-    //     // <div>
-    //     //     <select name='".$status_id."' id='".$status_id."'>";
-    //     //     foreach($status as $data) {
-    //     //         echo "<option value='".$data->id."'>".$data->name."</option>";
-    //     //     }
-    //     // echo "</select>
-    //     // </div>
-    //     // <input type='submit' value='Lưu'>
-    //     // </form>
-    //     // </div>";
-    // }
 
     public function getGroupOrder($id_status)
     {
         $order = Order::where('status_id', $id_status)->get();
-        $i = 1;
         if ($id_status == "all") {
             $order = Order::withTrashed()->get();
         }
-        echo "
-        <table width='100%' class='table table-striped table-bordered table-hover' id='table'>
-        <thead>
-        <tr>
-        <th class='text-center'>STT</th>
-        <th class='text-center'>Mã đơn hàng</th>
-        <th class='text-center'>Tên khách hàng</th>
-        <th class='text-center'>Địa chỉ</th>
-        <th class='text-center'>Email</th>
-        <th class='text-center'>Tổng cộng</th>
-        <th class='text-center'>Trạng thái</th>
-        <th class='text-center'>Ngày tạo</th>
-        <th class='text-center'>chức năng</th>
-        <th class='text-center'>Chi tiết</th>
-        </tr>
-        </thead>";
-        foreach ($order as $data) {
-            echo "
-            <tr>
-            <td class='text-center'>". $i++ ."</td>
-            <td class='text-center'>". $data->madh." </td>
-            <td class='text-center'>". $data->shipping_name. "</td>
-            <td class='text-center'> ". $data->shipping_address. "</td>
-            <td class='text-center'> ". $data->shipping_email. "</td>
-            <td class='text-center'> ". number_format($data->total). "VNĐ</td>
-            <td class='text-center'> ". $data->status->name. "</td>
-            <td class='text-center'> ". date('d/m/Y', strtotime($data->created_at)). "</td>
-            <td class='text-center'>
-            <a href='/admin/orders/edit/".$data->id."' class='btn btn-info'>
-            <span class='glyphicon glyphicon-edit'></span>
-            </a>";
-            if (empty($data->deleted_at)) {
-                echo "<button class='btn btn-danger btn-del' value='". $data->id."'>
-                <span class='glyphicon glyphicon-trash'></span></button>";
-            } else {
-                echo "<button class='btn btn-success btn-restore' value='". $data->id."'>
-                <span class='glyphicon glyphicon-refresh'></span></button>";
-            }
-            echo "</td>
-            <td>    
-            <button type='button' class='btn btn-info btn-sm adm-btn-view'
-             data-toggle='modal' data-target='#myModal' value='".$data->id."'>
-            <span class='glyphicon glyphicon-folder-open'>
-            </span></span> Chi tiết</button>
-            </td>                                   
-            </tr>";
-        }
-        echo "</table>
-        <script>
-        $(document).ready(function() {
-        $('#table').DataTable({
-        processing: true,
-        lengthMenu: [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
-        pageLength: 5,
-        });
-        });
-        </script>";
+        return view('admin.orders.groupOrder', compact('order'));
     }
 
-    public function getStatistic()
+    public function getStatisticDate()
     {
-        return view('admin.orders.statistic');
+        return view('admin.statistic.date');
     }
-    public function getStatisticDetail(Request $request)
+
+    public function getStatisticDateDetail(Request $request)
     {
         $date1 = date('Y/m/d', strtotime($request->fromdate));
         $date2 = date('Y/m/d', strtotime($request->todate));
@@ -296,9 +166,159 @@ class OrderController extends Controller
         if ($total == 0) {
             Alert::info('Không tìm bất kỳ hóa đơn nào tạo ra trong 
                 khoảng thời gian trên', 'Thông tin')->autoclose(3000);
-            return view('admin.orders.up', compact('total', 'result'));
+            return view('admin.statistic.update', compact('total', 'result'));
         } else {
-            return view('admin.orders.up', compact('total', 'result'));
+            return view('admin.statistic.update', compact('total', 'result'));
         }
+    }
+
+    public function getStatisticMonth()
+    {
+        $now = new \DateTime('now');
+        $year = $now->format('Y');
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+            ->groupBy(DB::raw('orders.created_at'))->get(); //must alias the aggregate column as aggregate
+        $chart = Charts::database($data, 'bar', 'highcharts')
+        ->title('Thống kê theo tháng năm'. $year)
+        ->elementLabel($year)
+        ->colors(['#47C6B2', '#00ff00'])
+        ->preaggregated(true)->groupByDay('01', $year, true);
+        return view('admin.statistic.month', compact('chart'));
+    }
+
+    public function getStatisticMonthDetail($month)
+    {
+        if ($month<10) {
+            $month =  sprintf('%02d', $month);
+        }
+        // $month = strval($month);
+        $now = new \DateTime('now');
+        $year = $now->format('Y');
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+        ->groupBy(DB::raw('orders.created_at'))->get();
+        $chart = Charts::database($data, 'bar', 'highcharts')
+        ->title('Thống kê theo tháng năm'. $year)
+        ->elementLabel($year)
+        ->colors(['#47C6B2', '#00ff00'])
+        ->preaggregated(true)->groupByDay($month, $year, true);
+        $date1 = date('Y/m/d', strtotime($year. '/'. $month. '/01'));
+        $date2 = date('Y/m/d', strtotime($year. '/'. $month. '/31'));
+        $result = Order::where('status_id', 5)
+        ->whereBetween('created_at', [$date1, $date2])->get();
+        $total = $result->sum('total');
+        if ($total == 0) {
+            Alert::info('Không tìm bất kỳ hóa đơn nào tạo ra trong 
+                khoảng thời gian trên', 'Thông tin')->autoclose(3000);
+            return view('admin.statistic.upmonth', compact('chart', 'total', 'result'));
+        } else {
+            return view('admin.statistic.upmonth', compact('chart', 'total', 'result'));
+        }
+    }
+    public function getStatisticYear()
+    {
+        $now = new \DateTime('now');
+        $year = $now->format('Y');
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+        ->groupBy(DB::raw('orders.created_at'))->get();
+        $chart = Charts::database($data, 'bar', 'highcharts')
+        ->title('Thống kê năm'. $year)
+        ->elementLabel($year)
+        ->colors(['#47C6B2', '#00ff00'])
+        ->preaggregated(true)->groupByMonth($year, true);
+        $date1 = date('Y/m/d', strtotime($year. '/01/01'));
+        $date2 = date('Y/m/d', strtotime($year. '/12/31'));
+        $result = Order::where('status_id', 5)
+        ->whereBetween('created_at', [$date1, $date2])->get();
+        $total = $result->sum('total');
+        return view('admin.statistic.year', compact('chart', 'total', 'result'));
+    }
+
+    public function getGroupYear()
+    {
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+            ->groupBy(DB::raw('orders.created_at'))->get();
+        $chart = Charts::database($data, 'bar', 'highcharts')
+        ->title('Số liệu thống kê các năm')
+        ->elementLabel('3 năm')
+        ->colors(['#47C6B2', '#00ff00'])
+        ->preaggregated(true)->lastByYear(3);
+       
+        return view('admin.statistic.groupyear', compact('chart'));
+    }
+
+    public function getGroupYearUpdate($quantity)
+    {
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+        ->groupBy(DB::raw('orders.created_at'))->get();
+        $chart = Charts::database($data, 'bar', 'highcharts')
+        ->title('Số liệu thống kê các năm')
+        ->elementLabel($quantity. ' năm')
+        ->colors(['#47C6B2', '#00ff00'])
+        ->preaggregated(true)->lastByYear($quantity);
+       
+        return view('admin.statistic.upgroupyear', compact('chart'));
+    }
+    
+    public function chart()
+    {
+        //được
+        // $data = OrderDetail::groupBy('product_id')->sum('total');
+        // $chart = Charts::database(OrderDetail::all(), 'bar', 'highcharts')
+        //           ->title('User types')
+        //           ->dimensions(1000, 500)
+        //           ->responsive(false)
+        //           ->groupBy('product_id', null, [1 => 'Samsung', 2 => 'Iphone']);
+        //group by month
+        // $data= Order::
+  //        $chart = Charts::database(Order::all(), 'bar', 'highcharts')
+  //     ->elementLabel("Total")
+  //     ->dimensions(1000, 500)
+  //     ->responsive(false)
+  //     ->groupByMonth();
+
+  // // to display a specific year, pass the parameter.
+        // For example to display the months of 2016 and display a fancy output label:
+  // $chart = Charts::database(Order::all(), 'bar', 'highcharts')
+  //     ->elementLabel("Total")
+  //     ->dimensions(1000, 500)
+  //     ->responsive(false)
+  //     ->groupByMonth('2017', true)
+  //     $chart->aggregateColumn('total', 'sum');
+//   $data = Order::all();
+// $chart = Charts::create('bar', 'highcharts')
+//              ->title('My nice chart')
+//              ->elementLabel('My nice label')
+//              ->labels($data->pluck('id'))
+//              ->values($data->pluck('total'))
+//              ->responsive(true);
+  //         $chart = new Database(Order::all(), 'bar', 'highcharts');
+  // $chart->aggregateColumn('amount', 'sum');
+    //     $chart=Charts::multiDatabase('line', 'material')
+    // ->dataset('Element 1', Order::all())
+    // ->dataset('Element 2', OrderDetail::all())
+    // ->groupByMonth(2017, true);
+        // $data = Order::all()->sum('total');
+        // // dd($data);
+        // $chart = Charts::multi('bar', 'material')
+        //     // Setup the chart settings
+        //     ->title("My Cool Chart")
+        //     // A dimension of 0 means it will take 100% of the space
+        //     ->dimensions(0, 400) // Width x Height
+        //     // This defines a preset of colors already done:)
+        //     ->template("material")
+        //     // You could always set them manually
+        //     // ->colors(['#2196F3', '#F44336', '#FFC107'])
+        //     // Setup the diferent datasets (this is a multi chart)
+        //     ->dataset('Element 1', [5,20,100])
+        //     ->dataset('Element 2', [15,30,80])
+        //     ->dataset('Element 3', [25,10,40])
+        //     // Setup what the values mean
+        //     ->labels(['One', 'Two', 'Three']);
+        // return view('admin.orders.chart', compact('chart'));
     }
 }

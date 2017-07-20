@@ -15,10 +15,10 @@ class CreateDesignsTable extends Migration
     {
         Schema::create('designs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('design', 255);
-            $table->string('material', 255);
-            $table->string('size', 255);
-            $table->string('weigth', 255);
+            $table->string('design', 255)->nullable();
+            $table->string('material', 255)->nullable();
+            $table->string('size', 255)->nullable();
+            $table->string('weigth', 255)->nullable();
             $table->timestamps();
         });
     }
