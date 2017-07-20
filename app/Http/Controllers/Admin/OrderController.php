@@ -220,8 +220,9 @@ class OrderController extends Controller
     {
         $now = new \DateTime('now');
         $year = $now->format('Y');
-        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))->where('orders.status_id', '=', 5)
-            ->groupBy(DB::raw('orders.created_at'))->get(); //must alias the aggregate column as aggregate
+        $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
+        ->where('orders.status_id', '=', 5)
+        ->groupBy(DB::raw('orders.created_at'))->get();
         $chart = Charts::database($data, 'bar', 'highcharts')
         ->title('Thống kê năm'. $year)
         ->elementLabel($year)
@@ -248,7 +249,9 @@ class OrderController extends Controller
        
         return view('admin.statistic.groupyear', compact('chart'));
     }
-    public function getGroupYearUpdate($quantity){
+
+    public function getGroupYearUpdate($quantity)
+    {
         $data = Order::select('orders.created_at', DB::raw('sum(orders.total) as aggregate'))
         ->where('orders.status_id', '=', 5)
         ->groupBy(DB::raw('orders.created_at'))->get();
@@ -260,6 +263,7 @@ class OrderController extends Controller
        
         return view('admin.statistic.upgroupyear', compact('chart'));
     }
+    
     public function chart()
     {
         //được
