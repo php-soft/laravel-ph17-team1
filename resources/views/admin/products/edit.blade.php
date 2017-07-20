@@ -1,17 +1,10 @@
 @extends('admin.layouts.master')
 
-@section('content')
-    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script
-      src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <link rel="stylesheet"
-      href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
-    <script
-      src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>  
+@section ('css')
+<script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+@stop
 
+@section('content')  
   <div class="row">
     <div class="col-md-2">   
     </div>
@@ -30,7 +23,7 @@
         <div class="form-group">
           <label for="name">Tên sản phẩm</label>
           <div class="form-formcontrols">
-              {!! Form::text('name',$product->name,['class'=>'form-control']) !!}
+              {!! Form::text('name', $product->name,['class'=>'form-control']) !!}
           </div>
         </div>
         <div class="form-group">
@@ -40,12 +33,9 @@
           </div>
         </div>
         <div class="form-group">
-            <div class="form-formcontrols">
-                <img class="thumbnail" src="{{$product->image}}" style="width: 50px; height: 50px;">
-            </div>
-        </div>
-        <div class="form-group">
             <label for="image">Ảnh</label>
+            <input type="hidden" name="img" value="{{$product->image}}">
+            <img class="thumbnail" src="{{$product->image}}" style="width: 100px; height: 100px;">
             <input type="file" name="image" id="image">
         </div>
         <div class="form-group">
@@ -63,9 +53,45 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="description">Mô tả sản phẩm</label>
-          <textarea style="width: 750px; height: 100px; max-width: 750px; border-radius: 4px;" id="description" name="description">{{$product->description}}
-          </textarea>
+          <label for="editor1">Mô tả sản phẩm</label>
+          <textarea name="editor1" style="width: 750px; height: 100px; max-width: 750px; border-radius: 4px;">{{ $product->description }}</textarea>
+          <script>
+              CKEDITOR.replace( 'editor1' );
+          </script>
+        </div>
+        <div class="form-group">
+          <label for="status">Tình trạng</label>
+          @if ($product->status == 1)
+          <div class="radio">
+            <label><input type="radio" name="status" value="1" checked>Có hàng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="status" value="2">Hết hàng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="status" value="3">Hàng sắp về</label>
+          </div>
+          @elseif ($product->status == 2)
+          <div class="radio">
+            <label><input type="radio" name="status" value="1">Có hàng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="status" value="2" checked>Hết hàng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="status" value="3">Hàng sắp về</label>
+          </div>
+          @else
+          <div class="radio">
+            <label><input type="radio" name="status" value="1">Có hàng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="status" value="2">Hết hàng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="status" value="3" checked>Hàng sắp về</label>
+          </div>
+          @endif
         </div>
         <div class="form-group">
           <label for="accessory">Phụ kiện</label>
@@ -73,29 +99,39 @@
         </div>
         <div class="form-group">
           <label for="warranty_moth">Thời gian bảo hành</label>
+          @if ($product->warranty_moth == '12 tháng')
           <div class="radio">
             <label><input type="radio" name="warranty_moth" value="12" checked>12 tháng</label>
           </div>
           <div class="radio">
             <label><input type="radio" name="warranty_moth" value="24">24 tháng (Bảo hành vàng )</label>
           </div>
+          @else
+          <div class="radio">
+            <label><input type="radio" name="warranty_moth" value="12">12 tháng</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="warranty_moth" value="24" checked>24 tháng (Bảo hành vàng )</label>
+          </div>
+          @endif
         </div>
         <div class="form-group">
           <label for="category">Danh mục</label>
           <div class="form-formcontrols">
             <div class="checkbox">
-              <label><input type="checkbox" name="category" value="1" checked>Smart Phone</label>
+              <label><input type="checkbox" name="category1" value="1">Smart Phone</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="category" value="2">Classic Phone</label>
+              <label><input type="checkbox" name="category2" value="2">Classic Phone</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="category" value="3" >Android</label>
+              <label><input type="checkbox" name="category3" value="3">Android</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="category" value="4" >iPhone(IOS)</label>
+              <label><input type="checkbox" name="category4" value="4">iPhone(IOS)</label>
             </div>
           </div>
+          
         </div>
         <div class="form-group">
           <label for="backcamera">Camera sau</label>
@@ -154,6 +190,7 @@
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Lưu</button>
           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+          <a href="{{ url('admin/products') }}" class="btn btn-success">Quay lại</a>
         </div>
       </form>      
     </div>
@@ -163,11 +200,5 @@
 @stop
 
 @section('js')
-    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
-    <script src="{{asset('js/toastr.min.js')}}"></script>
-    <script>
-        @if(Session::has('message'))
-            toastr.success("{{Session::get('message')}}")
-        @endif
-    </script>
+
 @stop
