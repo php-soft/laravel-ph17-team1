@@ -45,11 +45,12 @@ class ProductController extends Controller
     }
     public function indexByID($slug)
     {
-        $login = Auth::check();
-        if ($login==true) {
-            $alow = 1;
+        if (Auth::check() == true) {
+            $login = 1;
+            $users = \Auth::user()->get();
         } else {
-            $alow = 0;
+            $login = 0;
+            $users = User::all();
         }
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
@@ -57,14 +58,13 @@ class ProductController extends Controller
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
 
-        $product_tt=Product::where('id', '<>', $product_id)->orderBy('sale_price', 'desc')->limit(3)
-        ->pluck('id');
-        $product_sames=Product::find($product_tt);
+        $cate_id = ProductCategory::where('product_id', $product_id)->pluck('category_id');
+        $pros_cate = ProductCategory::where('category_id', $cate_id)->pluck('product_id');
+        $product_tt = Product::where('id', '<>', $product_id)->orwhere('id', $pros_cate)
+        ->orderBy('price', 'desc')->limit(3)->pluck('id');
+        $product_sames = Product::find($product_tt);
 
         $news = News::orderBy('created_at', 'desc')->limit(3)->get();
-
-        $product_g=Product::where('id', '<>', $product_id)->pluck('id');
-        $product_sss=Product::find($product_g);
 
         $count_vote=Vote::where('product_id', $product_id)->count();
         $vote=Vote::where('product_id', $product_id)->sum('star');
@@ -85,11 +85,11 @@ class ProductController extends Controller
         $reviews = Review::where('product_id', $product_id)->orderBy('created_at', 'desc')
         ->paginate(5);
 
-        return view('products.detail')->with('products', $products)->with('alow', $alow)
+        return view('products.detail')->with('products', $products)->with('login', $login)
         ->with('news', $news)->with('product_sames', $product_sames)
-        ->with('product_sss', $product_sss)->with('count_vote', $count_vote)
-        ->with('avgvote', $avgvote)->with('stores', $stores)->with('promotions', $promotions)
-        ->with('votes', $votes)->with('reviews', $reviews);
+        ->with('count_vote', $count_vote)->with('avgvote', $avgvote)
+        ->with('stores', $stores)->with('promotions', $promotions)
+        ->with('votes', $votes)->with('reviews', $reviews)->with('users', $users);
     }
 
     public function indexByName(Request $request)
@@ -464,7 +464,7 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $results = Battery::where('battery_capacity', '>', 3000)->pluck('id');
+        $results = Battery::where('capacity', '>', 3000)->pluck('id');
         if (empty($results)) {
             $products = Product::where('battery_id', 0)->get();
             if (count($products) == 0) {
@@ -509,11 +509,7 @@ class ProductController extends Controller
             $vote = Vote::where('product_id', $product_id)->first();
             $user_id = Auth::user()->id;
             $user = User::where('id', $user_id)->first();
-            
-            if ($vote->email == $user->email) {
-                Session::flash('message', 'Bạn đánh giá sản phẩm ' .$products->name .' rồi');
-                Session::flash('alert-class', 'alert-error');
-            } else {
+            if (empty($vote)) {
                 $vote = new Vote;
                 $vote->product_id = $request->product_id;
                 $vote->customer_id = $user_id;
@@ -524,6 +520,9 @@ class ProductController extends Controller
                 $vote->comment = $request->comment;
                 $vote->save();
                 Session::flash('message', 'Cảm ơn ' .$user->name . ' đã đánh giá sản phẩm chúng tôi');
+                Session::flash('alert-class', 'alert-error');
+            } else {
+                Session::flash('message', 'Bạn đã đánh giá sản phẩm ' .$products->name .' rồi');
                 Session::flash('alert-class', 'alert-error');
             }
         } else {

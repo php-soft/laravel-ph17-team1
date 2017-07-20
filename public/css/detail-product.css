@@ -126,10 +126,9 @@
 #wrapper #yourdiv{
     display: inline-block;
 }
-#wrapper #yourdiv img{
+#wrapper #newsimg img{
     height: 300px;
     width: 300px;
-    text-align: center;
     margin-left: -270px;
 }
 .product-rate label{
