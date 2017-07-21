@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Thế Giới Điện Thoại</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,7 +30,7 @@
 <body>
     
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #fed700">
             <div class="container">
                 <div class="navbar-header">
 
@@ -44,7 +44,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img src="http://localhost:8000/images/logo/logo.png" height="30px" width="80px" style="margin-top: -5px">
                     </a>
                 </div>
 
@@ -57,11 +57,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        <li><a href="{{ url('products') }}">Điện thoại</a></li>
-                        <li><a href="{{ url('news') }}">Tin tức</a></li>
+                        <li>
+                            <a href="{{ url('products') }}"><span class="glyphicon glyphicon-phone"> </span> Điện thoại</a>
+                        </li>
+                        <li><a href="{{ url('news') }}"><span class="glyphicon glyphicon-globe"></span> Tin tức</a></li>
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Đơn hàng
                                     <span class="caret"></span></a>
@@ -73,10 +73,12 @@
                                         <a href="/quan-ly-don-hang"><span class="glyphicon glyphicon-th-list"></span> Quản lý đơn hàng</a>
                                     </li>
                                 </ul>
-                            </li> 
+                            </li>
                             <li>
                                 <a href="/gio-hang"><span class="glyphicon glyphicon-shopping-cart"> </span> Giỏ hàng</a>
                             </li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Đơn hàng
