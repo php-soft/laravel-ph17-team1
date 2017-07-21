@@ -82,7 +82,12 @@ class CartController extends Controller
     {
         $rowid = Cart::content()->where('id', $id)->pluck('rowId')->first();
         Cart::remove($rowid);
-        return redirect()->back();
+        $content = Cart::content(); // display all new data of cart
+        $total = Cart::total();
+        $qty = Cart::count();
+        $qtysp = Cart::content()->count();
+        $subtotal = Cart::subtotal(0, '', '');
+        return view('pages.upCart', compact('content', 'total', 'qty', 'qtysp', 'subtotal'));
     }
 
     public function getDeleteCart()
