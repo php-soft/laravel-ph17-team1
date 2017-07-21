@@ -28,7 +28,7 @@
                             <input type="hidden" id="proId{{$count}}" value="{{$product->id}}">
                             <div style=" padding: 20px;">
                                 <div class="cart-item cyc col-md-3">
-                                    <img src="{{$product->options->image}}" class="img-responsive" alt=""  />
+                                    <img src="{{$product->options->image}}" class="img-responsive" alt="" width="70%"  />
                                 </div>
                                 <div class="cart-item-info col-md-9">
                                     <div class="col-md-5">
@@ -52,9 +52,9 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="close1 col-md-1">
-                                        <a href="/gio-hang/xoa-san-pham/{{$product->id}}" >
+                                        <button class="label label-info" id="btn-del-item{{$count}}">
                                             <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -105,10 +105,6 @@
                 @endif
             </div>
             <div class="clearfix"></div>
-            <div>
-                <hr>
-                <p class="text-danger text-right">Designer by Lê Đức Thiện</p>
-            </div>
         </div>
 
     </div>
@@ -136,6 +132,24 @@
                 }
             });
         <?php } ?>
+        });
+        $(document).ready(function() {
+            <?php for($i=1;$i<=$count;$i++){?>
+                $('#btn-del-item<?php echo $i;?>').click(function() {
+                    var rowId = $('#rowId<?php echo $i;?>').val();
+                    var proId = $('#proId<?php echo $i;?>').val();
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'html',
+                        url: '/gio-hang/xoa-san-pham/' + proId,
+                        data: "rowId=" + rowId + "& proId=" + proId,
+                        success: function (response) {
+                            console.log(response);
+                            $('#updateDiv').html(response);
+                        }
+                    });
+                });
+            <?php } ?>
         });
     </script>
 </div>
