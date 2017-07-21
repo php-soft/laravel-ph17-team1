@@ -51,12 +51,10 @@ class ProductController extends Controller
             $users = User::where('id', $user_id)->get();
         } else {
             $login = 0;
+            $users = User::where('id', 0)->get();
         }
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
-        if (count($products) == 0) {
-            Session::flash('message', 'Không tìm thấy sản phẩm nào');
-        }
 
         $cate_id = ProductCategory::where('product_id', $product_id)->pluck('category_id');
         $pros_cate = ProductCategory::where('category_id', $cate_id)->pluck('product_id');

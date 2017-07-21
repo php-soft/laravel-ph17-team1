@@ -8,7 +8,7 @@
 
 @section ('content')
     <div class="container">
-        <div class="row">
+        <div class="row menu-product">
             <div class="col-md-12">
                 <nav class="navbar navbar-default" role="navigation" style="margin-top: -20px; border: none; border-radius: 0px">
                     <div class="container">

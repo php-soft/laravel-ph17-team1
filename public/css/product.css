@@ -1,4 +1,3 @@
-
 .item{
     height:255px;
     -webkit-background-size: 100%;
@@ -345,4 +344,10 @@
 }
 .tinhnang li a:hover{
   color: orange;
+}
+#app ul li a{
+    color: black;
+}
+#navbar ul li a{
+    color: #288ad6;
 }

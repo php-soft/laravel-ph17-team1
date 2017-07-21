@@ -76,7 +76,7 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <h2>SẢN PHẨM HOT</h2>    
+            <h3>SẢN PHẨM HOT</h3>
         </div>
     </div>
     <div class="row">
@@ -143,7 +143,7 @@
     <hr>
     <div class="row">
         <div class="col-md-3">
-            <h2>SẢN PHẨM MỚI</h2>    
+            <h3>SẢN PHẨM MỚI</h3>
         </div>
     </div>
     <div class="row">
