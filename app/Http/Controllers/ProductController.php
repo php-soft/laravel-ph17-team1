@@ -47,10 +47,10 @@ class ProductController extends Controller
     {
         if (Auth::check() == true) {
             $login = 1;
-            $users = \Auth::user()->get();
+            $user_id = \Auth::user()->id;
+            $users = User::where('id', $user_id)->get();
         } else {
             $login = 0;
-            $users = User::all();
         }
         $product_id = Product::where('slug', $slug)->pluck('id');
         $products=Product::find($product_id);
@@ -241,10 +241,10 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::where('resolution1', '<', 3)->orWhere('resolution2', '<', 3)
-        ->pluck('id');
-        $products = Product::find($back_camera_id);
-        if (count($products) == 0) {
+        $back_camera_id = BackCamera::where('resolution1', '<', 3)->pluck('id');
+        $product_id = Product::where('back_camera_id', $back_camera_id)->pluck('id');
+        $products = Product::find($product_id);
+        if (count($back_camera_id) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
         return View('products.index')->with('manu_alls', $manu_alls)->with('manu_2s', $manu_2s)
@@ -255,9 +255,9 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::whereBetween('resolution1', [3, 5])
-        ->orWhereBetween('resolution2', [3, 5])->pluck('id');
-        $products = Product::find($back_camera_id);
+        $back_camera_id = BackCamera::whereBetween('resolution1', [3, 5])->pluck('id');
+        $product_id = Product::where('back_camera_id', $back_camera_id)->pluck('id');
+        $products = Product::find($product_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
@@ -269,9 +269,9 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::whereBetween('resolution1', [5, 8])
-        ->orWhereBetween('resolution2', [5, 8])->pluck('id');
-        $products = Product::find($back_camera_id);
+        $back_camera_id = BackCamera::whereBetween('resolution1', [5, 8])->pluck('id');
+        $product_id = Product::where('back_camera_id', $back_camera_id)->pluck('id');
+        $products = Product::find($product_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
@@ -283,9 +283,11 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $back_camera_id = BackCamera::whereBetween('resolution1', [8, 12])
-        ->orWhereBetween('resolution2', [8, 12])->pluck('id');
-        $products = Product::where('back_camera_id', $back_camera_id)->get();
+        $back_camera_id = BackCamera::whereBetween('resolution1', [8, 12])->pluck('id');
+        //dd($back_camera_id);
+        $product_id = Product::where('back_camera_id', $back_camera_id)->pluck('id');
+        //dd($product_id);
+        $products = Product::find($product_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
@@ -297,8 +299,9 @@ class ProductController extends Controller
     {
         $manu_alls = Manufactory::all();
         $manu_2s = Manufactory::whereIn('id', array(1, 2))->orderBy('name', 'asc')->get();
-        $products = Product::where('back_camera_id', BackCamera::where('resolution1', '>', 12)
-        ->orWhere('resolution2', '>', 12)->pluck('id'))->get();
+        $back_camera_id = BackCamera::where('resolution1', '>', 12)->pluck('id');
+        $product_id = Product::where('back_camera_id', $back_camera_id)->pluck('id');
+        $products = Product::find($product_id);
         if (count($products) == 0) {
             Session::flash('message', 'Không tìm thấy sản phẩm nào');
         }
