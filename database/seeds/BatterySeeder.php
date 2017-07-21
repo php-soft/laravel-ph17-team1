@@ -12,8 +12,11 @@ class BatterySeeder extends Seeder
     public function run()
     {
         DB::table('batteries')->insert([
-        	['battery_capacity' => "2900", 'battery_type' => "Lithium - Ion", 'battery_tech' => "Tiết kiệm pin"],
-        	['battery_capacity' => "3500", 'battery_type' => "Pin chuẩn Li-Ion", 'battery_tech' => "Sạc pin nhanh, Sạc pin không dây"],
+            ['capacity' => "4100", 'type' => "Pin chuẩn Li-Ion", 'technology' => "Sạc pin nhanh, Sạc pin không dây"],
+            ['capacity' => "3500", 'type' => "Pin chuẩn Li-Ion", 'technology' => "Sạc pin nhanh, Sạc pin không dây"],
+            ['capacity' => "2900", 'type' => "Lithium - Ion", 'technology' => "Tiết kiệm pin"],
+            ['capacity' => "2600", 'type' => "Lithium - Ion", 'technology' => "Tiết kiệm pin"],
+            ['capacity' => "1200", 'type' => "Lithium - Ion", 'technology' => null],
         ]);
     }
 }
