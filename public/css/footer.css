@@ -1,12 +1,14 @@
 .footer1 {
     background: #EDEFF1  ;
-	padding-top: 30px;
+	padding-top: 20px;
 	padding-right: 0;
-	padding-bottom: 20px;
+	padding-bottom: 0px;
     margin-top: 120px;
-	padding-left: 0;/*	border-top-width: 4px;
+	padding-left: 50px;/*	border-top-width: 4px;
 	border-top-style: solid;
 	border-top-color: #003;*/
+    overflow: hidden;
+
 }
 .title-widget {
 	color: #898989;

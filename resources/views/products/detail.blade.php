@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="{{ asset('css/seemore.css') }}">
 <link rel="stylesheet" href="{{ asset('css/detail-product.css') }}">
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-
 @stop
 
 @section ('content')
@@ -646,7 +645,7 @@
                 <!-- end col-md-4 -->
             </div>
         </div>
-        <hr><!-- end detail-product-news -->
+        <!-- end detail-product-news -->
     @endforeach
 </div>
 @stop
